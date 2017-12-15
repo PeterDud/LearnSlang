@@ -7,14 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AAA4B09D8750FDD24D0E8BDC /* Pods_Learn_Slang.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE025666FD851529711AB34E /* Pods_Learn_Slang.framework */; };
+		CE404F951FE29BAC006B058C /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE404F941FE29BAC006B058C /* Word.swift */; };
+		CE621CB11FE3AE4F007659DE /* DefinitionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE621CB01FE3AE4F007659DE /* DefinitionTableViewCell.swift */; };
 		CE8A03391FE131C1004E53AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8A03381FE131C1004E53AF /* AppDelegate.swift */; };
-		CE8A033B1FE131C1004E53AF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8A033A1FE131C1004E53AF /* ViewController.swift */; };
 		CE8A033E1FE131C1004E53AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE8A033C1FE131C1004E53AF /* Main.storyboard */; };
 		CE8A03411FE131C1004E53AF /* Learn_Slang.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE8A033F1FE131C1004E53AF /* Learn_Slang.xcdatamodeld */; };
 		CE8A03431FE131C1004E53AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE8A03421FE131C1004E53AF /* Assets.xcassets */; };
 		CE8A03461FE131C1004E53AF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE8A03441FE131C1004E53AF /* LaunchScreen.storyboard */; };
 		CE8A03511FE131C1004E53AF /* Learn_SlangTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8A03501FE131C1004E53AF /* Learn_SlangTests.swift */; };
 		CE8A035C1FE131C1004E53AF /* Learn_SlangUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8A035B1FE131C1004E53AF /* Learn_SlangUITests.swift */; };
+		CE8A036E1FE13ABF004E53AF /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8A036D1FE13ABF004E53AF /* ServerManager.swift */; };
+		CEAB91F71FE2B29600A7E7C6 /* WordRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAB91F61FE2B29600A7E7C6 /* WordRouter.swift */; };
+		CEAB91F91FE2C81D00A7E7C6 /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAB91F81FE2C81D00A7E7C6 /* SearchTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,9 +40,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		11D9810606B1FA7104A10098 /* Pods-Learn Slang.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Learn Slang.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Learn Slang/Pods-Learn Slang.debug.xcconfig"; sourceTree = "<group>"; };
+		2A5D94F1E216418D69759660 /* Pods-Learn Slang.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Learn Slang.release.xcconfig"; path = "Pods/Target Support Files/Pods-Learn Slang/Pods-Learn Slang.release.xcconfig"; sourceTree = "<group>"; };
+		CE404F941FE29BAC006B058C /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
+		CE621CB01FE3AE4F007659DE /* DefinitionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionTableViewCell.swift; sourceTree = "<group>"; };
 		CE8A03351FE131C1004E53AF /* Learn Slang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Learn Slang.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE8A03381FE131C1004E53AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CE8A033A1FE131C1004E53AF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CE8A033D1FE131C1004E53AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CE8A03401FE131C1004E53AF /* Learn_Slang.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Learn_Slang.xcdatamodel; sourceTree = "<group>"; };
 		CE8A03421FE131C1004E53AF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +57,10 @@
 		CE8A03571FE131C1004E53AF /* Learn SlangUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Learn SlangUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE8A035B1FE131C1004E53AF /* Learn_SlangUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Learn_SlangUITests.swift; sourceTree = "<group>"; };
 		CE8A035D1FE131C1004E53AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE8A036D1FE13ABF004E53AF /* ServerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerManager.swift; sourceTree = "<group>"; };
+		CEAB91F61FE2B29600A7E7C6 /* WordRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordRouter.swift; sourceTree = "<group>"; };
+		CEAB91F81FE2C81D00A7E7C6 /* SearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
+		EE025666FD851529711AB34E /* Pods_Learn_Slang.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Learn_Slang.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAA4B09D8750FDD24D0E8BDC /* Pods_Learn_Slang.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +89,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		582FE2417FF400AB4078CEED /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				11D9810606B1FA7104A10098 /* Pods-Learn Slang.debug.xcconfig */,
+				2A5D94F1E216418D69759660 /* Pods-Learn Slang.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		C5E3CA75992B8B7455C2DB58 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EE025666FD851529711AB34E /* Pods_Learn_Slang.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CE404F921FE26697006B058C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CE404F941FE29BAC006B058C /* Word.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CE404F931FE266A2006B058C /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				CE621CB01FE3AE4F007659DE /* DefinitionTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		CE8A032C1FE131C1004E53AF = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +129,8 @@
 				CE8A034F1FE131C1004E53AF /* Learn SlangTests */,
 				CE8A035A1FE131C1004E53AF /* Learn SlangUITests */,
 				CE8A03361FE131C1004E53AF /* Products */,
+				582FE2417FF400AB4078CEED /* Pods */,
+				C5E3CA75992B8B7455C2DB58 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,8 +147,13 @@
 		CE8A03371FE131C1004E53AF /* Learn Slang */ = {
 			isa = PBXGroup;
 			children = (
+				CE404F931FE266A2006B058C /* Cells */,
+				CE404F921FE26697006B058C /* Models */,
+				CE8A036C1FE13431004E53AF /* API */,
+				CE8A036B1FE133A8004E53AF /* Controller */,
+				CE8A036A1FE1339D004E53AF /* Model */,
+				CE8A03691FE13236004E53AF /* View */,
 				CE8A03381FE131C1004E53AF /* AppDelegate.swift */,
-				CE8A033A1FE131C1004E53AF /* ViewController.swift */,
 				CE8A033C1FE131C1004E53AF /* Main.storyboard */,
 				CE8A03421FE131C1004E53AF /* Assets.xcassets */,
 				CE8A03441FE131C1004E53AF /* LaunchScreen.storyboard */,
@@ -128,6 +181,37 @@
 			path = "Learn SlangUITests";
 			sourceTree = "<group>";
 		};
+		CE8A03691FE13236004E53AF /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CE8A036A1FE1339D004E53AF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CE8A036B1FE133A8004E53AF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CEAB91F81FE2C81D00A7E7C6 /* SearchTableViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		CE8A036C1FE13431004E53AF /* API */ = {
+			isa = PBXGroup;
+			children = (
+				CE8A036D1FE13ABF004E53AF /* ServerManager.swift */,
+				CEAB91F61FE2B29600A7E7C6 /* WordRouter.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,9 +219,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE8A03601FE131C1004E53AF /* Build configuration list for PBXNativeTarget "Learn Slang" */;
 			buildPhases = (
+				60BE478D81AF68D091128096 /* [CP] Check Pods Manifest.lock */,
 				CE8A03311FE131C1004E53AF /* Sources */,
 				CE8A03321FE131C1004E53AF /* Frameworks */,
 				CE8A03331FE131C1004E53AF /* Resources */,
+				591435A7FD64D268030BA242 /* [CP] Embed Pods Frameworks */,
+				FE36F2DB80D3FFD502364812 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -257,12 +344,70 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		591435A7FD64D268030BA242 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Learn Slang/Pods-Learn Slang-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Learn Slang/Pods-Learn Slang-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		60BE478D81AF68D091128096 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Learn Slang-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FE36F2DB80D3FFD502364812 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Learn Slang/Pods-Learn Slang-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CE8A03311FE131C1004E53AF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE8A033B1FE131C1004E53AF /* ViewController.swift in Sources */,
+				CEAB91F71FE2B29600A7E7C6 /* WordRouter.swift in Sources */,
+				CE621CB11FE3AE4F007659DE /* DefinitionTableViewCell.swift in Sources */,
+				CE8A036E1FE13ABF004E53AF /* ServerManager.swift in Sources */,
+				CEAB91F91FE2C81D00A7E7C6 /* SearchTableViewController.swift in Sources */,
+				CE404F951FE29BAC006B058C /* Word.swift in Sources */,
 				CE8A03391FE131C1004E53AF /* AppDelegate.swift in Sources */,
 				CE8A03411FE131C1004E53AF /* Learn_Slang.xcdatamodeld in Sources */,
 			);
@@ -428,6 +573,7 @@
 		};
 		CE8A03611FE131C1004E53AF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 11D9810606B1FA7104A10098 /* Pods-Learn Slang.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -442,6 +588,7 @@
 		};
 		CE8A03621FE131C1004E53AF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2A5D94F1E216418D69759660 /* Pods-Learn Slang.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
