@@ -16,61 +16,45 @@ class ServerManager {
     private init() {
     }
 
-    func downloadWord (word: String, completion: @escaping ([String]) -> Void) -> () {
+    func downloadWord (word: String, completion: @escaping (Result<WordModel>) -> Void) -> () {
         
         Alamofire.request(WordRouter(word: word)).responseJSON { (response) in
             
             guard response.result.isSuccess else {
-                print("Error while fetching word: \(response.result.error)")
+                print("Error while fetching word: \(String(describing: response.result.error))")
 
+                completion(.Error(response.result.error!.localizedDescription))
                 return
             }
             
             guard let responseJSON = response.result.value as? [String: Any],
-            let list = responseJSON["list"] as? [[String: Any]] else {
-                    print("Error while fetching word: \(response.result.error)")
+            let list = responseJSON["list"] as? [[String: Any]],
+            let spellingsURLs = responseJSON["sounds"] as? [String] else {
+                print("Error while fetching word: \(String(describing: response.result.error))")
                     return
             }
             
             var words = [String]()
-            var definitions = [String]()
+            var defsAndExamps = [DefinitionAndExample]()
             
             for word in list {
                 
                 words.append(word["word"] as! String)
-                definitions.append(word["definition"] as! String)
+                let defAndExamp = DefinitionAndExample(definition: word["definition"] as! String,
+                                                       example: word["example"] as! String)
+                defsAndExamps.append(defAndExamp)
             }
             
-            completion(definitions)
+            _ = defsAndExamps.map{print($0.definition);print($0.example)}
+            
+            let wordModel = WordModel(word: words[0], defsAndExamps: NSOrderedSet(array: defsAndExamps), spellingURL: spellingsURLs[0])
+            
+            completion(.Success(wordModel))
         }
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+enum Result<T> {
+    case Success(T)
+    case Error(String)
+}

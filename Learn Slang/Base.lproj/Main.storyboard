@@ -28,7 +28,7 @@
             </objects>
             <point key="canvasLocation" x="-270" y="94"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Word List-->
         <scene sceneID="lBV-Q0-sxW">
             <objects>
                 <tableViewController id="ro7-K1-3QF" sceneMemberID="viewController">
@@ -37,7 +37,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="cUd-zJ-Ff2">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="wordCell" id="cUd-zJ-Ff2">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cUd-zJ-Ff2" id="syY-bb-r8m">
@@ -51,7 +51,7 @@
                             <outlet property="delegate" destination="ro7-K1-3QF" id="A5f-NX-M6u"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="v0O-Lj-WyO"/>
+                    <navigationItem key="navigationItem" title="Word List" id="v0O-Lj-WyO"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8iT-7H-zU1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -102,7 +102,13 @@
                             <outlet property="delegate" destination="gDp-Ij-N3Z" id="dbo-Zn-uW9"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="es4-6I-q2t"/>
+                    <navigationItem key="navigationItem" id="es4-6I-q2t">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="NyD-M4-ADr">
+                            <connections>
+                                <action selector="saveWordButtonClicked:" destination="gDp-Ij-N3Z" id="Jwx-hg-bDy"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="wordSearchBar" destination="hsU-PQ-UOy" id="XXX-K1-ouE"/>
                     </connections>
