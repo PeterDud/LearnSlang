@@ -36,7 +36,8 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
     // MARK: - UISearchBarDelegate
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        ServerManager.shared.downloadWord(word: searchBar.text ?? " ") { (result) in
+        
+        ServerManager.shared.downloadWord(word: searchBar.text!) { (result) in
                 switch result {
                 case .Success(let wordModel):
                     self.wordModel = wordModel
@@ -76,212 +77,133 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
     
     @IBAction func saveWordButtonClicked(_ sender: UIBarButtonItem) {
 
-        clearData()
+//        clearData()
         
-        saveDefinitionInCoreData(wordModel: wordModel!)
-        saveExampleInCoreData(wordModel: wordModel!)
-        saveWordInCoreData(wordModel: wordModel!)
+        if wordAlreadyExists(wordModel: wordModel!) {
+            showAlertWith(title: "Already have it", message: "It seems like you already added this word to the learning list =)")
+            return
+        }
+        saveEntityInCoreData(type: .definition(nil))
+        saveEntityInCoreData(type: .example(nil))
+        saveEntityInCoreData(type: .word())
     }
     
-    // MARK: - Core Data Operations #Warning: trhy to optimize these methods with generics
+    // MARK: - Alerts
     
-    private func clearData() {
-        do {
-            
-            let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: "Word"))
-            do {
-                let objects  = try context.fetch(fetchRequest) as? [NSManagedObject]
-                _ = objects.map{$0.map{context.delete($0)}}
-                CoreDataStack.sharedInstance.saveContext()
-            } catch let error {
-                print("ERROR DELETING : \(error)")
-            }
-        }
+    func showAlertWith(title: String, message: String, style: UIAlertControllerStyle = .alert) {
         
-        do {
-            
-            let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: "Definition"))
-            do {
-                let objects  = try context.fetch(fetchRequest) as? [NSManagedObject]
-                _ = objects.map{$0.map{context.delete($0)}}
-                CoreDataStack.sharedInstance.saveContext()
-            } catch let error {
-                print("ERROR DELETING : \(error)")
-            }
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: style)
+        let action = UIAlertAction(title: "Ok", style: .default) { (action) in
+            self.dismiss(animated: true, completion: nil)
         }
-
-        do {
-            
-            let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: "Example"))
-            do {
-                let objects  = try context.fetch(fetchRequest) as? [NSManagedObject]
-                _ = objects.map{$0.map{context.delete($0)}}
-                CoreDataStack.sharedInstance.saveContext()
-            } catch let error {
-                print("ERROR DELETING : \(error)")
-            }
-        }
-
-    }
-    
-    private func createDefinitionEntityFrom(definition: String) -> NSManagedObject? { // #Warning: Think about doing it with generics
-        
-        let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
-        if let definitionEntity = NSEntityDescription.insertNewObject(forEntityName: "Definition", into: context) as? Definition {
-            definitionEntity.definition = definition
-            return definitionEntity
-        }
-        return nil
-    }
-    
-    private func createExampleEntityFrom(example: String) -> NSManagedObject? { // #Warning: Think about doing it with generics
-        
-        let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
-        if let exampleEntity = NSEntityDescription.insertNewObject(forEntityName: "Example", into: context) as? Example {
-            exampleEntity.example = example
-            return exampleEntity
-        }
-        return nil
+        alertController.addAction(action)
+        self.present(alertController, animated: true, completion: nil)
     }
 
-    private func createWordEntityFrom(wordModel: WordModel) -> NSManagedObject? {
+    // MARK: - Core Data Operations
+    
+    private func wordAlreadyExists(wordModel: WordModel) -> Bool {
         
         let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
-        if let wordEntity = NSEntityDescription.insertNewObject(forEntityName: "Word", into: context) as? Word {
-            wordEntity.word = wordModel.word
-            wordEntity.spellingURL = wordModel.spellingURL
-            
-            return wordEntity
-        }
-        return nil
-    }
-    
-    //        private func createEntityFor<T>(_ value: T, from: WordModel) {  // #Warning: Research how to do this
-//
-//        for value in wordModel.va
-//    }
-    
-    
-    private func saveDefinitionInCoreData(wordModel: WordModel) {
-        _ = wordModel.defsAndExamps.map({ (defAndExamp)  in
-            let definitionAndExample = defAndExamp as! DefinitionAndExample
-            _ = self.createDefinitionEntityFrom(definition: definitionAndExample.definition)
-            do {
-                try CoreDataStack.sharedInstance.persistentContainer.viewContext.save()
-            } catch let error {
-                print(error)
-            }
-        })
-    }
-    
-    private func saveExampleInCoreData(wordModel: WordModel) {
-        _ = wordModel.defsAndExamps.map({ (defAndExamp)  in
-            let definitionAndExample = defAndExamp as! DefinitionAndExample
-            _ = self.createExampleEntityFrom(example: definitionAndExample.example)
-            do {
-                try CoreDataStack.sharedInstance.persistentContainer.viewContext.save()
-            } catch let error {
-                print(error)
-            }
-        })
-    }
-    
-    private func saveWordInCoreData(wordModel: WordModel) {
-        _ = createWordEntityFrom(wordModel: wordModel)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Word")
+        
+        fetchRequest.predicate = NSPredicate(format: "word == %@", wordModel.word)
+        fetchRequest.fetchLimit = 1
+        
         do {
-            try CoreDataStack.sharedInstance.persistentContainer.viewContext.save()
+            let count = try context.count(for: fetchRequest)
+            if count > 0 {
+
+                return true
+            }
         } catch let error {
             print(error)
         }
+        return false
     }
-
-//    private func createPhotoEntityFrom(dictionary: [String: AnyObject]) -> NSManagedObject? {
-//
-//        let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
-//        if let photoEntity = NSEntityDescription.insertNewObject(forEntityName: "Photo", into: context) as? Photo {
-//            photoEntity.author = dictionary["author"] as? String
-//            photoEntity.tags = dictionary["tags"] as? String
-//            let mediaDictionary = dictionary["media"] as? [String: AnyObject]
-//            photoEntity.mediaURL = mediaDictionary?["m"] as? String
-//            return photoEntity
-//        }
-//        return nil
-//    }
-//
-//    private func saveInCoreDataWith(array: [[String: AnyObject]]) {
-//        _ = array.map{self.createPhotoEntityFrom(dictionary: $0)}
-//        do {
-//            try CoreDataStack.sharedInstance.persistentContainer.viewContext.save()
-//        } catch let error {
-//            print(error)
-//        }
-//    }
-
- 
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+        
+    private func createEntityOf(type: EntityType) -> NSManagedObject? {
+        let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
+        
+        switch type {
+        case .word():
+            if let wordEntity = NSEntityDescription.insertNewObject(forEntityName: "Word", into: context) as? Word {
+                wordEntity.word = wordModel?.word
+                wordEntity.spellingURL = wordModel?.spellingURL
+            }
+         case .definition(let definition):
+            if let definitionEntity = NSEntityDescription.insertNewObject(forEntityName: "Definition", into: context) as? Definition {
+                definitionEntity.definition = definition
+                return definitionEntity
+                }
+        case .example(let example):
+            if let exampleEntity = NSEntityDescription.insertNewObject(forEntityName: "Example", into: context) as? Example {
+                exampleEntity.example = example
+                return exampleEntity
+            }
+        }
+        return nil
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
+    private func saveEntityInCoreData(type: EntityType) {
+        
+        switch type {
+        case .word:
+            _ = createEntityOf(type: .word())
+            do {
+                try CoreDataStack.sharedInstance.persistentContainer.viewContext.save()
+            } catch let error {
+                print(error)
+            }
+
+        case .definition:
+            _ = wordModel?.defsAndExamps.map({ (defAndExamp)  in
+                let definitionAndExample = defAndExamp as! DefinitionAndExample
+                _ = self.createEntityOf(type: .definition(definitionAndExample.definition))
+                do {
+                    try CoreDataStack.sharedInstance.persistentContainer.viewContext.save()
+                } catch let error {
+                    print(error)
+                }
+            })
+            
+        case .example:
+            _ = wordModel?.defsAndExamps.map({ (defAndExamp)  in
+                let definitionAndExample = defAndExamp as! DefinitionAndExample
+                _ = self.createEntityOf(type: .example(definitionAndExample.example))
+                do {
+                    try CoreDataStack.sharedInstance.persistentContainer.viewContext.save()
+                } catch let error {
+                    print(error)
+                }
+            })
+        }
+    }
+
+    private func clearData() {
+        
+        let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
+        let wordsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: "Word"))
+        let definitionsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: "Definition"))
+        let examplesFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: "Example"))
+        do {
+            let words  = try context.fetch(wordsFetchRequest) as? [NSManagedObject]
+            let definitions = try context.fetch(definitionsFetchRequest) as? [NSManagedObject]
+            let examples = try context.fetch(examplesFetchRequest) as? [NSManagedObject]
+
+            _ = words.map{$0.map{context.delete($0)}}
+            _ = definitions.map{$0.map{context.delete($0)}}
+            _ = examples.map{$0.map{context.delete($0)}}
+
+            CoreDataStack.sharedInstance.saveContext()
+        } catch let error {
+            print("ERROR DELETING : \(error)")
+        }
+    }
+    
+    enum EntityType {
+        case word()
+        case definition(String?)
+        case example(String?)
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

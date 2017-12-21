@@ -46,8 +46,8 @@ class ServerManager {
             }
             
             _ = defsAndExamps.map{print($0.definition);print($0.example)}
-            
-            let wordModel = WordModel(word: words[0], defsAndExamps: NSOrderedSet(array: defsAndExamps), spellingURL: spellingsURLs[0])
+
+            let wordModel = WordModel(word: words[0], defsAndExamps: NSOrderedSet(array: defsAndExamps), spellingURL: spellingsURLs.count > 0 ? spellingsURLs[0] : "")
             
             completion(.Success(wordModel))
         }
