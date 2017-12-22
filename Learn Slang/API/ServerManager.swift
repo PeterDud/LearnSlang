@@ -21,7 +21,7 @@ class ServerManager {
         Alamofire.request(WordRouter(word: word)).responseJSON { (response) in
             
             guard response.result.isSuccess else {
-                print("Error while fetching word: \(String(describing: response.result.error))") // MARK: error
+                print("Error while fetching word: \(String(describing: response.result.error))") 
 
                 completion(.Error(response.result.error!.localizedDescription))
                 return

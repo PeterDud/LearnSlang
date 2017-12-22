@@ -55,7 +55,8 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
                     self.enableSaveButton()
 
                 case .Error(let errorMessage):
-                    print(errorMessage)  // MARK: error
+                    self.showAlertWith(title: "Oh", message: "The word wasn't downloaded. Try again!")
+                    print("ERROR DOWNLOADING WORD: \(errorMessage)")
             }
         }
     }
@@ -183,7 +184,7 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
                 return true
             }
         } catch let error {
-            print(error) // MARK: error
+            print("ERROR FETCHING WORD COUNT: \(error)")
         }
         return false
     }
@@ -221,7 +222,8 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
 
                 showSavedWordMessage()
             } catch let error {
-                print(error) // MARK: error
+                print("ERROR SAVING WORD: \(error)")
+                showAlertWith(title: "Oops...", message: "It seems word wasn't saved. Try again!")
             }
 
         case .definition:
@@ -231,7 +233,8 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
                 do {
                     try CoreDataStack.sharedInstance.persistentContainer.viewContext.save()
                 } catch let error {
-                    print(error) // MARK: error
+                    print("ERROR SAVING DEFINITION: \(error)")
+                    showAlertWith(title: "Oops...", message: "It seems definition wasn't saved. Try again!")
                 }
             })
             
@@ -242,7 +245,8 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
                 do {
                     try CoreDataStack.sharedInstance.persistentContainer.viewContext.save()
                 } catch let error {
-                    print(error) // MARK: error
+                    print("ERROR SAVING EXAMPLE: \(error)")
+                    showAlertWith(title: "Oops...", message: "It seems example wasn't saved. Try again!")
                 }
             })
         }
@@ -256,16 +260,32 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         let examplesFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: "Example"))
         do {
             let words  = try context.fetch(wordsFetchRequest) as? [NSManagedObject]
-            let definitions = try context.fetch(definitionsFetchRequest) as? [NSManagedObject]
-            let examples = try context.fetch(examplesFetchRequest) as? [NSManagedObject]
-
             _ = words.map{$0.map{context.delete($0)}}
-            _ = definitions.map{$0.map{context.delete($0)}}
-            _ = examples.map{$0.map{context.delete($0)}}
 
             CoreDataStack.sharedInstance.saveContext()
         } catch let error {
-            print("ERROR DELETING : \(error)") // MARK: error
+            print("ERROR DELETING WORD: \(error)")
+            showAlertWith(title: "Oops...", message: "It seems word wasn't deleted. Try again!")
+        }
+        do {
+            let definitions = try context.fetch(definitionsFetchRequest) as? [NSManagedObject]
+            
+            _ = definitions.map{$0.map{context.delete($0)}}
+            
+            CoreDataStack.sharedInstance.saveContext()
+        } catch let error {
+            print("ERROR DELETING DEFINITION: \(error)")
+            showAlertWith(title: "Oops...", message: "It seems definition wasn't deleted. Try again!")
+        }
+        do {
+            let examples = try context.fetch(examplesFetchRequest) as? [NSManagedObject]
+            
+            _ = examples.map{$0.map{context.delete($0)}}
+            
+            CoreDataStack.sharedInstance.saveContext()
+        } catch let error {
+            print("ERROR DELETING EXAMPLE: \(error)")
+            showAlertWith(title: "Oops...", message: "It seems example wasn't deleted. Try again!")
         }
     }
     
