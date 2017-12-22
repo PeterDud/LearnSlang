@@ -13,24 +13,34 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
 
     var wordModel: WordModel?
     @IBOutlet weak var wordSearchBar: UISearchBar!
+    @IBOutlet weak var saveWordButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = "Word Search"
-        
-        wordSearchBar.delegate = self
+
         wordSearchBar.becomeFirstResponder()
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 140
         
-        CoreDataStack.sharedInstance.applicationDocumentsDirectory()
+        CoreDataStack.sharedInstance.applicationDocumentsDirectory() // #Warning: Delete this when you don't need this
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func enableSaveButton() {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.3) {self.saveWordButton.isEnabled = true}
+        }
+    }
+    
+    func disableSaveButton() {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.3) {self.saveWordButton.isEnabled = false}
+        }
     }
     
     // MARK: - UISearchBarDelegate
@@ -39,16 +49,61 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         
         ServerManager.shared.downloadWord(word: searchBar.text!) { (result) in
                 switch result {
-                case .Success(let wordModel):
-                    self.wordModel = wordModel
-                    self.tableView.reloadData()
+                case .Success(let word):
+                    
+                    self.updateTableView(word: word)
+                    self.enableSaveButton()
+
                 case .Error(let errorMessage):
-                    print(errorMessage) // #warning: add Alert later
+                    print(errorMessage)  // MARK: error
             }
         }
     }
+    
+    func updateTableView(word: WordModel) {
+        
+        if wordModel != nil {
+            tableView.performBatchUpdates({
+                
+                self.deleteRowsInTableView()
+                
+            }) { (finished) in
+                self.wordModel = word
+                self.insertRowsInTableView()
+            }
+        } else {
+            wordModel = word
+            insertRowsInTableView()
+        }
+    }
 
-    // MARK: - Table view data source
+    func insertRowsInTableView() {
+        
+        var indexPaths = [IndexPath]()
+        for index in 0..<wordModel!.defsAndExamps.count {
+            indexPaths.append(IndexPath.init(row: index, section: 0))
+        }
+        self.tableView.insertRows(at: indexPaths, with: .top)
+    }
+    
+    func deleteRowsInTableView() {
+        
+        var indexPaths = [IndexPath]()
+        for index in 0..<self.wordModel!.defsAndExamps.count {
+            indexPaths.append(IndexPath.init(row: index, section: 0))
+        }
+        self.wordModel = nil
+        self.tableView.deleteRows(at: indexPaths, with: .bottom)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        
+        deleteRowsInTableView()
+        disableSaveButton()
+        searchBar.text = ""
+    }
+    
+    // MARK: - UITableViewDataSource
 
     override func numberOfSections(in tableView: UITableView) -> Int {
 
@@ -83,21 +138,33 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
             showAlertWith(title: "Already have it", message: "It seems like you already added this word to the learning list =)")
             return
         }
+        saveEntityInCoreData(type: .word())
         saveEntityInCoreData(type: .definition(nil))
         saveEntityInCoreData(type: .example(nil))
-        saveEntityInCoreData(type: .word())
     }
     
     // MARK: - Alerts
     
     func showAlertWith(title: String, message: String, style: UIAlertControllerStyle = .alert) {
         
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: style)
-        let action = UIAlertAction(title: "Ok", style: .default) { (action) in
-            self.dismiss(animated: true, completion: nil)
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: style)
+            let action = UIAlertAction(title: "Ok", style: .default) { (action) in
+                self.dismiss(animated: true, completion: nil)
+            }
+            alertController.addAction(action)
+            self.present(alertController, animated: true, completion: nil)
         }
-        alertController.addAction(action)
-        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func showSavedWordMessage() {
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: "Saved!", message: nil, preferredStyle: .alert)
+            self.present(alertController, animated: true, completion: nil)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                alertController.dismiss(animated: true, completion: nil)
+            }
+        }
     }
 
     // MARK: - Core Data Operations
@@ -113,11 +180,10 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         do {
             let count = try context.count(for: fetchRequest)
             if count > 0 {
-
                 return true
             }
         } catch let error {
-            print(error)
+            print(error) // MARK: error
         }
         return false
     }
@@ -152,8 +218,10 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
             _ = createEntityOf(type: .word())
             do {
                 try CoreDataStack.sharedInstance.persistentContainer.viewContext.save()
+
+                showSavedWordMessage()
             } catch let error {
-                print(error)
+                print(error) // MARK: error
             }
 
         case .definition:
@@ -163,7 +231,7 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
                 do {
                     try CoreDataStack.sharedInstance.persistentContainer.viewContext.save()
                 } catch let error {
-                    print(error)
+                    print(error) // MARK: error
                 }
             })
             
@@ -174,7 +242,7 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
                 do {
                     try CoreDataStack.sharedInstance.persistentContainer.viewContext.save()
                 } catch let error {
-                    print(error)
+                    print(error) // MARK: error
                 }
             })
         }
@@ -197,7 +265,7 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
 
             CoreDataStack.sharedInstance.saveContext()
         } catch let error {
-            print("ERROR DELETING : \(error)")
+            print("ERROR DELETING : \(error)") // MARK: error
         }
     }
     

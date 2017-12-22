@@ -57,22 +57,29 @@
             </objects>
             <point key="canvasLocation" x="1273" y="457"/>
         </scene>
-        <!--Search Table View Controller-->
+        <!--Word Search-->
         <scene sceneID="Ye5-9j-6hO">
             <objects>
                 <tableViewController id="gDp-Ij-N3Z" customClass="SearchTableViewController" customModule="Learn_Slang" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="S7S-je-NrQ">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="S7S-je-NrQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="hsU-PQ-UOy">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Enter your word" showsCancelButton="YES" id="hsU-PQ-UOy">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
+                            <scopeButtonTitles>
+                                <string>Title</string>
+                                <string>Title</string>
+                            </scopeButtonTitles>
+                            <connections>
+                                <outlet property="delegate" destination="gDp-Ij-N3Z" id="OAf-fw-V0l"/>
+                            </connections>
                         </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="definitionCell" id="hwl-XK-l5N" customClass="DefinitionTableViewCell" customModule="Learn_Slang" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="84" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hwl-XK-l5N" id="q6o-na-vsQ">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -102,14 +109,15 @@
                             <outlet property="delegate" destination="gDp-Ij-N3Z" id="dbo-Zn-uW9"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="es4-6I-q2t">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="NyD-M4-ADr">
+                    <navigationItem key="navigationItem" title="Word Search" id="es4-6I-q2t">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="save" id="NyD-M4-ADr">
                             <connections>
                                 <action selector="saveWordButtonClicked:" destination="gDp-Ij-N3Z" id="Jwx-hg-bDy"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="saveWordButton" destination="NyD-M4-ADr" id="Qsy-Cb-88A"/>
                         <outlet property="wordSearchBar" destination="hsU-PQ-UOy" id="XXX-K1-ouE"/>
                     </connections>
                 </tableViewController>

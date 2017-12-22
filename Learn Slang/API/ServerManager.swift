@@ -21,7 +21,7 @@ class ServerManager {
         Alamofire.request(WordRouter(word: word)).responseJSON { (response) in
             
             guard response.result.isSuccess else {
-                print("Error while fetching word: \(String(describing: response.result.error))")
+                print("Error while fetching word: \(String(describing: response.result.error))") // MARK: error
 
                 completion(.Error(response.result.error!.localizedDescription))
                 return
@@ -44,10 +44,10 @@ class ServerManager {
                                                        example: word["example"] as! String)
                 defsAndExamps.append(defAndExamp)
             }
-            
-            _ = defsAndExamps.map{print($0.definition);print($0.example)}
 
-            let wordModel = WordModel(word: words[0], defsAndExamps: NSOrderedSet(array: defsAndExamps), spellingURL: spellingsURLs.count > 0 ? spellingsURLs[0] : "")
+            let wordModel = WordModel(word: words[0],
+                                      defsAndExamps: NSOrderedSet(array: defsAndExamps),
+                                      spellingURL: spellingsURLs.count > 0 ? spellingsURLs[0] : "")
             
             completion(.Success(wordModel))
         }
