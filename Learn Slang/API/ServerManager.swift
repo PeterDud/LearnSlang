@@ -34,6 +34,11 @@ class ServerManager {
                     return
             }
             
+            guard list.count > 0 else {
+                completion(.NotFound)
+                return
+            }
+            
             var words = [String]()
             var defsAndExamps = [DefinitionAndExample]()
             
@@ -57,4 +62,5 @@ class ServerManager {
 enum Result<T> {
     case Success(T)
     case Error(String)
+    case NotFound
 }

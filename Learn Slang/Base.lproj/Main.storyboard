@@ -85,7 +85,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Definition" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GgJ-G1-7Rj">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Definition" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="43" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GgJ-G1-7Rj">
                                             <rect key="frame" x="24" y="11" width="343" height="22"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -110,7 +110,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Word Search" id="es4-6I-q2t">
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="save" id="NyD-M4-ADr">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Save" id="NyD-M4-ADr">
                             <connections>
                                 <action selector="saveWordButtonClicked:" destination="gDp-Ij-N3Z" id="Jwx-hg-bDy"/>
                             </connections>

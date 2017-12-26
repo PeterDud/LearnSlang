@@ -14,16 +14,53 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
     var wordModel: WordModel?
     @IBOutlet weak var wordSearchBar: UISearchBar!
     @IBOutlet weak var saveWordButton: UIBarButtonItem!
+    @IBOutlet weak var cancelButton: UIButton?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         wordSearchBar.becomeFirstResponder()
+        cancelButton = wordSearchBar.value(forKey: "_cancelButton") as? UIButton
+        cancelButton?.isEnabled = false
+        
+        enableCustomFonts()
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 140
         
-        CoreDataStack.sharedInstance.applicationDocumentsDirectory() // #Warning: Delete this when you don't need this
+        CoreDataStack.sharedInstance.applicationDocumentsDirectory() // #Warning: Delete this when you no longer need it
+    }
+    
+    func enableCustomFonts() {
+        
+        let hallosansLight = "Hallosans-Light"
+        let textField = wordSearchBar.value(forKey: "_searchField") as! UITextField
+        textField.font = UIFont(name: hallosansLight, size: 25.0)
+        
+        let attributesBlack  = makeAttributes(color: UIColor.black, name: hallosansLight, size: 25.0)
+        let attributesGray = makeAttributes(color: UIColor.lightGray, name: hallosansLight, size: 25.0)
+        
+        textField.attributedPlaceholder = NSAttributedString(string: "Enter your word", attributes:attributesGray)
+        
+        UIBarButtonItem.appearance().setTitleTextAttributes(attributesBlack, for: UIControlState.disabled)
+        
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(attributesBlack,
+                                                                                                          for: .normal)
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(attributesGray,
+                                                                                                          for: .disabled)
+
+        self.navigationController?.navigationBar.titleTextAttributes = attributesBlack
+        
+        saveWordButton.setTitleTextAttributes(attributesGray, for: UIControlState.disabled)
+        saveWordButton.setTitleTextAttributes(attributesBlack, for: UIControlState.normal)
+    }
+    
+    func makeAttributes(color: UIColor, name: String, size: CGFloat) -> [NSAttributedStringKey : NSObject] {
+        
+        let attributes = [NSAttributedStringKey.foregroundColor : color,
+            NSAttributedStringKey.font : UIFont.init(name: name, size: size)!]
+        
+        return attributes
     }
 
     override func didReceiveMemoryWarning() {
@@ -57,9 +94,49 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
                 case .Error(let errorMessage):
                     self.showAlertWith(title: "Oh", message: "The word wasn't downloaded. Try again!")
                     print("ERROR DOWNLOADING WORD: \(errorMessage)")
+                    
+                case .NotFound:
+                    let notFoundString = "Unfortunately there's no such word/phrase at www.urbandictionary.com"
+                    let notFoundDefAndExamp = DefinitionAndExample(definition: notFoundString, example: "")
+                    let notFoundWordModel = WordModel(word: "",
+                                                      defsAndExamps: NSOrderedSet(array: [notFoundDefAndExamp]),
+                                                      spellingURL: "")
+                    self.updateTableView(word: notFoundWordModel)
             }
         }
     }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        
+        deleteRowsInTableView()
+        disableSaveButton()
+        searchBar.text = ""
+    }
+    
+    // MARK: - UITableViewDataSource
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+        guard wordModel != nil else {
+            UIView.animate(withDuration: 0.3) {self.cancelButton?.isEnabled = false}
+            return 0
+        }
+        UIView.animate(withDuration: 0.3) {self.cancelButton?.isEnabled = true}
+        return wordModel!.defsAndExamps.count
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "definitionCell", for: indexPath) as! DefinitionTableViewCell
+        let defAndExamp = wordModel!.defsAndExamps[indexPath.row] as! DefinitionAndExample
+        let definition = defAndExamp.definition
+        cell.definitionLabel.font = UIFont(name: "Hallo sans", size: 22.0)
+        cell.definitionLabel.text = definition
+        
+        return cell
+    }
+    
+    // MARK: - Table View Update Methods
     
     func updateTableView(word: WordModel) {
         
@@ -77,7 +154,7 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
             insertRowsInTableView()
         }
     }
-
+    
     func insertRowsInTableView() {
         
         var indexPaths = [IndexPath]()
@@ -96,45 +173,11 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         self.wordModel = nil
         self.tableView.deleteRows(at: indexPaths, with: .bottom)
     }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        
-        deleteRowsInTableView()
-        disableSaveButton()
-        searchBar.text = ""
-    }
-    
-    // MARK: - UITableViewDataSource
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-
-        return 1
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        if wordModel == nil {
-            return 0
-        }
-        return wordModel!.defsAndExamps.count
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "definitionCell", for: indexPath) as! DefinitionTableViewCell
-        let defAndExamp = wordModel!.defsAndExamps[indexPath.row] as! DefinitionAndExample
-        let definition = defAndExamp.definition 
-        cell.definitionLabel.text = definition
-        
-        return cell
-    }
-    
     // MARK: - Actions
     
     @IBAction func saveWordButtonClicked(_ sender: UIBarButtonItem) {
 
-//        clearData()
-        
         if wordAlreadyExists(wordModel: wordModel!) {
             showAlertWith(title: "Already have it", message: "It seems like you already added this word to the learning list =)")
             return
