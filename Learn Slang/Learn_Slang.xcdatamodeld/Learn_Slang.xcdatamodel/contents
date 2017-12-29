@@ -9,6 +9,7 @@
         <relationship name="word" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Word" inverseName="examples" inverseEntity="Word" syncable="YES"/>
     </entity>
     <entity name="Word" representedClassName="Word" syncable="YES">
+        <attribute name="firstLetter" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
         <attribute name="spellingURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="word" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="definitions" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Definition" inverseName="word" inverseEntity="Definition" syncable="YES"/>
@@ -17,6 +18,6 @@
     <elements>
         <element name="Definition" positionX="-45" positionY="18" width="128" height="75"/>
         <element name="Example" positionX="-36" positionY="27" width="128" height="75"/>
-        <element name="Word" positionX="-45" positionY="0" width="128" height="105"/>
+        <element name="Word" positionX="-45" positionY="0" width="128" height="120"/>
     </elements>
 </model>

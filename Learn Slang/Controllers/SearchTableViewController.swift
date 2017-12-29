@@ -13,68 +13,73 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
 
     var wordModel: WordModel?
     @IBOutlet weak var wordSearchBar: UISearchBar!
-    @IBOutlet weak var saveWordButton: UIBarButtonItem!
-    @IBOutlet weak var cancelButton: UIButton?
-    
+    var saveWordButton: UIBarButtonItem!
+    var cancelButton: UIButton!
+    var saveButton: UIButton!
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
+//        clearData()
         wordSearchBar.becomeFirstResponder()
         cancelButton = wordSearchBar.value(forKey: "_cancelButton") as? UIButton
-        cancelButton?.isEnabled = false
+        cancelButton.isEnabled = false
         
+        createSaveBarButtonItem()
         enableCustomFonts()
-        
+
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 140
         
         CoreDataStack.sharedInstance.applicationDocumentsDirectory() // #Warning: Delete this when you no longer need it
     }
     
+    func createSaveBarButtonItem()  {
+
+        saveButton = UIButton(type: .custom)
+        saveButton.addTarget(self, action: #selector(SearchTableViewController.saveWordButtonClicked(_:)), for: .touchUpInside)
+        saveWordButton = UIBarButtonItem(customView: saveButton)
+        saveWordButton.isEnabled = false
+        saveWordButton.action = #selector(saveWordButtonClicked(_:))
+        navigationItem.rightBarButtonItem = saveWordButton
+    }
+    
     func enableCustomFonts() {
         
         let hallosansLight = "Hallosans-Light"
+        
+        let attributesBlack = [NSAttributedStringKey.foregroundColor : UIColor.black,
+                               NSAttributedStringKey.font : UIFont.init(name: hallosansLight, size: 25.0)!]
+        let attributesGray = [NSAttributedStringKey.foregroundColor : UIColor.lightGray,
+                              NSAttributedStringKey.font : UIFont.init(name: hallosansLight, size: 25.0)!]
+
         let textField = wordSearchBar.value(forKey: "_searchField") as! UITextField
         textField.font = UIFont(name: hallosansLight, size: 25.0)
-        
-        let attributesBlack  = makeAttributes(color: UIColor.black, name: hallosansLight, size: 25.0)
-        let attributesGray = makeAttributes(color: UIColor.lightGray, name: hallosansLight, size: 25.0)
-        
         textField.attributedPlaceholder = NSAttributedString(string: "Enter your word", attributes:attributesGray)
-        
-        UIBarButtonItem.appearance().setTitleTextAttributes(attributesBlack, for: UIControlState.disabled)
         
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(attributesBlack,
                                                                                                           for: .normal)
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(attributesGray,
                                                                                                           for: .disabled)
+        saveButton?.setAttributedTitle(NSAttributedString(string: "Save", attributes: attributesBlack), for: .normal)
+        saveButton?.setAttributedTitle(NSAttributedString(string: "Save", attributes: attributesGray), for: .disabled)
+        saveButton?.setAttributedTitle(NSAttributedString(string: "Save", attributes: attributesGray), for: .highlighted)
 
         self.navigationController?.navigationBar.titleTextAttributes = attributesBlack
-        
-        saveWordButton.setTitleTextAttributes(attributesGray, for: UIControlState.disabled)
-        saveWordButton.setTitleTextAttributes(attributesBlack, for: UIControlState.normal)
     }
     
-    func makeAttributes(color: UIColor, name: String, size: CGFloat) -> [NSAttributedStringKey : NSObject] {
-        
-        let attributes = [NSAttributedStringKey.foregroundColor : color,
-            NSAttributedStringKey.font : UIFont.init(name: name, size: size)!]
-        
-        return attributes
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    func enableSaveButton() {
+    func enableSaveButton() { // #Warning: maybe you don't need this method
         DispatchQueue.main.async {
             UIView.animate(withDuration: 0.3) {self.saveWordButton.isEnabled = true}
         }
     }
     
-    func disableSaveButton() {
+    func disableSaveButton() { // #Warning: maybe you don't need this method
         DispatchQueue.main.async {
             UIView.animate(withDuration: 0.3) {self.saveWordButton.isEnabled = false}
         }
@@ -118,10 +123,14 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         guard wordModel != nil else {
-            UIView.animate(withDuration: 0.3) {self.cancelButton?.isEnabled = false}
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 0.3) {self.cancelButton.isEnabled = false}
+            }
             return 0
         }
-        UIView.animate(withDuration: 0.3) {self.cancelButton?.isEnabled = true}
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.3) {self.cancelButton.isEnabled = true}
+        }
         return wordModel!.defsAndExamps.count
     }
 
@@ -140,18 +149,17 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
     
     func updateTableView(word: WordModel) {
         
-        if wordModel != nil {
+        if wordModel == nil {
+            wordModel = word
+            insertRowsInTableView()
+            
+        } else {
             tableView.performBatchUpdates({
-                
                 self.deleteRowsInTableView()
-                
             }) { (finished) in
                 self.wordModel = word
                 self.insertRowsInTableView()
             }
-        } else {
-            wordModel = word
-            insertRowsInTableView()
         }
     }
     
@@ -189,10 +197,10 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
     
     // MARK: - Alerts
     
-    func showAlertWith(title: String, message: String, style: UIAlertControllerStyle = .alert) {
+    func showAlertWith(title: String, message: String) {
         
         DispatchQueue.main.async {
-            let alertController = UIAlertController(title: title, message: message, preferredStyle: style)
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
             let action = UIAlertAction(title: "Ok", style: .default) { (action) in
                 self.dismiss(animated: true, completion: nil)
             }
@@ -240,6 +248,7 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
             if let wordEntity = NSEntityDescription.insertNewObject(forEntityName: "Word", into: context) as? Word {
                 wordEntity.word = wordModel?.word
                 wordEntity.spellingURL = wordModel?.spellingURL
+                return wordEntity
             }
          case .definition(let definition):
             if let definitionEntity = NSEntityDescription.insertNewObject(forEntityName: "Definition", into: context) as? Definition {
@@ -295,7 +304,7 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         }
     }
 
-    private func clearData() {
+    private func clearData() { // #Warning: Create abstract class to unite all your managed objects
         
         let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
         let wordsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: "Word"))

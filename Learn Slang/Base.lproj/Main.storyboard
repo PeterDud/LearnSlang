@@ -31,18 +31,27 @@
         <!--Word List-->
         <scene sceneID="lBV-Q0-sxW">
             <objects>
-                <tableViewController id="ro7-K1-3QF" sceneMemberID="viewController">
+                <tableViewController id="ro7-K1-3QF" customClass="WordListTableViewController" customModule="Learn_Slang" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="rDN-wk-eh8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="wordCell" id="cUd-zJ-Ff2">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="wordCell" textLabel="exv-fa-bSB" style="IBUITableViewCellStyleDefault" id="cUd-zJ-Ff2">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cUd-zJ-Ff2" id="syY-bb-r8m">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="exv-fa-bSB">
+                                            <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -109,15 +118,8 @@
                             <outlet property="delegate" destination="gDp-Ij-N3Z" id="dbo-Zn-uW9"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Word Search" id="es4-6I-q2t">
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Save" id="NyD-M4-ADr">
-                            <connections>
-                                <action selector="saveWordButtonClicked:" destination="gDp-Ij-N3Z" id="Jwx-hg-bDy"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Word Search" id="es4-6I-q2t"/>
                     <connections>
-                        <outlet property="saveWordButton" destination="NyD-M4-ADr" id="Qsy-Cb-88A"/>
                         <outlet property="wordSearchBar" destination="hsU-PQ-UOy" id="XXX-K1-ouE"/>
                     </connections>
                 </tableViewController>

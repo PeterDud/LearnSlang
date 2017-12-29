@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		AAA4B09D8750FDD24D0E8BDC /* Pods_Learn_Slang.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE025666FD851529711AB34E /* Pods_Learn_Slang.framework */; };
 		CE3E54331FEA7F3A0048C742 /* DefinitionAndExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E54321FEA7F3A0048C742 /* DefinitionAndExample.swift */; };
+		CE5283701FF6AE2500CCE7A7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52836F1FF6AE2500CCE7A7 /* Extensions.swift */; };
+		CE5283741FF6AF6E00CCE7A7 /* Word+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5283731FF6AF6E00CCE7A7 /* Word+CoreDataProperties.swift */; };
+		CE5827061FF3A7DE00ED1E6B /* WordListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5827051FF3A7DE00ED1E6B /* WordListTableViewController.swift */; };
 		CE621CB11FE3AE4F007659DE /* DefinitionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE621CB01FE3AE4F007659DE /* DefinitionTableViewCell.swift */; };
 		CE700E201FF24578001F206F /* Mohave Italics.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE700E111FF24577001F206F /* Mohave Italics.otf */; };
 		CE700E221FF24578001F206F /* Hallo sans.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE700E131FF24577001F206F /* Hallo sans.otf */; };
@@ -36,7 +39,6 @@
 		CEAB91F91FE2C81D00A7E7C6 /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAB91F81FE2C81D00A7E7C6 /* SearchTableViewController.swift */; };
 		CEC2A9511FE93CFB0011609A /* WordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2A9501FE93CFB0011609A /* WordModel.swift */; };
 		CEC2A9641FE956F50011609A /* Word+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2A95E1FE956F50011609A /* Word+CoreDataClass.swift */; };
-		CEC2A9651FE956F50011609A /* Word+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2A95F1FE956F50011609A /* Word+CoreDataProperties.swift */; };
 		CEC2A9661FE956F50011609A /* Example+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2A9601FE956F50011609A /* Example+CoreDataClass.swift */; };
 		CEC2A9671FE956F50011609A /* Example+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2A9611FE956F50011609A /* Example+CoreDataProperties.swift */; };
 		CEC2A9681FE956F50011609A /* Definition+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2A9621FE956F50011609A /* Definition+CoreDataClass.swift */; };
@@ -65,6 +67,9 @@
 		11D9810606B1FA7104A10098 /* Pods-Learn Slang.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Learn Slang.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Learn Slang/Pods-Learn Slang.debug.xcconfig"; sourceTree = "<group>"; };
 		2A5D94F1E216418D69759660 /* Pods-Learn Slang.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Learn Slang.release.xcconfig"; path = "Pods/Target Support Files/Pods-Learn Slang/Pods-Learn Slang.release.xcconfig"; sourceTree = "<group>"; };
 		CE3E54321FEA7F3A0048C742 /* DefinitionAndExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionAndExample.swift; sourceTree = "<group>"; };
+		CE52836F1FF6AE2500CCE7A7 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		CE5283731FF6AF6E00CCE7A7 /* Word+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Word+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CE5827051FF3A7DE00ED1E6B /* WordListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListTableViewController.swift; sourceTree = "<group>"; };
 		CE621CB01FE3AE4F007659DE /* DefinitionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionTableViewCell.swift; sourceTree = "<group>"; };
 		CE700E111FF24577001F206F /* Mohave Italics.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mohave Italics.otf"; sourceTree = "<group>"; };
 		CE700E131FF24577001F206F /* Hallo sans.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Hallo sans.otf"; sourceTree = "<group>"; };
@@ -98,7 +103,6 @@
 		CEAB91F81FE2C81D00A7E7C6 /* SearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
 		CEC2A9501FE93CFB0011609A /* WordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordModel.swift; sourceTree = "<group>"; };
 		CEC2A95E1FE956F50011609A /* Word+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Word+CoreDataClass.swift"; sourceTree = "<group>"; };
-		CEC2A95F1FE956F50011609A /* Word+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Word+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CEC2A9601FE956F50011609A /* Example+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Example+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CEC2A9611FE956F50011609A /* Example+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Example+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CEC2A9621FE956F50011609A /* Definition+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Definition+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -154,7 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				CEC2A95E1FE956F50011609A /* Word+CoreDataClass.swift */,
-				CEC2A95F1FE956F50011609A /* Word+CoreDataProperties.swift */,
+				CE5283731FF6AF6E00CCE7A7 /* Word+CoreDataProperties.swift */,
 				CEC2A9601FE956F50011609A /* Example+CoreDataClass.swift */,
 				CEC2A9611FE956F50011609A /* Example+CoreDataProperties.swift */,
 				CEC2A9621FE956F50011609A /* Definition+CoreDataClass.swift */,
@@ -222,7 +226,7 @@
 				CE404F931FE266A2006B058C /* Cells */,
 				CE404F921FE26697006B058C /* Core Data Files */,
 				CE8A036C1FE13431004E53AF /* API */,
-				CE8A036B1FE133A8004E53AF /* Controller */,
+				CE8A036B1FE133A8004E53AF /* Controllers */,
 				CE8A03691FE13236004E53AF /* View */,
 				CE8A03381FE131C1004E53AF /* AppDelegate.swift */,
 				CEC2A94F1FE938CC0011609A /* Models */,
@@ -231,6 +235,7 @@
 				CE8A03441FE131C1004E53AF /* LaunchScreen.storyboard */,
 				CE8A03471FE131C1004E53AF /* Info.plist */,
 				CE8A033F1FE131C1004E53AF /* Learn_Slang.xcdatamodeld */,
+				CE52836F1FF6AE2500CCE7A7 /* Extensions.swift */,
 			);
 			path = "Learn Slang";
 			sourceTree = "<group>";
@@ -260,12 +265,13 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		CE8A036B1FE133A8004E53AF /* Controller */ = {
+		CE8A036B1FE133A8004E53AF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				CEAB91F81FE2C81D00A7E7C6 /* SearchTableViewController.swift */,
+				CE5827051FF3A7DE00ED1E6B /* WordListTableViewController.swift */,
 			);
-			path = Controller;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		CE8A036C1FE13431004E53AF /* API */ = {
@@ -492,11 +498,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEC2A9671FE956F50011609A /* Example+CoreDataProperties.swift in Sources */,
+				CE5827061FF3A7DE00ED1E6B /* WordListTableViewController.swift in Sources */,
+				CE5283741FF6AF6E00CCE7A7 /* Word+CoreDataProperties.swift in Sources */,
 				CEAB91F71FE2B29600A7E7C6 /* WordRouter.swift in Sources */,
 				CEC2A9511FE93CFB0011609A /* WordModel.swift in Sources */,
 				CE3E54331FEA7F3A0048C742 /* DefinitionAndExample.swift in Sources */,
 				CEC2A9691FE956F50011609A /* Definition+CoreDataProperties.swift in Sources */,
-				CEC2A9651FE956F50011609A /* Word+CoreDataProperties.swift in Sources */,
 				CE621CB11FE3AE4F007659DE /* DefinitionTableViewCell.swift in Sources */,
 				CEC2A9641FE956F50011609A /* Word+CoreDataClass.swift in Sources */,
 				CEC2A96B1FE959A10011609A /* CoreDataStack.swift in Sources */,
@@ -505,6 +512,7 @@
 				CE8A03391FE131C1004E53AF /* AppDelegate.swift in Sources */,
 				CEC2A9661FE956F50011609A /* Example+CoreDataClass.swift in Sources */,
 				CEC2A9681FE956F50011609A /* Definition+CoreDataClass.swift in Sources */,
+				CE5283701FF6AE2500CCE7A7 /* Extensions.swift in Sources */,
 				CE8A03411FE131C1004E53AF /* Learn_Slang.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
