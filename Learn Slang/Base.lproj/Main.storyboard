@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,50 +22,77 @@
                     </tabBar>
                     <connections>
                         <segue destination="kac-2x-lGO" kind="relationship" relationship="viewControllers" id="wwA-Vn-L3h"/>
-                        <segue destination="rAb-m8-9HM" kind="relationship" relationship="viewControllers" id="6TN-mO-wLd"/>
+                        <segue destination="sJt-Kg-0zT" kind="relationship" relationship="viewControllers" id="Z5P-ys-xKS"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nPf-Ug-bZY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-270" y="94"/>
         </scene>
-        <!--Word List-->
-        <scene sceneID="lBV-Q0-sxW">
+        <!--Word List Table View Controller-->
+        <scene sceneID="bNa-Sm-9Xw">
             <objects>
-                <tableViewController id="ro7-K1-3QF" customClass="WordListTableViewController" customModule="Learn_Slang" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="rDN-wk-eh8">
+                <viewController id="0GD-t8-u3c" customClass="WordListTableViewController" customModule="Learn_Slang" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zc7-Bg-S3P">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="wordCell" textLabel="exv-fa-bSB" style="IBUITableViewCellStyleDefault" id="cUd-zJ-Ff2">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cUd-zJ-Ff2" id="syY-bb-r8m">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="exv-fa-bSB">
-                                            <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="g7Y-kH-bHi">
+                                <rect key="frame" x="0.0" y="64" width="375" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="0GD-t8-u3c" id="xce-Cq-IAw"/>
+                                </connections>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1TZ-h1-U8l">
+                                <rect key="frame" x="0.0" y="120" width="375" height="498"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="wordCell" textLabel="2lS-4A-CuQ" style="IBUITableViewCellStyleDefault" id="ddp-UZ-MDz">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ddp-UZ-MDz" id="AI7-PH-SVa">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="ro7-K1-3QF" id="vmn-ck-hEf"/>
-                            <outlet property="delegate" destination="ro7-K1-3QF" id="A5f-NX-M6u"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Word List" id="v0O-Lj-WyO"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8iT-7H-zU1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2lS-4A-CuQ">
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="0GD-t8-u3c" id="qu3-Ow-wKv"/>
+                                    <outlet property="delegate" destination="0GD-t8-u3c" id="sF8-Wa-glS"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="g7Y-kH-bHi" secondAttribute="trailing" id="9Pr-l8-8pQ"/>
+                            <constraint firstItem="1TZ-h1-U8l" firstAttribute="top" secondItem="g7Y-kH-bHi" secondAttribute="bottom" id="CQe-os-z3W"/>
+                            <constraint firstItem="1TZ-h1-U8l" firstAttribute="leading" secondItem="fZJ-mk-uZE" secondAttribute="leading" id="IPt-Il-iTZ"/>
+                            <constraint firstItem="g7Y-kH-bHi" firstAttribute="leading" secondItem="zc7-Bg-S3P" secondAttribute="leading" id="VNw-zv-zCa"/>
+                            <constraint firstItem="fZJ-mk-uZE" firstAttribute="bottom" secondItem="1TZ-h1-U8l" secondAttribute="bottom" id="hna-Ah-njL"/>
+                            <constraint firstItem="g7Y-kH-bHi" firstAttribute="top" secondItem="fZJ-mk-uZE" secondAttribute="top" id="wju-7I-4hN"/>
+                            <constraint firstItem="fZJ-mk-uZE" firstAttribute="trailing" secondItem="1TZ-h1-U8l" secondAttribute="trailing" id="x2H-YO-DJQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="fZJ-mk-uZE"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="r9m-PJ-uCh"/>
+                    <connections>
+                        <outlet property="tableView" destination="1TZ-h1-U8l" id="J4F-fw-0gT"/>
+                        <outlet property="wordSearchBar" destination="g7Y-kH-bHi" id="OWp-L7-Nch"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hoM-gK-L7O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1273" y="457"/>
+            <point key="canvasLocation" x="1273" y="547"/>
         </scene>
         <!--Word Search-->
         <scene sceneID="Ye5-9j-6hO">
@@ -131,7 +159,9 @@
         <scene sceneID="B44-2k-uvM">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kac-2x-lGO" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" selectedImage="search_icon" systemItem="search" id="S5s-iY-eoh"/>
+                    <tabBarItem key="tabBarItem" selectedImage="search_icon" systemItem="search" id="S5s-iY-eoh">
+                        <color key="badgeColor" name="systemPinkColor" catalog="System" colorSpace="catalog"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="JF1-N2-ohg">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -147,23 +177,23 @@
             <point key="canvasLocation" x="540.79999999999995" y="-233.88305847076464"/>
         </scene>
         <!--List-->
-        <scene sceneID="gLE-Rk-hB4">
+        <scene sceneID="Q1X-BK-7G4">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rAb-m8-9HM" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="List" image="list_icon_25x25" selectedImage="list_icon_25x25" id="CWD-EV-4Cc"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sJt-Kg-0zT" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="List" image="list_icon_25x25" selectedImage="list_icon_25x25" id="MSN-q9-NyT"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Eeo-gP-tQW">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Vdd-Fy-vfp">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="ro7-K1-3QF" kind="relationship" relationship="rootViewController" id="DXz-79-MG4"/>
+                        <segue destination="0GD-t8-u3c" kind="relationship" relationship="rootViewController" id="F2F-z2-YaY"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0A3-Vc-WS6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tTR-CX-1pN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="540.79999999999995" y="456.97151424287858"/>
+            <point key="canvasLocation" x="550" y="547"/>
         </scene>
     </scenes>
     <resources>

@@ -9,15 +9,23 @@
 import UIKit
 import CoreData
 
-class WordListTableViewController: UITableViewController {
+class WordListTableViewController: UIViewController {
 
+    @IBOutlet weak var wordSearchBar: UISearchBar!
+    @IBOutlet weak var tableView: UITableView!
     private let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
-
-    private var fetchedResultController: NSFetchedResultsController<Word>?
-
+    private var fetchedResultController: NSFetchedResultsController<Word>!
+    
+    let attributesBlack = [NSAttributedStringKey.foregroundColor : UIColor.black,
+                           NSAttributedStringKey.font : UIFont.init(name: "Hallosans-Light", size: 28.0)!]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        enableCustomFonts()
+        let editButton = createEditButton(withText: "Edit")
+        wordSearchBar.becomeFirstResponder()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: editButton)
+        tableView.sectionIndexColor = UIColor.black
+        self.navigationController?.navigationBar.titleTextAttributes = attributesBlack
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -25,98 +33,194 @@ class WordListTableViewController: UITableViewController {
         updateTableContent()
         tableView.reloadData()
     }
+    
+    func createEditButton (withText text: String) -> UIButton  {
+        
+        let editButton = UIButton(type: .custom)
+        editButton.addTarget(self, action: #selector(WordListTableViewController.editButtonClicked(_:)), for: .touchUpInside)
+        editButton.setAttributedTitle(NSAttributedString(string: text, attributes: attributesBlack), for: .normal)
+        
+        return editButton
+    }
+
+    @objc func editButtonClicked (_ sender: UIBarButtonItem) {
+        
+        let isEditing = tableView.isEditing
+        tableView.setEditing(!isEditing, animated: true)
+        
+        let editBarButtonItem = UIBarButtonItem()
+        editBarButtonItem.customView = createEditButton(withText: "Edit")
+        if tableView.isEditing {
+            editBarButtonItem.customView = createEditButton(withText: "Done")
+        }
+        navigationItem.setRightBarButton(editBarButtonItem, animated: true)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    func enableCustomFonts() {
-        
-        let attributesBlack = [NSAttributedStringKey.foregroundColor : UIColor.black,
-                               NSAttributedStringKey.font : UIFont.init(name: "Hallosans-Light", size: 28.0)!]
-        self.navigationController?.navigationBar.titleTextAttributes = attributesBlack
-    }
-
-
-    // MARK: - Table view data source
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return fetchedResultController?.sections?.count ?? 0
-    }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-
-        let words = fetchedResultController?.sections?[section].objects as? [Word]
-        let word = words?.first
-        let string = word?.word
-        let index = string!.index(string!.startIndex, offsetBy: 2)
-        let first2Chars = word?.word?.prefix(upTo: index)
-        let first2CharsStr = "\(first2Chars!)"
-
-        return first2CharsStr
-    }
-    
-    func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
-        return (fetchedResultController?.section(forSectionIndexTitle: title, at: index))!
-    }
-
-//    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-//
-//        return fetchedResultController!.sectionIndexTitles
-//    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        guard let sections = fetchedResultController?.sections, let objs = sections[section].objects else {
-            return 0
-        }
-        return objs.count
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "wordCell", for: indexPath)
-
-        let word = fetchedResultController?.object(at: indexPath)
-        cell.textLabel!.font = UIFont(name: "Hallo sans", size: 25)
-        cell.textLabel!.text = word?.word
-        
-        return cell
-    }
-    
     func updateTableContent() {
         
         let request = Word.fetchRequest() as NSFetchRequest<Word>
+        let sort = NSSortDescriptor(key: "word", ascending:true, selector: nil)
         
-        let sort = NSSortDescriptor(key: #keyPath(Word.word), ascending:true, selector: #selector(NSString.caseInsensitiveCompare(_:)))
+        if wordSearchBar.text?.count != nil && (wordSearchBar.text?.count)! > 0 {
+            let predicate = NSPredicate(format: "word CONTAINS[cd] %@", self.wordSearchBar.text ?? "")
+            request.predicate = predicate
+        }
         request.sortDescriptors = [sort]
-        
         do {
-            fetchedResultController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: #keyPath(), cacheName: nil)
-            fetchedResultController?.delegate = self
-
-            try self.fetchedResultController?.performFetch()
-            print("COUNT FETCHED FIRST: \(String(describing: fetchedResultController?.sections?[0].numberOfObjects))")
+            fetchedResultController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: "word.firstChar", cacheName: nil)
+            fetchedResultController.delegate = self
+            
+            try self.fetchedResultController.performFetch()
         } catch let error  {
             print("ERROR: \(error)")
         }
     }
+
+    // MARK: - Table view data source
+    
+}
+
+extension WordListTableViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        
+        if fetchedResultController != nil {
+            return (fetchedResultController.sections?.count)!
+        } else {
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        let objs = fetchedResultController.sections?[section].objects
+        return objs?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "wordCell", for: indexPath)
+        
+        let word = fetchedResultController.object(at: indexPath)
+        cell.textLabel!.font = UIFont(name: "Hallo sans", size: 24)
+        cell.textLabel!.text = word.word
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            let word = fetchedResultController.object(at: indexPath)
+            context.delete(word)
+            do {
+                try context.save()
+            } catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+        
+        return fetchedResultController.section(forSectionIndexTitle: title, at: index)
+    }
+    
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        
+        if fetchedResultController != nil {
+            return fetchedResultController.sectionIndexTitles
+        } else {
+            return nil
+        }
+    }
+}
+
+extension WordListTableViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        
+        if tableView.isEditing {
+            return .delete
+        }
+        return .none
+    }
+
+    internal func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let sectionTitle = fetchedResultController.sectionIndexTitles[section]
+        
+        let myLabel = UILabel()
+        myLabel.frame = CGRect(x: 20, y: 5, width: 320, height: 22) // #Warning: make it flexible
+        myLabel.font = UIFont.init(name: "Hallo sans", size: 24)
+        myLabel.text = sectionTitle
+        
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.groupTableViewBackground
+        headerView.addSubview(myLabel)
+        
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { 
+        return 50
+    }
+
 }
 
 extension WordListTableViewController: NSFetchedResultsControllerDelegate {
 
-//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-//
-//        switch type {
-//        case .insert:
-//            break // The word is added in SearchTableViewController (WordListTableViewController won't be visible at the moment of adding new cell), that's why we don't update table view here.
-//        case .delete:
-//            tableView.deleteRows(at: [indexPath!], with: .automatic)
-//        default:
-//            break
-//        }
-//    }
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
 
+        guard indexPath?.section != nil, tableView.numberOfRows(inSection: (indexPath?.section)!) > 1 else { return } // if there's only one row left we delete an entire section in another NSFetchedResultsControllerDelegate method
+        
+        if type == .delete {
+            tableView.beginUpdates()
+            tableView.deleteRows(at: [indexPath!], with: .left)
+            tableView.endUpdates()
+        }
+    }
+
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+
+        if type == .delete {
+            tableView.beginUpdates()
+            tableView.deleteSections([sectionIndex], with: .left)
+            tableView.endUpdates()
+        }
+    }
 }
+
+extension WordListTableViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        updateTableContent()
+        tableView.reloadData()
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

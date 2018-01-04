@@ -17,13 +17,12 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
     var cancelButton: UIButton!
     var saveButton: UIButton!
 
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        clearData()
+
         wordSearchBar.becomeFirstResponder()
         cancelButton = wordSearchBar.value(forKey: "_cancelButton") as? UIButton
-        cancelButton.isEnabled = false
         
         createSaveBarButtonItem()
         enableCustomFonts()
@@ -34,13 +33,18 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         CoreDataStack.sharedInstance.applicationDocumentsDirectory() // #Warning: Delete this when you no longer need it
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if wordModel == nil {
+            DispatchQueue.main.async { self.cancelButton.isEnabled = false }
+        }
+    }
+    
     func createSaveBarButtonItem()  {
 
         saveButton = UIButton(type: .custom)
         saveButton.addTarget(self, action: #selector(SearchTableViewController.saveWordButtonClicked(_:)), for: .touchUpInside)
         saveWordButton = UIBarButtonItem(customView: saveButton)
         saveWordButton.isEnabled = false
-        saveWordButton.action = #selector(saveWordButtonClicked(_:))
         navigationItem.rightBarButtonItem = saveWordButton
     }
     
@@ -112,7 +116,9 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        
+        if tableView.visibleCells.isEmpty {
+            return
+        }
         deleteRowsInTableView()
         disableSaveButton()
         searchBar.text = ""
@@ -184,7 +190,7 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
 
     // MARK: - Actions
     
-    @IBAction func saveWordButtonClicked(_ sender: UIBarButtonItem) {
+    @objc func saveWordButtonClicked(_ sender: UIBarButtonItem) {
 
         if wordAlreadyExists(wordModel: wordModel!) {
             showAlertWith(title: "Already have it", message: "It seems like you already added this word to the learning list =)")
@@ -218,6 +224,16 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
             }
         }
     }
+    
+    // MARK: - Custom Methods
+    
+    func setUpWordForCoreData(_ word: String) -> String {
+        if word == word.uppercased() {
+            return word
+        } else {
+            return word.capitalized
+        }
+    }
 
     // MARK: - Core Data Operations
     
@@ -226,7 +242,7 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Word")
         
-        fetchRequest.predicate = NSPredicate(format: "word == %@", wordModel.word)
+        fetchRequest.predicate = NSPredicate(format: "word ==[c] %@", wordModel.word)
         fetchRequest.fetchLimit = 1
         
         do {
@@ -246,7 +262,8 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         switch type {
         case .word():
             if let wordEntity = NSEntityDescription.insertNewObject(forEntityName: "Word", into: context) as? Word {
-                wordEntity.word = wordModel?.word
+                
+                wordEntity.word = setUpWordForCoreData(wordModel!.word)
                 wordEntity.spellingURL = wordModel?.spellingURL
                 return wordEntity
             }

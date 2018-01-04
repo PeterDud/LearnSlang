@@ -8,11 +8,23 @@
 
 import Foundation
 
-extension NSString{
-    func firstChar() -> String{
+extension NSString {
+    @objc func firstChar() -> String{
         if self.length == 0{
             return ""
         }
         return self.substring(to: 1)
     }
 }
+
+extension String {
+    func firstChar() -> String{
+        if self.count == 0{
+            return ""
+        }
+        let i = index(self.startIndex, offsetBy: 1)
+        let firstChar = String(self.prefix(upTo: i))
+        return firstChar
+    }
+}
+

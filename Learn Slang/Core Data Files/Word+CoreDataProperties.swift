@@ -2,8 +2,8 @@
 //  Word+CoreDataProperties.swift
 //  Learn Slang
 //
-//  Created by user on 29/12/2017.
-//  Copyright © 2017 user. All rights reserved.
+//  Created by user on 04/01/2018.
+//  Copyright © 2018 user. All rights reserved.
 //
 //
 
@@ -19,21 +19,6 @@ extension Word {
 
     @NSManaged public var spellingURL: String?
     @NSManaged public var word: String?
-    @NSManaged public var firstLetter: String? {
-        get {
-        //        [self willAccessValueForKey:@"committeeNameInitial"];
-        //        NSString * initial = [[self committeeName] substringToIndex:1];
-        //        [self didAccessValueForKey:@"committeeNameInitial"];
-        //        return initial;
-        self.willAccessValue(forKey: "firstLetter")
-        let indexFirstLetter = self.word?.index((self.word?.startIndex)!, offsetBy: 1)
-
-        let initial = word?.prefix(upTo: indexFirstLetter!)
-        self.didAccessValue(forKey: "firstLetter")
-        
-        return String(describing: initial!)
-        }
-    }
     @NSManaged public var definitions: NSOrderedSet?
     @NSManaged public var examples: NSOrderedSet?
 
