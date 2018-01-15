@@ -81,11 +81,7 @@ class WordTableViewController: UITableViewController {
         cell.definitionLabel.font = UIFont(name: "Hallo sans", size: 24)
         cell.definitionLabel.text = myDefinition!
         
-        
         cell.exampleLabel.text = examples
-        
-//        cell.textLabel!.font = UIFont(name: "Hallo sans", size: 24)
-//        cell.textLabel!.text = text
         
         return cell
     }
