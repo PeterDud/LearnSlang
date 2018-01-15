@@ -2,7 +2,7 @@
 //  Definition+CoreDataProperties.swift
 //  Learn Slang
 //
-//  Created by user on 12/01/2018.
+//  Created by user on 15/01/2018.
 //  Copyright © 2018 user. All rights reserved.
 //
 //
@@ -18,24 +18,42 @@ extension Definition {
     }
 
     @NSManaged public var definition: String?
+    @NSManaged public var examples: NSOrderedSet?
     @NSManaged public var word: Word?
-    @NSManaged public var example: NSSet?
 
 }
 
-// MARK: Generated accessors for example
+// MARK: Generated accessors for examples
 extension Definition {
 
-    @objc(addExampleObject:)
-    @NSManaged public func addToExample(_ value: Example)
+    @objc(insertObject:inExamplesAtIndex:)
+    @NSManaged public func insertIntoExamples(_ value: Example, at idx: Int)
 
-    @objc(removeExampleObject:)
-    @NSManaged public func removeFromExample(_ value: Example)
+    @objc(removeObjectFromExamplesAtIndex:)
+    @NSManaged public func removeFromExamples(at idx: Int)
 
-    @objc(addExample:)
-    @NSManaged public func addToExample(_ values: NSSet)
+    @objc(insertExamples:atIndexes:)
+    @NSManaged public func insertIntoExamples(_ values: [Example], at indexes: NSIndexSet)
 
-    @objc(removeExample:)
-    @NSManaged public func removeFromExample(_ values: NSSet)
+    @objc(removeExamplesAtIndexes:)
+    @NSManaged public func removeFromExamples(at indexes: NSIndexSet)
+
+    @objc(replaceObjectInExamplesAtIndex:withObject:)
+    @NSManaged public func replaceExamples(at idx: Int, with value: Example)
+
+    @objc(replaceExamplesAtIndexes:withExamples:)
+    @NSManaged public func replaceExamples(at indexes: NSIndexSet, with values: [Example])
+
+    @objc(addExamplesObject:)
+    @NSManaged public func addToExamples(_ value: Example)
+
+    @objc(removeExamplesObject:)
+    @NSManaged public func removeFromExamples(_ value: Example)
+
+    @objc(addExamples:)
+    @NSManaged public func addToExamples(_ values: NSOrderedSet)
+
+    @objc(removeExamples:)
+    @NSManaged public func removeFromExamples(_ values: NSOrderedSet)
 
 }

@@ -28,3 +28,9 @@ extension String {
     }
 }
 
+//extension NSOrderedSet {
+//    var last: Element {
+//        return self[self.endIndex - 1]
+//    }
+//}
+

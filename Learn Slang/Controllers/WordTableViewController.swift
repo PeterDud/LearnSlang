@@ -37,8 +37,28 @@ class WordTableViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "wordCell", for: indexPath)
 
-        let definition = (word.definitions?[indexPath.row] as? Definition)?.definition
-        cell.textLabel!.text = definition
+        let definition = word.definitions?[indexPath.row] as! Definition
+//        print(definition)
+        let myDefinition = definition.definition
+        var text = ""
+        text += myDefinition!
+        text += "\n"
+        text += "\n"
+
+        for example in definition.examples! {
+            let myExample = example as! Example
+            let exampleStr = myExample.example
+            text += exampleStr!
+            let lastElement = definition.examples!.lastObject as! Example
+            if !(myExample == lastElement) {
+                text += "\n"
+                text += "\n"
+            }
+            print(exampleStr!)
+        }
+        
+        cell.textLabel!.font = UIFont(name: "Hallo sans", size: 24)
+        cell.textLabel!.text = text
         
         return cell
     }

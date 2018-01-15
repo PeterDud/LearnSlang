@@ -12,18 +12,18 @@
 		CE5827061FF3A7DE00ED1E6B /* WordListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5827051FF3A7DE00ED1E6B /* WordListViewController.swift */; };
 		CE621CB11FE3AE4F007659DE /* DefinitionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE621CB01FE3AE4F007659DE /* DefinitionTableViewCell.swift */; };
 		CE6AA9A92008FF3E000B3BBE /* DefinitionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6AA9A82008FF3E000B3BBE /* DefinitionModel.swift */; };
-		CE6AA9BC200903C2000B3BBE /* Word+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6AA9B6200903C2000B3BBE /* Word+CoreDataClass.swift */; };
-		CE6AA9BD200903C2000B3BBE /* Word+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6AA9B7200903C2000B3BBE /* Word+CoreDataProperties.swift */; };
-		CE6AA9BE200903C2000B3BBE /* Example+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6AA9B8200903C2000B3BBE /* Example+CoreDataClass.swift */; };
-		CE6AA9BF200903C2000B3BBE /* Example+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6AA9B9200903C2000B3BBE /* Example+CoreDataProperties.swift */; };
-		CE6AA9C0200903C2000B3BBE /* Definition+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6AA9BA200903C2000B3BBE /* Definition+CoreDataClass.swift */; };
-		CE6AA9C1200903C2000B3BBE /* Definition+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6AA9BB200903C2000B3BBE /* Definition+CoreDataProperties.swift */; };
 		CE6CC0E22007BDE100C70692 /* WordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CC0E12007BDE100C70692 /* WordTableViewController.swift */; };
 		CE700E201FF24578001F206F /* Mohave Italics.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE700E111FF24577001F206F /* Mohave Italics.otf */; };
 		CE700E221FF24578001F206F /* Hallo sans.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE700E131FF24577001F206F /* Hallo sans.otf */; };
 		CE700E261FF24578001F206F /* Canter Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE700E171FF24577001F206F /* Canter Light.otf */; };
 		CE700E3E1FF255E9001F206F /* Hallo sans light.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE700E321FF255E8001F206F /* Hallo sans light.otf */; };
 		CE700E411FF255E9001F206F /* Hallo sans black.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE700E351FF255E8001F206F /* Hallo sans black.otf */; };
+		CE74CB77200CE5FF00386551 /* Definition+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE74CB71200CE5FF00386551 /* Definition+CoreDataClass.swift */; };
+		CE74CB78200CE5FF00386551 /* Definition+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE74CB72200CE5FF00386551 /* Definition+CoreDataProperties.swift */; };
+		CE74CB79200CE5FF00386551 /* Word+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE74CB73200CE5FF00386551 /* Word+CoreDataClass.swift */; };
+		CE74CB7A200CE5FF00386551 /* Word+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE74CB74200CE5FF00386551 /* Word+CoreDataProperties.swift */; };
+		CE74CB7B200CE5FF00386551 /* Example+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE74CB75200CE5FF00386551 /* Example+CoreDataClass.swift */; };
+		CE74CB7C200CE5FF00386551 /* Example+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE74CB76200CE5FF00386551 /* Example+CoreDataProperties.swift */; };
 		CE8A03391FE131C1004E53AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8A03381FE131C1004E53AF /* AppDelegate.swift */; };
 		CE8A033E1FE131C1004E53AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE8A033C1FE131C1004E53AF /* Main.storyboard */; };
 		CE8A03411FE131C1004E53AF /* Learn_Slang.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE8A033F1FE131C1004E53AF /* Learn_Slang.xcdatamodeld */; };
@@ -62,18 +62,18 @@
 		CE5827051FF3A7DE00ED1E6B /* WordListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListViewController.swift; sourceTree = "<group>"; };
 		CE621CB01FE3AE4F007659DE /* DefinitionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionTableViewCell.swift; sourceTree = "<group>"; };
 		CE6AA9A82008FF3E000B3BBE /* DefinitionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionModel.swift; sourceTree = "<group>"; };
-		CE6AA9B6200903C2000B3BBE /* Word+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Word+CoreDataClass.swift"; sourceTree = "<group>"; };
-		CE6AA9B7200903C2000B3BBE /* Word+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Word+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		CE6AA9B8200903C2000B3BBE /* Example+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Example+CoreDataClass.swift"; sourceTree = "<group>"; };
-		CE6AA9B9200903C2000B3BBE /* Example+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Example+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		CE6AA9BA200903C2000B3BBE /* Definition+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Definition+CoreDataClass.swift"; sourceTree = "<group>"; };
-		CE6AA9BB200903C2000B3BBE /* Definition+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Definition+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CE6CC0E12007BDE100C70692 /* WordTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordTableViewController.swift; sourceTree = "<group>"; };
 		CE700E111FF24577001F206F /* Mohave Italics.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mohave Italics.otf"; sourceTree = "<group>"; };
 		CE700E131FF24577001F206F /* Hallo sans.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Hallo sans.otf"; sourceTree = "<group>"; };
 		CE700E171FF24577001F206F /* Canter Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Canter Light.otf"; sourceTree = "<group>"; };
 		CE700E321FF255E8001F206F /* Hallo sans light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Hallo sans light.otf"; sourceTree = "<group>"; };
 		CE700E351FF255E8001F206F /* Hallo sans black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Hallo sans black.otf"; sourceTree = "<group>"; };
+		CE74CB71200CE5FF00386551 /* Definition+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Definition+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CE74CB72200CE5FF00386551 /* Definition+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Definition+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CE74CB73200CE5FF00386551 /* Word+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Word+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CE74CB74200CE5FF00386551 /* Word+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Word+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CE74CB75200CE5FF00386551 /* Example+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Example+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CE74CB76200CE5FF00386551 /* Example+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Example+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CE8A03351FE131C1004E53AF /* Learn Slang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Learn Slang.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE8A03381FE131C1004E53AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE8A033D1FE131C1004E53AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -141,12 +141,12 @@
 		CE404F921FE26697006B058C /* Core Data Files */ = {
 			isa = PBXGroup;
 			children = (
-				CE6AA9B6200903C2000B3BBE /* Word+CoreDataClass.swift */,
-				CE6AA9B7200903C2000B3BBE /* Word+CoreDataProperties.swift */,
-				CE6AA9BA200903C2000B3BBE /* Definition+CoreDataClass.swift */,
-				CE6AA9BB200903C2000B3BBE /* Definition+CoreDataProperties.swift */,
-				CE6AA9B8200903C2000B3BBE /* Example+CoreDataClass.swift */,
-				CE6AA9B9200903C2000B3BBE /* Example+CoreDataProperties.swift */,
+				CE74CB71200CE5FF00386551 /* Definition+CoreDataClass.swift */,
+				CE74CB72200CE5FF00386551 /* Definition+CoreDataProperties.swift */,
+				CE74CB73200CE5FF00386551 /* Word+CoreDataClass.swift */,
+				CE74CB74200CE5FF00386551 /* Word+CoreDataProperties.swift */,
+				CE74CB75200CE5FF00386551 /* Example+CoreDataClass.swift */,
+				CE74CB76200CE5FF00386551 /* Example+CoreDataProperties.swift */,
 				CEC2A96A1FE959A10011609A /* CoreDataStack.swift */,
 			);
 			path = "Core Data Files";
@@ -459,21 +459,21 @@
 				CE6AA9A92008FF3E000B3BBE /* DefinitionModel.swift in Sources */,
 				CE5827061FF3A7DE00ED1E6B /* WordListViewController.swift in Sources */,
 				CEAB91F71FE2B29600A7E7C6 /* WordRouter.swift in Sources */,
-				CE6AA9BC200903C2000B3BBE /* Word+CoreDataClass.swift in Sources */,
+				CE74CB7B200CE5FF00386551 /* Example+CoreDataClass.swift in Sources */,
 				CEC2A9511FE93CFB0011609A /* WordModel.swift in Sources */,
-				CE6AA9BE200903C2000B3BBE /* Example+CoreDataClass.swift in Sources */,
-				CE6AA9C1200903C2000B3BBE /* Definition+CoreDataProperties.swift in Sources */,
 				CE621CB11FE3AE4F007659DE /* DefinitionTableViewCell.swift in Sources */,
+				CE74CB7C200CE5FF00386551 /* Example+CoreDataProperties.swift in Sources */,
 				CEC2A96B1FE959A10011609A /* CoreDataStack.swift in Sources */,
-				CE6AA9BD200903C2000B3BBE /* Word+CoreDataProperties.swift in Sources */,
-				CE6AA9C0200903C2000B3BBE /* Definition+CoreDataClass.swift in Sources */,
 				CE6CC0E22007BDE100C70692 /* WordTableViewController.swift in Sources */,
 				CE8A036E1FE13ABF004E53AF /* ServerManager.swift in Sources */,
+				CE74CB78200CE5FF00386551 /* Definition+CoreDataProperties.swift in Sources */,
 				CEAB91F91FE2C81D00A7E7C6 /* SearchTableViewController.swift in Sources */,
 				CE8A03391FE131C1004E53AF /* AppDelegate.swift in Sources */,
-				CE6AA9BF200903C2000B3BBE /* Example+CoreDataProperties.swift in Sources */,
+				CE74CB79200CE5FF00386551 /* Word+CoreDataClass.swift in Sources */,
 				CE5283701FF6AE2500CCE7A7 /* Extensions.swift in Sources */,
+				CE74CB77200CE5FF00386551 /* Definition+CoreDataClass.swift in Sources */,
 				CE8A03411FE131C1004E53AF /* Learn_Slang.xcdatamodeld in Sources */,
+				CE74CB7A200CE5FF00386551 /* Word+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

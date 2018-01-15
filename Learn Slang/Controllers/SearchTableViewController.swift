@@ -257,11 +257,6 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
                 
                 wordEntity.word = setUpWordForCoreData(wordModel?.word ?? "")
                 wordEntity.spellingURL = wordModel?.spellingURL
-//                let definitions = wordModel?.defsAndExamps.map{ ($0 as! DefinitionAndExample).definition }
-//                let examples    = wordModel?.defsAndExamps.map{ ($0 as! DefinitionAndExample).example }
-//
-//                wordEntity.definitions = NSOrderedSet(array: definitions!)
-//                wordEntity.examples = NSOrderedSet(array: examples!)
                 
                 word = wordEntity
                 
@@ -274,6 +269,9 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
                 
                 definition = definitionEntity
                 
+//                print(word.word ?? "none")
+//                print(myDefinition ?? "no def")
+
                 return definitionEntity
                 }
         case .example(let example):
@@ -281,6 +279,8 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
                 exampleEntity.example = example
                 exampleEntity.definition = definition
                 
+//                print(definition.definition ?? "none")
+//                print(example ?? "no example")
                 return exampleEntity
             }
         }
@@ -319,10 +319,6 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
                     print("ERROR SAVING DEFINITION: \(error)")
                     showAlertWith(title: "Oops...", message: "It seems definition wasn't saved. Try again!")
                 }
-            })
-            
-        case .example:
-            _ = wordModel?.definitions.map({ (myDefinition)  in
                 _ = myDefinition.examples.map({ (myExample) in
                     _ = self.createEntityOf(type: .example(myExample))
                     do {
@@ -333,6 +329,21 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
                     }
                 })
             })
+        case . example:
+            break
+            
+//        case .example:
+//            _ = wordModel?.definitions.map({ (myDefinition)  in
+//                _ = myDefinition.examples.map({ (myExample) in
+//                    _ = self.createEntityOf(type: .example(myExample))
+//                    do {
+//                        try CoreDataStack.sharedInstance.persistentContainer.viewContext.save()
+//                    } catch let error {
+//                        print("ERROR SAVING EXAMPLE: \(error)")
+//                        self.showAlertWith(title: "Oops...", message: "It seems example wasn't saved. Try again!")
+//                    }
+//                })
+//            })
         }
     }
 
