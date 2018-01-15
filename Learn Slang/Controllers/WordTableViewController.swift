@@ -15,6 +15,10 @@ class WordTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 100
+
+        navigationItem.title = "Word"
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,9 +28,26 @@ class WordTableViewController: UITableViewController {
 
     // MARK: - Table view data source
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return word.word
+    internal override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let sectionTitle = word.word!
+        
+        let myLabel = UILabel()
+        myLabel.frame = CGRect(x: 20, y: 9, width: 320, height: 22) // #Warning: make it flexible
+        myLabel.font = UIFont.init(name: "Hallosans-Black", size: 24)
+        myLabel.text = sectionTitle
+        
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.white
+        headerView.addSubview(myLabel)
+        
+        return headerView
     }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 35
+    }
+
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -35,30 +56,36 @@ class WordTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "wordCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "defWithExampCell", for: indexPath) as! DefinitionWithExampleTVCell
 
         let definition = word.definitions?[indexPath.row] as! Definition
-//        print(definition)
         let myDefinition = definition.definition
         var text = ""
         text += myDefinition!
         text += "\n"
         text += "\n"
+        
+        var examples = ""
 
         for example in definition.examples! {
             let myExample = example as! Example
             let exampleStr = myExample.example
-            text += exampleStr!
+            examples += exampleStr!
             let lastElement = definition.examples!.lastObject as! Example
             if !(myExample == lastElement) {
-                text += "\n"
-                text += "\n"
+                examples += "\n"
+                examples += "\n"
             }
-            print(exampleStr!)
         }
         
-        cell.textLabel!.font = UIFont(name: "Hallo sans", size: 24)
-        cell.textLabel!.text = text
+        cell.definitionLabel.font = UIFont(name: "Hallo sans", size: 24)
+        cell.definitionLabel.text = myDefinition!
+        
+        
+        cell.exampleLabel.text = examples
+        
+//        cell.textLabel!.font = UIFont(name: "Hallo sans", size: 24)
+//        cell.textLabel!.text = text
         
         return cell
     }
@@ -68,4 +95,5 @@ class WordTableViewController: UITableViewController {
     }
 
 
+    
 }

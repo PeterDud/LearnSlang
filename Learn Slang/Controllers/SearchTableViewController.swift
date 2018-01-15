@@ -31,8 +31,6 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
 
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 140
-        
-        CoreDataStack.sharedInstance.applicationDocumentsDirectory() // #Warning: Delete this when you no longer need it
     }
     
     override func viewWillAppear(_ animated: Bool) {
