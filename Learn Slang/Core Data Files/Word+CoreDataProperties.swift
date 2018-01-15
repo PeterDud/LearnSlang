@@ -2,7 +2,7 @@
 //  Word+CoreDataProperties.swift
 //  Learn Slang
 //
-//  Created by user on 04/01/2018.
+//  Created by user on 12/01/2018.
 //  Copyright © 2018 user. All rights reserved.
 //
 //
@@ -20,7 +20,6 @@ extension Word {
     @NSManaged public var spellingURL: String?
     @NSManaged public var word: String?
     @NSManaged public var definitions: NSOrderedSet?
-    @NSManaged public var examples: NSOrderedSet?
 
 }
 
@@ -56,40 +55,5 @@ extension Word {
 
     @objc(removeDefinitions:)
     @NSManaged public func removeFromDefinitions(_ values: NSOrderedSet)
-
-}
-
-// MARK: Generated accessors for examples
-extension Word {
-
-    @objc(insertObject:inExamplesAtIndex:)
-    @NSManaged public func insertIntoExamples(_ value: Example, at idx: Int)
-
-    @objc(removeObjectFromExamplesAtIndex:)
-    @NSManaged public func removeFromExamples(at idx: Int)
-
-    @objc(insertExamples:atIndexes:)
-    @NSManaged public func insertIntoExamples(_ values: [Example], at indexes: NSIndexSet)
-
-    @objc(removeExamplesAtIndexes:)
-    @NSManaged public func removeFromExamples(at indexes: NSIndexSet)
-
-    @objc(replaceObjectInExamplesAtIndex:withObject:)
-    @NSManaged public func replaceExamples(at idx: Int, with value: Example)
-
-    @objc(replaceExamplesAtIndexes:withExamples:)
-    @NSManaged public func replaceExamples(at indexes: NSIndexSet, with values: [Example])
-
-    @objc(addExamplesObject:)
-    @NSManaged public func addToExamples(_ value: Example)
-
-    @objc(removeExamplesObject:)
-    @NSManaged public func removeFromExamples(_ value: Example)
-
-    @objc(addExamples:)
-    @NSManaged public func addToExamples(_ values: NSOrderedSet)
-
-    @objc(removeExamples:)
-    @NSManaged public func removeFromExamples(_ values: NSOrderedSet)
 
 }

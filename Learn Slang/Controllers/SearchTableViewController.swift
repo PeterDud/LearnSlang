@@ -16,6 +16,8 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
     var saveWordButton: UIBarButtonItem!
     var cancelButton: UIButton!
     var saveButton: UIButton!
+    var word: Word!
+    var definition: Definition!
 
     
     override func viewDidLoad() {
@@ -102,13 +104,13 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
 
                 case .Error(let errorMessage):
                     self.showAlertWith(title: "Oh", message: "The word wasn't downloaded. Try again!")
-                    print("ERROR DOWNLOADING WORD: \(errorMessage)")
+                    print(errorMessage)
                     
                 case .NotFound:
                     let notFoundString = "Unfortunately there's no such word/phrase at www.urbandictionary.com"
-                    let notFoundDefAndExamp = DefinitionAndExample(definition: notFoundString, example: "")
+                    let notFoundDefAndExamp = DefinitionModel(definition: notFoundString, examples: [""])
                     let notFoundWordModel = WordModel(word: "",
-                                                      defsAndExamps: NSOrderedSet(array: [notFoundDefAndExamp]),
+                                                      definitions: [notFoundDefAndExamp],
                                                       spellingURL: "")
                     self.updateTableView(word: notFoundWordModel)
             }
@@ -137,16 +139,16 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         DispatchQueue.main.async {
             UIView.animate(withDuration: 0.3) {self.cancelButton.isEnabled = true}
         }
-        return wordModel!.defsAndExamps.count
+        return wordModel!.definitions.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "definitionCell", for: indexPath) as! DefinitionTableViewCell
-        let defAndExamp = wordModel!.defsAndExamps[indexPath.row] as! DefinitionAndExample
-        let definition = defAndExamp.definition
+        let definition = wordModel!.definitions[indexPath.row]
+        let definitionStr = definition.definition
         cell.definitionLabel.font = UIFont(name: "Hallo sans", size: 22.0)
-        cell.definitionLabel.text = definition
+        cell.definitionLabel.text = definitionStr
         
         return cell
     }
@@ -172,7 +174,7 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
     func insertRowsInTableView() {
         
         var indexPaths = [IndexPath]()
-        for index in 0..<wordModel!.defsAndExamps.count {
+        for index in 0..<wordModel!.definitions.count {
             indexPaths.append(IndexPath.init(row: index, section: 0))
         }
         self.tableView.insertRows(at: indexPaths, with: .top)
@@ -181,7 +183,7 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
     func deleteRowsInTableView() {
         
         var indexPaths = [IndexPath]()
-        for index in 0..<self.wordModel!.defsAndExamps.count {
+        for index in 0..<self.wordModel!.definitions.count {
             indexPaths.append(IndexPath.init(row: index, section: 0))
         }
         self.wordModel = nil
@@ -225,16 +227,6 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         }
     }
     
-    // MARK: - Custom Methods
-    
-    func setUpWordForCoreData(_ word: String) -> String {
-        if word == word.uppercased() {
-            return word
-        } else {
-            return word.capitalized
-        }
-    }
-
     // MARK: - Core Data Operations
     
     private func wordAlreadyExists(wordModel: WordModel) -> Bool {
@@ -263,22 +255,44 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         case .word():
             if let wordEntity = NSEntityDescription.insertNewObject(forEntityName: "Word", into: context) as? Word {
                 
-                wordEntity.word = setUpWordForCoreData(wordModel!.word)
+                wordEntity.word = setUpWordForCoreData(wordModel?.word ?? "")
                 wordEntity.spellingURL = wordModel?.spellingURL
+//                let definitions = wordModel?.defsAndExamps.map{ ($0 as! DefinitionAndExample).definition }
+//                let examples    = wordModel?.defsAndExamps.map{ ($0 as! DefinitionAndExample).example }
+//
+//                wordEntity.definitions = NSOrderedSet(array: definitions!)
+//                wordEntity.examples = NSOrderedSet(array: examples!)
+                
+                word = wordEntity
+                
                 return wordEntity
             }
-         case .definition(let definition):
+         case .definition(let myDefinition):
             if let definitionEntity = NSEntityDescription.insertNewObject(forEntityName: "Definition", into: context) as? Definition {
-                definitionEntity.definition = definition
+                definitionEntity.definition = myDefinition
+                definitionEntity.word = word
+                
+                definition = definitionEntity
+                
                 return definitionEntity
                 }
         case .example(let example):
             if let exampleEntity = NSEntityDescription.insertNewObject(forEntityName: "Example", into: context) as? Example {
                 exampleEntity.example = example
+                exampleEntity.definition = definition
+                
                 return exampleEntity
             }
         }
         return nil
+    }
+    
+    func setUpWordForCoreData(_ word: String) -> String {
+        if word == word.uppercased() {
+            return word
+        } else {
+            return word.capitalized
+        }
     }
     
     private func saveEntityInCoreData(type: EntityType) {
@@ -286,6 +300,7 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         switch type {
         case .word:
             _ = createEntityOf(type: .word())
+
             do {
                 try CoreDataStack.sharedInstance.persistentContainer.viewContext.save()
 
@@ -296,9 +311,8 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
             }
 
         case .definition:
-            _ = wordModel?.defsAndExamps.map({ (defAndExamp)  in
-                let definitionAndExample = defAndExamp as! DefinitionAndExample
-                _ = self.createEntityOf(type: .definition(definitionAndExample.definition))
+            _ = wordModel?.definitions.map({ (myDefinition)  in
+                _ = self.createEntityOf(type: .definition(myDefinition.definition))
                 do {
                     try CoreDataStack.sharedInstance.persistentContainer.viewContext.save()
                 } catch let error {
@@ -308,15 +322,16 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
             })
             
         case .example:
-            _ = wordModel?.defsAndExamps.map({ (defAndExamp)  in
-                let definitionAndExample = defAndExamp as! DefinitionAndExample
-                _ = self.createEntityOf(type: .example(definitionAndExample.example))
-                do {
-                    try CoreDataStack.sharedInstance.persistentContainer.viewContext.save()
-                } catch let error {
-                    print("ERROR SAVING EXAMPLE: \(error)")
-                    showAlertWith(title: "Oops...", message: "It seems example wasn't saved. Try again!")
-                }
+            _ = wordModel?.definitions.map({ (myDefinition)  in
+                _ = myDefinition.examples.map({ (myExample) in
+                    _ = self.createEntityOf(type: .example(myExample))
+                    do {
+                        try CoreDataStack.sharedInstance.persistentContainer.viewContext.save()
+                    } catch let error {
+                        print("ERROR SAVING EXAMPLE: \(error)")
+                        self.showAlertWith(title: "Oops...", message: "It seems example wasn't saved. Try again!")
+                    }
+                })
             })
         }
     }

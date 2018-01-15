@@ -2,21 +2,21 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17C88" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Definition" representedClassName="Definition" syncable="YES">
         <attribute name="definition" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="example" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Example" inverseName="definition" inverseEntity="Example" syncable="YES"/>
         <relationship name="word" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Word" inverseName="definitions" inverseEntity="Word" syncable="YES"/>
     </entity>
     <entity name="Example" representedClassName="Example" syncable="YES">
         <attribute name="example" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="word" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Word" inverseName="examples" inverseEntity="Word" syncable="YES"/>
+        <relationship name="definition" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Definition" inverseName="example" inverseEntity="Definition" syncable="YES"/>
     </entity>
     <entity name="Word" representedClassName="Word" syncable="YES">
         <attribute name="spellingURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="word" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="definitions" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Definition" inverseName="word" inverseEntity="Definition" syncable="YES"/>
-        <relationship name="examples" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Example" inverseName="word" inverseEntity="Example" syncable="YES"/>
+        <relationship name="definitions" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Definition" inverseName="word" inverseEntity="Definition" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Definition" positionX="-45" positionY="18" width="128" height="75"/>
-        <element name="Example" positionX="-36" positionY="27" width="128" height="75"/>
-        <element name="Word" positionX="-45" positionY="0" width="128" height="105"/>
+        <element name="Definition" positionX="-45" positionY="18" width="128" height="90"/>
+        <element name="Word" positionX="-351" positionY="48" width="128" height="90"/>
+        <element name="Example" positionX="-198" positionY="63" width="128" height="75"/>
     </elements>
 </model>

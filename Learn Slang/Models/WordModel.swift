@@ -11,12 +11,12 @@ import Foundation
 class WordModel: NSObject {
     
     let word: String
-    let defsAndExamps: NSOrderedSet
+    let definitions: [DefinitionModel]   // Ordered set of DefinitionModel objects, each object has an array of "example" strings as its property.
     let spellingURL: String
     
-    init(word: String, defsAndExamps: NSOrderedSet, spellingURL: String) {
+    init(word: String, definitions: [DefinitionModel], spellingURL: String) {
         self.word = word
-        self.defsAndExamps = defsAndExamps
+        self.definitions = definitions 
         self.spellingURL = spellingURL
     }
 }

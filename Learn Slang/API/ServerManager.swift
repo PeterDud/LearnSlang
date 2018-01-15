@@ -16,22 +16,24 @@ class ServerManager {
     private init() {
     }
 
-    func downloadWord (word: String, completion: @escaping (Result<WordModel>) -> Void) -> () {
+    func downloadWord (word: String, completion: @escaping (Result) -> Void) -> () {
         
         Alamofire.request(WordRouter(word: word)).responseJSON { (response) in
             
             guard response.result.isSuccess else {
-                print("Error while fetching word: \(String(describing: response.result.error))") 
 
-                completion(.Error(response.result.error!.localizedDescription))
+                let responseError = response.result.error!
+                let errorDescription = responseError.localizedDescription
+                completion(.Error("ERROR WHILE DOWNLOADING WORD: \(errorDescription)"))
                 return
             }
             
             guard let responseJSON = response.result.value as? [String: Any],
-            let list = responseJSON["list"] as? [[String: Any]],
-            let spellingsURLs = responseJSON["sounds"] as? [String] else {
-                print("Error while fetching word: \(String(describing: response.result.error))")
-                    return
+                  let list = responseJSON["list"] as? [[String: Any]],
+                  let spellingsURLs = responseJSON["sounds"] as? [String] else {
+                
+                completion(.Error("ERROR WHILE FETCHING WORD"))
+                return
             }
             
             guard list.count > 0 else {
@@ -40,18 +42,28 @@ class ServerManager {
             }
             
             var words = [String]()
-            var defsAndExamps = [DefinitionAndExample]()
-            
-            for word in list {
-                
-                words.append(word["word"] as! String)
-                let defAndExamp = DefinitionAndExample(definition: word["definition"] as! String,
-                                                       example: word["example"] as! String)
-                defsAndExamps.append(defAndExamp)
-            }
+            var definitions = [DefinitionModel]()
+            var definitionsSet = Set<String>()
 
+            for word in list {
+                words.append(word["word"] as! String)
+
+                let definitionStr = word["definition"] as! String // here we need to make sure we don't save similar definitions. If we get similar definitions only one of them is saved and all examples of not save definitions are also saved to that one definition.
+                if definitionsSet.contains(where: {$0.caseInsensitiveCompare(definitionStr) == .orderedSame}) {
+                    for definition in definitions {
+                        if definition.definition.caseInsensitiveCompare(definitionStr) == .orderedSame {
+                            definition.examples.append(word["example"] as! String)
+                        }
+                    }
+                } else {
+                    let definition = DefinitionModel(definition: definitionStr, examples: [word["example"] as! String])
+                    definitions.append(definition)
+                    definitionsSet.insert(word["definition"] as! String)
+                }
+            }
+            
             let wordModel = WordModel(word: words[0],
-                                      defsAndExamps: NSOrderedSet(array: defsAndExamps),
+                                      definitions: definitions,
                                       spellingURL: spellingsURLs.count > 0 ? spellingsURLs[0] : "")
             
             completion(.Success(wordModel))
@@ -59,8 +71,8 @@ class ServerManager {
     }
 }
 
-enum Result<T> {
-    case Success(T)
+enum Result {
+    case Success(WordModel)
     case Error(String)
     case NotFound
 }

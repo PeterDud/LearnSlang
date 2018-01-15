@@ -29,10 +29,10 @@
             </objects>
             <point key="canvasLocation" x="-270" y="94"/>
         </scene>
-        <!--Word List Table View Controller-->
+        <!--Word List-->
         <scene sceneID="bNa-Sm-9Xw">
             <objects>
-                <viewController id="0GD-t8-u3c" customClass="WordListTableViewController" customModule="Learn_Slang" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="0GD-t8-u3c" customClass="WordListViewController" customModule="Learn_Slang" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zc7-Bg-S3P">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -84,15 +84,53 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fZJ-mk-uZE"/>
                     </view>
-                    <navigationItem key="navigationItem" id="r9m-PJ-uCh"/>
+                    <navigationItem key="navigationItem" title="Word List" id="r9m-PJ-uCh"/>
                     <connections>
                         <outlet property="tableView" destination="1TZ-h1-U8l" id="J4F-fw-0gT"/>
                         <outlet property="wordSearchBar" destination="g7Y-kH-bHi" id="OWp-L7-Nch"/>
+                        <segue destination="bOa-GT-fac" kind="show" identifier="showWordSegue" id="i5W-QK-0od"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hoM-gK-L7O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1273" y="547"/>
+            <point key="canvasLocation" x="1263" y="476"/>
+        </scene>
+        <!--Word Table View Controller-->
+        <scene sceneID="WaB-o9-2f1">
+            <objects>
+                <tableViewController id="bOa-GT-fac" customClass="WordTableViewController" customModule="Learn_Slang" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="AX1-rc-Yuv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="wordCell" textLabel="ybr-mu-q4k" style="IBUITableViewCellStyleDefault" id="ctr-aG-pJ8">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ctr-aG-pJ8" id="3cg-b3-9UG">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ybr-mu-q4k">
+                                            <rect key="frame" x="16" y="0.0" width="343" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="bOa-GT-fac" id="1xZ-NR-coY"/>
+                            <outlet property="delegate" destination="bOa-GT-fac" id="KBe-dQ-UJu"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hJU-sa-cOq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2012" y="475"/>
         </scene>
         <!--Word Search-->
         <scene sceneID="Ye5-9j-6hO">
@@ -153,7 +191,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xSs-ew-jGE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1274" y="-234"/>
+            <point key="canvasLocation" x="1273" y="-202"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="B44-2k-uvM">
@@ -174,7 +212,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZHp-le-v0z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="540.79999999999995" y="-233.88305847076464"/>
+            <point key="canvasLocation" x="540" y="-202"/>
         </scene>
         <!--List-->
         <scene sceneID="Q1X-BK-7G4">
@@ -193,7 +231,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tTR-CX-1pN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="550" y="547"/>
+            <point key="canvasLocation" x="540" y="476"/>
         </scene>
     </scenes>
     <resources>

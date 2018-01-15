@@ -11,11 +11,16 @@ import Alamofire
 
 class WordRouter: URLRequestConvertible {
     
-    let baseURLString = "http://api.urbandictionary.com/v0/define?term="
+    let baseURLString = "http://api.urbandictionary.com"
+    let versionAPI = "/v0"
+    let operation = "/define"
     let word: String
+    lazy var query: String = {
+        return "?term=" + word
+    }()
     lazy var urlString: String = {
         
-        var urlStr = baseURLString + word
+        var urlStr = baseURLString + versionAPI + operation + query
         if urlStr.contains(" ") { // space is not valid character in URL, so we need to replace it with %20
             urlStr = urlStr.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
             return urlStr

@@ -1,5 +1,5 @@
 //
-//  WordListTableViewController.swift
+//  WordListViewController.swift
 //  Learn Slang
 //
 //  Created by user on 27/12/2017.
@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class WordListTableViewController: UIViewController {
+class WordListViewController: UIViewController {
 
     @IBOutlet weak var wordSearchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -20,6 +20,7 @@ class WordListTableViewController: UIViewController {
                            NSAttributedStringKey.font : UIFont.init(name: "Hallosans-Light", size: 28.0)!]
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         let editButton = createEditButton(withText: "Edit")
         wordSearchBar.becomeFirstResponder()
@@ -37,7 +38,7 @@ class WordListTableViewController: UIViewController {
     func createEditButton (withText text: String) -> UIButton  {
         
         let editButton = UIButton(type: .custom)
-        editButton.addTarget(self, action: #selector(WordListTableViewController.editButtonClicked(_:)), for: .touchUpInside)
+        editButton.addTarget(self, action: #selector(WordListViewController.editButtonClicked(_:)), for: .touchUpInside)
         editButton.setAttributedTitle(NSAttributedString(string: text, attributes: attributesBlack), for: .normal)
         
         return editButton
@@ -80,12 +81,9 @@ class WordListTableViewController: UIViewController {
             print("ERROR: \(error)")
         }
     }
-
-    // MARK: - Table view data source
-    
 }
 
-extension WordListTableViewController: UITableViewDataSource {
+extension WordListViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
@@ -141,7 +139,7 @@ extension WordListTableViewController: UITableViewDataSource {
     }
 }
 
-extension WordListTableViewController: UITableViewDelegate {
+extension WordListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         
@@ -170,10 +168,53 @@ extension WordListTableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { 
         return 50
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let word = fetchedResultController.object(at: indexPath)
+//        let wordViewController = WordViewController()
+//        wordViewController.word = word
+//        wordViewController.loadView()
+//
+//        show(wordViewController, sender: nil)
+        
+        performSegue(withIdentifier: "showWordSegue", sender: word)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+            if segue.identifier == "showWordSegue" {
+                if let wordViewController = segue.destination as? WordTableViewController {
+                    if let send = sender as? Word {
+                    wordViewController.word = send 
+                }
+            }
+        }
+    }
+//        if let indexPath = tableView.indexPathForSelectedRow{
+//            let word = fetchedResultController.object(at: indexPath)
+//            if let wordViewController = segue.destination as? WordViewController {
+//                wordViewController.word = word
+//
+//            }
+//        }
+
+//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        selectedBasicPhrase = basicPhrases[indexPath.row]
+//        self.performSegueWithIdentifier("BasicPhrasesVC2BasicDisplayVC", sender: selectedBasicPhrase)
+//    }
+//
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if segue.identifier == "BasicPhrasesVC2BasicDisplayVC" {
+//            if let nextVC = segue.destinationViewController as? NextViewController {
+//                nextVC.selectedBasicPhrase = sender
+//            }
+//        }
+//    }
 
 }
 
-extension WordListTableViewController: NSFetchedResultsControllerDelegate {
+extension WordListViewController: NSFetchedResultsControllerDelegate {
 
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
 
@@ -196,7 +237,7 @@ extension WordListTableViewController: NSFetchedResultsControllerDelegate {
     }
 }
 
-extension WordListTableViewController: UISearchBarDelegate {
+extension WordListViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
