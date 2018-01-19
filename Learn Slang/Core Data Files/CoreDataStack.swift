@@ -15,6 +15,7 @@ class CoreDataStack: NSObject {
     static let sharedInstance = CoreDataStack()
     private override init() {}
 
+    @available(iOS 10.0, *)
     lazy var persistentContainer: NSPersistentContainer = {
         /*
          The persistent container for the application. This implementation

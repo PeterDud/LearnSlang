@@ -12,11 +12,11 @@ class WordModel: NSObject {
     
     let word: String
     let definitions: [DefinitionModel]   // Ordered set of DefinitionModel objects, each object has an array of "example" strings as its property.
-    let spellingURL: String
+    let spellingURL: String?
     
-    init(word: String, definitions: [DefinitionModel], spellingURL: String) {
+    init(word: String, definitions: [DefinitionModel], spellingURL: String?) {
         self.word = word
         self.definitions = definitions 
-        self.spellingURL = spellingURL
+        self.spellingURL = spellingURL ?? nil
     }
 }

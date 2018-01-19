@@ -16,17 +16,22 @@ class WordListViewController: UIViewController {
     private let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
     private var fetchedResultController: NSFetchedResultsController<Word>!
     
-    let attributesBlack = [NSAttributedStringKey.foregroundColor : UIColor.black,
+    var attributesBlack = [NSAttributedStringKey.foregroundColor : UIColor.black,
                            NSAttributedStringKey.font : UIFont.init(name: "Hallosans-Light", size: 28.0)!]
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         let editButton = createEditButton(withText: "Edit")
-        wordSearchBar.becomeFirstResponder()
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: editButton)
         tableView.sectionIndexColor = UIColor.black
+        
+        attributesBlack[NSAttributedStringKey.font] = UIFont.init(name: "Hallosans-Light", size: 25.0)!
         self.navigationController?.navigationBar.titleTextAttributes = attributesBlack
+        
+        // Notifications subscriptions
+        NotificationCenter.default.addObserver(self, selector: #selector(SearchTableViewController.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SearchTableViewController.keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -62,6 +67,10 @@ class WordListViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     func updateTableContent() {
         
         let request = Word.fetchRequest() as NSFetchRequest<Word>
@@ -81,12 +90,29 @@ class WordListViewController: UIViewController {
             print("ERROR: \(error)")
         }
     }
+    
+    // MARK: - Notifactions methods, moving content up/down when keyboard appears/disappears
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+     
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            let contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0)
+            tableView.contentInset = contentInsets
+            tableView.scrollIndicatorInsets = contentInsets
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+      
+        tableView.contentInset = UIEdgeInsets.zero
+        tableView.scrollIndicatorInsets = UIEdgeInsets.zero
+    }
 }
 
 extension WordListViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        
+
         if fetchedResultController != nil {
             return (fetchedResultController.sections?.count)!
         } else {
@@ -172,11 +198,6 @@ extension WordListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let word = fetchedResultController.object(at: indexPath)
-//        let wordViewController = WordViewController()
-//        wordViewController.word = word
-//        wordViewController.loadView()
-//
-//        show(wordViewController, sender: nil)
         
         performSegue(withIdentifier: "showWordSegue", sender: word)
     }
@@ -184,34 +205,13 @@ extension WordListViewController: UITableViewDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
             if segue.identifier == "showWordSegue" {
-                if let wordViewController = segue.destination as? WordTableViewController {
+                if let wordTableViewController = segue.destination as? WordTableViewController {
                     if let send = sender as? Word {
-                    wordViewController.word = send 
+                    wordTableViewController.word = send 
                 }
             }
         }
     }
-//        if let indexPath = tableView.indexPathForSelectedRow{
-//            let word = fetchedResultController.object(at: indexPath)
-//            if let wordViewController = segue.destination as? WordViewController {
-//                wordViewController.word = word
-//
-//            }
-//        }
-
-//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        selectedBasicPhrase = basicPhrases[indexPath.row]
-//        self.performSegueWithIdentifier("BasicPhrasesVC2BasicDisplayVC", sender: selectedBasicPhrase)
-//    }
-//
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if segue.identifier == "BasicPhrasesVC2BasicDisplayVC" {
-//            if let nextVC = segue.destinationViewController as? NextViewController {
-//                nextVC.selectedBasicPhrase = sender
-//            }
-//        }
-//    }
-
 }
 
 extension WordListViewController: NSFetchedResultsControllerDelegate {
@@ -244,24 +244,16 @@ extension WordListViewController: UISearchBarDelegate {
         updateTableContent()
         tableView.reloadData()
     }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        wordSearchBar.resignFirstResponder()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        wordSearchBar.text = ""
+        wordSearchBar.resignFirstResponder()
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

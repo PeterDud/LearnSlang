@@ -1,17 +1,18 @@
 //
-//  SearchTableViewController.swift
+//  SearchViewController.swift
 //  Learn Slang
 //
-//  Created by user on 14/12/2017.
-//  Copyright © 2017 user. All rights reserved.
+//  Created by user on 19/01/2018.
+//  Copyright © 2018 user. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-class SearchTableViewController: UITableViewController, UISearchBarDelegate {
-
+class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
+    
     var wordModel: WordModel?
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var wordSearchBar: UISearchBar!
     var saveWordButton: UIBarButtonItem!
     var cancelButton: UIButton!
@@ -19,16 +20,16 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
     var word: Word!
     var definition: Definition!
     var spellingFilePath: String!
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         cancelButton = wordSearchBar.value(forKey: "_cancelButton") as? UIButton
         
         createSaveBarButtonItem()
         enableCustomFonts()
-
+        
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 140
         
@@ -38,13 +39,13 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        if wordModel == nil {
-//            DispatchQueue.main.async { self.cancelButton.isEnabled = false }
-//        }
+        //        if wordModel == nil {
+        //            DispatchQueue.main.async { self.cancelButton.isEnabled = false }
+        //        }
     }
     
     func createSaveBarButtonItem()  {
-
+        
         saveButton = UIButton(type: .custom)
         saveButton.addTarget(self, action: #selector(SearchTableViewController.saveWordButtonClicked(_:)), for: .touchUpInside)
         saveWordButton = UIBarButtonItem(customView: saveButton)
@@ -60,7 +61,7 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
                                NSAttributedStringKey.font : UIFont.init(name: hallosansLight, size: 25.0)!]
         let attributesGray = [NSAttributedStringKey.foregroundColor : UIColor.lightGray,
                               NSAttributedStringKey.font : UIFont.init(name: hallosansLight, size: 25.0)!]
-
+        
         let textField = wordSearchBar.value(forKey: "_searchField") as! UITextField
         textField.font = UIFont(name: hallosansLight, size: 25.0)
         textField.attributedPlaceholder = NSAttributedString(string: "Enter your word", attributes:attributesGray)
@@ -72,7 +73,7 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         saveButton?.setAttributedTitle(NSAttributedString(string: "Save", attributes: attributesBlack), for: .normal)
         saveButton?.setAttributedTitle(NSAttributedString(string: "Save", attributes: attributesGray), for: .disabled)
         saveButton?.setAttributedTitle(NSAttributedString(string: "Save", attributes: attributesGray), for: .highlighted)
-
+        
         self.navigationController?.navigationBar.titleTextAttributes = attributesBlack
     }
     
@@ -106,23 +107,23 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         ServerManager.shared.downloadWord(word: searchBar.text!) { (result) in
-                switch result {
-                case .Success(let word):
-                    
-                    self.updateTableView(word: word)
-                    self.enableSaveButton()
-
-                case .Error(let errorMessage):
-                    self.showAlertWith(title: "Oh", message: "The word wasn't downloaded. Try again!")
-                    print(errorMessage)
-                    
-                case .NotFound:
-                    let notFoundString = "Unfortunately there's no such word/phrase at www.urbandictionary.com"
-                    let notFoundDefAndExamp = DefinitionModel(definition: notFoundString, examples: [""])
-                    let notFoundWordModel = WordModel(word: "",
-                                                      definitions: [notFoundDefAndExamp],
-                                                      spellingURL: "")
-                    self.updateTableView(word: notFoundWordModel)
+            switch result {
+            case .Success(let word):
+                
+                self.updateTableView(word: word)
+                self.enableSaveButton()
+                
+            case .Error(let errorMessage):
+                self.showAlertWith(title: "Oh", message: "The word wasn't downloaded. Try again!")
+                print(errorMessage)
+                
+            case .NotFound:
+                let notFoundString = "Unfortunately there's no such word/phrase at www.urbandictionary.com"
+                let notFoundDefAndExamp = DefinitionModel(definition: notFoundString, examples: [""])
+                let notFoundWordModel = WordModel(word: "",
+                                                  definitions: [notFoundDefAndExamp],
+                                                  spellingURL: "")
+                self.updateTableView(word: notFoundWordModel)
             }
         }
     }
@@ -140,9 +141,9 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     // MARK: - UITableViewDataSource
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         guard wordModel != nil else {
             DispatchQueue.main.async {
                 UIView.animate(withDuration: 0.3) {self.cancelButton.isEnabled = false}
@@ -154,14 +155,21 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         }
         return wordModel!.definitions.count
     }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "definitionCell", for: indexPath) as! DefinitionTableViewCell
         let definition = wordModel!.definitions[indexPath.row]
         let definitionStr = definition.definition
         cell.definitionLabel.font = UIFont(name: "Hallo sans", size: 22.0)
         cell.definitionLabel.text = definitionStr
+        
+        if indexPath.row % 2 == 0 {
+            let color = UIColor.init(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0)
+            cell.backgroundColor = color
+        } else {
+            cell.backgroundColor = UIColor.white
+        }
         
         return cell
     }
@@ -218,11 +226,11 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         self.wordModel = nil
         self.tableView.deleteRows(at: indexPaths, with: .bottom)
     }
-
+    
     // MARK: - Actions
     
     @objc func saveWordButtonClicked(_ sender: UIBarButtonItem) {
-
+        
         if wordAlreadyExists(wordModel: wordModel!) {
             showAlertWith(title: "Already have it", message: "It seems like you already added this word to the learning list =)")
             return
@@ -278,7 +286,7 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         }
         return false
     }
-        
+    
     private func createEntityOf(type: EntityType) -> NSManagedObject? {
         let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
         
@@ -291,7 +299,7 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
                 wordEntity.spellingURL = downloadAudioAndCreateFile()
                 return wordEntity
             }
-         case .definition(let myDefinition):
+        case .definition(let myDefinition):
             if let definitionEntity = NSEntityDescription.insertNewObject(forEntityName: "Definition", into: context) as? Definition {
                 
                 definition = definitionEntity
@@ -299,7 +307,7 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
                 definitionEntity.definition = myDefinition
                 definitionEntity.word = word
                 return definitionEntity
-                }
+            }
         case .example(let example):
             if let exampleEntity = NSEntityDescription.insertNewObject(forEntityName: "Example", into: context) as? Example {
                 
@@ -333,17 +341,17 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         do { urlData = try NSData(contentsOf: url!)
             
             let fileName = (stringURL as NSString).lastPathComponent
-
+            
             let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
             let documentDirectory = paths[0]
             let url = URL(string: documentDirectory)!
-
+            
             let filePathURL = URL(fileURLWithPath: fileName, relativeTo: url)
             
             DispatchQueue.global(qos: .background).async {
                 urlData.write(toFile: filePathURL.absoluteString, atomically: true)
             }
-
+            
             return filePathURL.relativePath
         } catch {
             print("ERROR WHILE DOWNLOADING WORD AUDIO")
@@ -356,7 +364,7 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         switch type {
         case .word:
             _ = createEntityOf(type: .word())
-
+            
             do {
                 try CoreDataStack.sharedInstance.persistentContainer.viewContext.save()
                 disableSaveButton()
@@ -365,7 +373,7 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
                 print("ERROR SAVING WORD: \(error)")
                 showAlertWith(title: "Oops...", message: "It seems word wasn't saved. Try again!")
             }
-
+            
         case .definition:
             _ = wordModel?.definitions.map({ (myDefinition)  in
                 _ = self.createEntityOf(type: .definition(myDefinition.definition))
@@ -390,7 +398,7 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
             
         }
     }
-
+    
     private func clearData() { // #Warning: Create abstract class to unite all your managed objects
         
         let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
@@ -400,7 +408,7 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         do {
             let words  = try context.fetch(wordsFetchRequest) as? [NSManagedObject]
             _ = words.map{$0.map{context.delete($0)}}
-
+            
             CoreDataStack.sharedInstance.saveContext()
         } catch let error {
             print("ERROR DELETING WORD: \(error)")
@@ -434,3 +442,4 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         case example(String?)
     }
 }
+

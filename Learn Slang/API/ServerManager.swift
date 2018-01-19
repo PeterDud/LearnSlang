@@ -64,7 +64,7 @@ class ServerManager {
             
             let wordModel = WordModel(word: words[0],
                                       definitions: definitions,
-                                      spellingURL: spellingsURLs.count > 0 ? spellingsURLs[0] : "")
+                                      spellingURL: spellingsURLs.count > 0 ? spellingsURLs[0] : nil)
             
             completion(.Success(wordModel))
         }
