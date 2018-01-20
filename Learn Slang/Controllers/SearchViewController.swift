@@ -34,8 +34,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         tableView.estimatedRowHeight = 140
         
         // Notifications subscriptions
-        NotificationCenter.default.addObserver(self, selector: #selector(SearchTableViewController.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(SearchTableViewController.keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SearchViewController.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SearchViewController.keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,7 +47,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     func createSaveBarButtonItem()  {
         
         saveButton = UIButton(type: .custom)
-        saveButton.addTarget(self, action: #selector(SearchTableViewController.saveWordButtonClicked(_:)), for: .touchUpInside)
+        saveButton.addTarget(self, action: #selector(SearchViewController.saveWordButtonClicked(_:)), for: .touchUpInside)
         saveWordButton = UIBarButtonItem(customView: saveButton)
         saveWordButton.isEnabled = false
         navigationItem.rightBarButtonItem = saveWordButton

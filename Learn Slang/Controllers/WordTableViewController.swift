@@ -150,9 +150,9 @@ class WordTableViewController: UITableViewController {
             print(filepathURL.absoluteString)
 
             let player = try AVAudioPlayer(contentsOf: filepathURL)
-            player.prepareToPlay()
             player.volume = 1.0
             print(player.duration)
+            player.prepareToPlay()
             player.play()
         } catch let error as NSError {
             //self.player = nil

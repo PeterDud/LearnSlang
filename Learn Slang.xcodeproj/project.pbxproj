@@ -35,7 +35,6 @@
 		CE8A035C1FE131C1004E53AF /* Learn_SlangUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8A035B1FE131C1004E53AF /* Learn_SlangUITests.swift */; };
 		CE8A036E1FE13ABF004E53AF /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8A036D1FE13ABF004E53AF /* ServerManager.swift */; };
 		CEAB91F71FE2B29600A7E7C6 /* WordRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAB91F61FE2B29600A7E7C6 /* WordRouter.swift */; };
-		CEAB91F91FE2C81D00A7E7C6 /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAB91F81FE2C81D00A7E7C6 /* SearchTableViewController.swift */; };
 		CEC2A9511FE93CFB0011609A /* WordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2A9501FE93CFB0011609A /* WordModel.swift */; };
 		CEC2A96B1FE959A10011609A /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2A96A1FE959A10011609A /* CoreDataStack.swift */; };
 /* End PBXBuildFile section */
@@ -93,7 +92,6 @@
 		CE8A035D1FE131C1004E53AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE8A036D1FE13ABF004E53AF /* ServerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerManager.swift; sourceTree = "<group>"; };
 		CEAB91F61FE2B29600A7E7C6 /* WordRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordRouter.swift; sourceTree = "<group>"; };
-		CEAB91F81FE2C81D00A7E7C6 /* SearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
 		CEC2A9501FE93CFB0011609A /* WordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordModel.swift; sourceTree = "<group>"; };
 		CEC2A96A1FE959A10011609A /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		EE025666FD851529711AB34E /* Pods_Learn_Slang.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Learn_Slang.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -241,7 +239,6 @@
 			isa = PBXGroup;
 			children = (
 				CE1A333120121D0900FB256B /* SearchViewController.swift */,
-				CEAB91F81FE2C81D00A7E7C6 /* SearchTableViewController.swift */,
 				CE5827051FF3A7DE00ED1E6B /* WordListViewController.swift */,
 				CE6CC0E12007BDE100C70692 /* WordTableViewController.swift */,
 			);
@@ -475,7 +472,6 @@
 				CE1A333220121D0A00FB256B /* SearchViewController.swift in Sources */,
 				CE8A036E1FE13ABF004E53AF /* ServerManager.swift in Sources */,
 				CE74CB78200CE5FF00386551 /* Definition+CoreDataProperties.swift in Sources */,
-				CEAB91F91FE2C81D00A7E7C6 /* SearchTableViewController.swift in Sources */,
 				CE8A03391FE131C1004E53AF /* AppDelegate.swift in Sources */,
 				CE74CB79200CE5FF00386551 /* Word+CoreDataClass.swift in Sources */,
 				CE5283701FF6AE2500CCE7A7 /* Extensions.swift in Sources */,
