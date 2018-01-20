@@ -177,8 +177,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     // MARK: - Notifactions methods, moving content up/down when keyboard appears/disappears
     
     @objc func keyboardWillShow(notification: NSNotification) {
-        
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size {
             let contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0)
             tableView.contentInset = contentInsets
             tableView.scrollIndicatorInsets = contentInsets

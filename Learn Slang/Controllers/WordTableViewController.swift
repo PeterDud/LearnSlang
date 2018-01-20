@@ -46,6 +46,7 @@ class WordTableViewController: UITableViewController {
         }
         if let image = UIImage(named: "play_icon_35x35_light") {
             play.setImage(image, for: .disabled)
+            play.setImage(image, for: .highlighted)
         }
         
         if word.spellingURL == nil {
