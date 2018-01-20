@@ -87,7 +87,7 @@ class WordListViewController: UIViewController {
             
             try self.fetchedResultController.performFetch()
         } catch let error  {
-            print("ERROR: \(error)")
+            print("Error: \(error)")
         }
     }
     
