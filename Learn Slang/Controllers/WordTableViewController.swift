@@ -146,10 +146,8 @@ class WordTableViewController: UITableViewController {
         let url = URL(fileURLWithPath: documentDirectory)
         
         let filepathURL = URL(fileURLWithPath: spellingURL, relativeTo: url)
-
+        
         do {
-            print(filepathURL.absoluteString)
-
             let player = try AVAudioPlayer(contentsOf: filepathURL)
             player.volume = 1.0
             print(player.duration)

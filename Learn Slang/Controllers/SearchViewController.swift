@@ -340,19 +340,18 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         
         do { urlData = try NSData(contentsOf: url!)
             
-            let fileName = (stringURL as NSString).lastPathComponent
+            let relativePath = (stringURL as NSString).lastPathComponent
             
             let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
             let documentDirectory = paths[0]
-            let url = URL(string: documentDirectory)!
             
-            let filePathURL = URL(fileURLWithPath: fileName, relativeTo: url)
-            
+            let fileDirectory = documentDirectory + "/" + relativePath
+                
             DispatchQueue.global(qos: .background).async {
-                urlData.write(toFile: filePathURL.absoluteString, atomically: true)
+                urlData.write(toFile: fileDirectory, atomically: true)
             }
             
-            return filePathURL.relativePath
+            return relativePath
         } catch {
             print("ERROR WHILE DOWNLOADING WORD AUDIO")
         }
