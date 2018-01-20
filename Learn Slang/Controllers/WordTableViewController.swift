@@ -12,6 +12,7 @@ import AVKit
 class WordTableViewController: UITableViewController {
 
     var word: Word!
+    var player: AVAudioPlayer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -148,7 +149,8 @@ class WordTableViewController: UITableViewController {
         let filepathURL = URL(fileURLWithPath: spellingURL, relativeTo: url)
         
         do {
-            let player = try AVAudioPlayer(contentsOf: filepathURL)
+            player = try AVAudioPlayer(contentsOf: filepathURL)
+            
             player.volume = 1.0
             print(player.duration)
             player.prepareToPlay()
