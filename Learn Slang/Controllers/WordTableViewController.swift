@@ -26,7 +26,7 @@ class WordTableViewController: UITableViewController {
         
         tableView.sectionHeaderHeight = UITableViewAutomaticDimension
         tableView.estimatedSectionHeaderHeight = 100
-        
+
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
 
@@ -63,10 +63,8 @@ class WordTableViewController: UITableViewController {
         headerView.backgroundColor = UIColor(white: 0.97, alpha: 1)
         headerView.addSubview(definitionLabel)
         
-        // Fixing button to the right side of header view by adding trailing constraint
-
         definitionLabel.translatesAutoresizingMaskIntoConstraints = false
-//
+
         let leadingConstraint = NSLayoutConstraint(item: definitionLabel,
                                                     attribute: .leading,
                                                     relatedBy: .equal,
@@ -104,10 +102,6 @@ class WordTableViewController: UITableViewController {
         
         return headerView
     }
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return UITableViewAutomaticDimension
-    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -143,10 +137,6 @@ class WordTableViewController: UITableViewController {
         cell.textLabel?.text = examples
 
         return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
     }
     
     //MARK: - Actions
