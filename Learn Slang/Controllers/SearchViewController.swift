@@ -276,7 +276,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
                 return true
             }
         } catch let error {
-            print("ERROR FETCHING WORD COUNT: \(error)")
+            print("ERR FETCHING WORD COUNT: \(error)")
         }
         return false
     }
