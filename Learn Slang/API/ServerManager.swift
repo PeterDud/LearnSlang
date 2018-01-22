@@ -48,7 +48,7 @@ class ServerManager {
             for word in list {
                 words.append(word["word"] as! String)
 
-                let definitionStr = word["definition"] as! String // here we need to make sure we don't save similar definitions. If we get similar definitions only one of them is saved and all examples of not save definitions are also saved to that one definition.
+                let definitionStr = word["definition"] as! String // here we need to make sure we don't save similar definitions. If we get similar definitions only one of them is saved and all examples of unsaved definitions are also saved to that one definition.
                 if definitionsSet.contains(where: {$0.caseInsensitiveCompare(definitionStr) == .orderedSame}) {
                     for definition in definitions {
                         if definition.definition.caseInsensitiveCompare(definitionStr) == .orderedSame {

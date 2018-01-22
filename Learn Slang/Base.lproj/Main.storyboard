@@ -33,10 +33,10 @@
             </objects>
             <point key="canvasLocation" x="-270" y="94"/>
         </scene>
-        <!--Word List-->
+        <!--showWordSegue-->
         <scene sceneID="bNa-Sm-9Xw">
             <objects>
-                <viewController id="0GD-t8-u3c" customClass="WordListViewController" customModule="Learn_Slang" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="showWordSegue" id="0GD-t8-u3c" customClass="WordListViewController" customModule="Learn_Slang" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zc7-Bg-S3P">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -92,7 +92,7 @@
                     <connections>
                         <outlet property="tableView" destination="1TZ-h1-U8l" id="J4F-fw-0gT"/>
                         <outlet property="wordSearchBar" destination="g7Y-kH-bHi" id="OWp-L7-Nch"/>
-                        <segue destination="bOa-GT-fac" kind="show" identifier="showWordSegue" id="i5W-QK-0od"/>
+                        <segue destination="bOa-GT-fac" kind="show" identifier="showWordSegue" id="XMr-xQ-wey"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hoM-gK-L7O" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -108,40 +108,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="defWithExampCell" rowHeight="77" id="fTG-gU-FPD" customClass="DefinitionWithExampleTVCell" customModule="Learn_Slang" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="77"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="exampleCell" textLabel="LGI-O2-fq5" rowHeight="49" style="IBUITableViewCellStyleDefault" id="fTG-gU-FPD" customClass="DefinitionWithExampleTVCell" customModule="Learn_Slang" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="49"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fTG-gU-FPD" id="zdk-D6-2fQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="76.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="48.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Definition" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uAB-UT-SbA">
-                                            <rect key="frame" x="16" y="8" width="73" height="20.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" text="Example(s)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Hh-2L-yWe">
-                                            <rect key="frame" x="16" y="36.5" width="96.5" height="21.5"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Example" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LGI-O2-fq5">
+                                            <rect key="frame" x="16" y="0.0" width="343" height="48.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" name="Arial-ItalicMT" family="Arial" pointSize="19"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="7Hh-2L-yWe" secondAttribute="trailing" constant="16" identifier="id104" id="04L-CS-OYb"/>
-                                        <constraint firstItem="uAB-UT-SbA" firstAttribute="top" secondItem="zdk-D6-2fQ" secondAttribute="top" constant="8" identifier="id101" id="1Se-eX-6R5"/>
-                                        <constraint firstItem="7Hh-2L-yWe" firstAttribute="top" secondItem="uAB-UT-SbA" secondAttribute="bottom" constant="8" identifier="id105" id="Bzv-ip-ERM"/>
-                                        <constraint firstItem="7Hh-2L-yWe" firstAttribute="leading" secondItem="zdk-D6-2fQ" secondAttribute="leading" constant="16" identifier="id106" id="Y5h-W5-Jl4"/>
-                                        <constraint firstItem="uAB-UT-SbA" firstAttribute="leading" secondItem="zdk-D6-2fQ" secondAttribute="leading" constant="16" identifier="id102" id="Z5R-Dr-Mkw"/>
-                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="uAB-UT-SbA" secondAttribute="trailing" constant="16" identifier="id103" id="hkR-L6-YqO"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="7Hh-2L-yWe" secondAttribute="bottom" constant="8" identifier="id107" id="rr7-2z-IVi"/>
-                                    </constraints>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="definitionLabel" destination="uAB-UT-SbA" id="MKi-lN-RGA"/>
-                                    <outlet property="exampleLabel" destination="7Hh-2L-yWe" id="kec-Zz-dRO"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -149,10 +131,17 @@
                             <outlet property="delegate" destination="bOa-GT-fac" id="KBe-dQ-UJu"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="8Ae-iM-ygi">
+                        <barButtonItem key="rightBarButtonItem" systemItem="play" id="EBl-g7-ntl">
+                            <connections>
+                                <action selector="play" destination="bOa-GT-fac" id="b5S-sR-vds"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hJU-sa-cOq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1980" y="475"/>
+            <point key="canvasLocation" x="2108" y="475"/>
         </scene>
         <!--Word Search-->
         <scene sceneID="tmd-A7-aGT">

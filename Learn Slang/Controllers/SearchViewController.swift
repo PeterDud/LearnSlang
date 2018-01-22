@@ -29,19 +29,13 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         
         createSaveBarButtonItem()
         enableCustomFonts()
-        
+                
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 140
         
         // Notifications subscriptions
         NotificationCenter.default.addObserver(self, selector: #selector(SearchViewController.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SearchViewController.keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        //        if wordModel == nil {
-        //            DispatchQueue.main.async { self.cancelButton.isEnabled = false }
-        //        }
     }
     
     func createSaveBarButtonItem()  {
