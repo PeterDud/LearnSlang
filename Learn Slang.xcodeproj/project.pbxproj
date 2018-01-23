@@ -25,7 +25,6 @@
 		CE74CB7A200CE5FF00386551 /* Word+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE74CB74200CE5FF00386551 /* Word+CoreDataProperties.swift */; };
 		CE74CB7B200CE5FF00386551 /* Example+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE74CB75200CE5FF00386551 /* Example+CoreDataClass.swift */; };
 		CE74CB7C200CE5FF00386551 /* Example+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE74CB76200CE5FF00386551 /* Example+CoreDataProperties.swift */; };
-		CE74CB7E200CFD6B00386551 /* DefinitionWithExampleTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE74CB7D200CFD6B00386551 /* DefinitionWithExampleTVCell.swift */; };
 		CE8A03391FE131C1004E53AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8A03381FE131C1004E53AF /* AppDelegate.swift */; };
 		CE8A033E1FE131C1004E53AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE8A033C1FE131C1004E53AF /* Main.storyboard */; };
 		CE8A03411FE131C1004E53AF /* Learn_Slang.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE8A033F1FE131C1004E53AF /* Learn_Slang.xcdatamodeld */; };
@@ -76,7 +75,6 @@
 		CE74CB74200CE5FF00386551 /* Word+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Word+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CE74CB75200CE5FF00386551 /* Example+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Example+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CE74CB76200CE5FF00386551 /* Example+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Example+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		CE74CB7D200CFD6B00386551 /* DefinitionWithExampleTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionWithExampleTVCell.swift; sourceTree = "<group>"; };
 		CE8A03351FE131C1004E53AF /* Learn Slang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Learn Slang.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE8A03381FE131C1004E53AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE8A033D1FE131C1004E53AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -230,7 +228,6 @@
 			isa = PBXGroup;
 			children = (
 				CE621CB01FE3AE4F007659DE /* DefinitionTableViewCell.swift */,
-				CE74CB7D200CFD6B00386551 /* DefinitionWithExampleTVCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -460,7 +457,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE6AA9A92008FF3E000B3BBE /* DefinitionModel.swift in Sources */,
-				CE74CB7E200CFD6B00386551 /* DefinitionWithExampleTVCell.swift in Sources */,
 				CE5827061FF3A7DE00ED1E6B /* WordListViewController.swift in Sources */,
 				CEAB91F71FE2B29600A7E7C6 /* WordRouter.swift in Sources */,
 				CE74CB7B200CE5FF00386551 /* Example+CoreDataClass.swift in Sources */,

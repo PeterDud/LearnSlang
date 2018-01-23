@@ -17,7 +17,7 @@ extension Word {
         return NSFetchRequest<Word>(entityName: "Word")
     }
 
-    @NSManaged public var spellingURL: String?
+    @NSManaged public var spellingURL: String? 
     @NSManaged public var word: String?
     @NSManaged public var definitions: NSOrderedSet?
 
