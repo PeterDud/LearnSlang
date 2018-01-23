@@ -51,6 +51,7 @@ class WordTableViewController: UITableViewController {
 
         let definitionLabel = UILabel()
         definitionLabel.numberOfLines = 0
+        definitionLabel.textAlignment = .justified
         
         definitionLabel.font = UIFont.init(name: "ArialMT", size: 19)
         definitionLabel.text = sectionTitle
@@ -67,7 +68,7 @@ class WordTableViewController: UITableViewController {
                                                     toItem: headerView,
                                                     attribute: .leading,
                                                     multiplier: 1,
-                                                    constant: 8)
+                                                    constant: 13)
 
         let trailingConstraint = NSLayoutConstraint(item: definitionLabel,
                                                     attribute: .trailing,
@@ -75,7 +76,7 @@ class WordTableViewController: UITableViewController {
                                                     toItem: headerView,
                                                     attribute: .trailing,
                                                     multiplier: 1,
-                                                    constant: -8)
+                                                    constant: -13)
 
         let topConstraint = NSLayoutConstraint(item: definitionLabel,
                                                     attribute: .top,
