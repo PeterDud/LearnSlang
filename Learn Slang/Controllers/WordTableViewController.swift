@@ -108,9 +108,9 @@ class WordTableViewController: UITableViewController {
         let definition = word.definitions?[section] as! Definition
         
         if  let examplesCount = definition.examples?.count {
-
             return examplesCount
         }
+        
         return 0
     }
 
@@ -122,6 +122,12 @@ class WordTableViewController: UITableViewController {
         let examplesSet = definition.examples!
         
         var examples = ""
+        
+        if examplesSet.count > 1 && indexPath.row == 0 {
+            examples = "Examples: \n"
+        } else if examplesSet.count == 1 {
+            examples = "Example: \n"
+        }
         
         for example in examplesSet {
             let myExample = example as! Example
