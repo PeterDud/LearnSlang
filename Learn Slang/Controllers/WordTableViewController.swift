@@ -116,7 +116,7 @@ class WordTableViewController: UITableViewController {
         
         if examplesSet.count > 1 && indexPath.row == 0 {
             examples = "Examples: \n"
-        } else if examplesSet.count == 1 {
+        } else if examplesSet.count == 1 && (examplesSet[0] as! Example).example != "" {
             examples = "Example: \n"
         }
         
@@ -152,11 +152,10 @@ class WordTableViewController: UITableViewController {
             player = try AVAudioPlayer(contentsOf: filepathURL)
             
             player.volume = 1.0
-            print(player.duration)
             player.prepareToPlay()
             player.play()
         } catch let error as NSError {
-            //self.player = nil
+
             print(error.localizedDescription)
         } catch {
             print("AVAudioPlayer init failed")
