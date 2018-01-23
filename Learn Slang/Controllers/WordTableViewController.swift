@@ -29,7 +29,6 @@ class WordTableViewController: UITableViewController {
 
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,11 +39,8 @@ class WordTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        if let definitions = word.definitions {
-            return definitions.count
-        } else {
-            return 0
-        }
+        
+        return word.definitions?.count ?? 0
     }
     
     internal override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -106,12 +102,7 @@ class WordTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         let definition = word.definitions?[section] as! Definition
-        
-        if  let examplesCount = definition.examples?.count {
-            return examplesCount
-        }
-        
-        return 0
+        return definition.examples?.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

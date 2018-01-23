@@ -113,11 +113,7 @@ extension WordListViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
 
-        if fetchedResultController != nil {
-            return (fetchedResultController.sections?.count)!
-        } else {
-            return 0
-        }
+        return fetchedResultController.sections?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
