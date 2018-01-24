@@ -11,18 +11,19 @@ import AVKit
 
 class WordTableViewController: UITableViewController {
 
-    var word: Word!
+    var word: Word?
     var player: AVAudioPlayer!
+    let speechSynthesizer = AVSpeechSynthesizer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = word.word
+        title = word?.word
         
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .play, target: self, action: #selector(WordTableViewController.play))
-        if word.spellingURL == nil {
-            navigationItem.rightBarButtonItem?.isEnabled = false
-        }
+//        if word?.spellingURL == nil {
+//            navigationItem.rightBarButtonItem?.isEnabled = false
+//        }
         
         tableView.sectionHeaderHeight = UITableViewAutomaticDimension
         tableView.estimatedSectionHeaderHeight = 100
@@ -40,12 +41,12 @@ class WordTableViewController: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         
-        return word.definitions?.count ?? 0
+        return word?.definitions?.count ?? 0
     }
     
     internal override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 
-        guard let definitions = word.definitions else { return nil }
+        guard let definitions = word?.definitions else { return nil }
         
         let sectionTitle = (definitions[section] as! Definition).definition
 
@@ -84,7 +85,7 @@ class WordTableViewController: UITableViewController {
                                                     toItem: headerView,
                                                     attribute: .top,
                                                     multiplier: 1,
-                                                    constant: 3)
+                                                    constant: 5)
 
         let bottomConstraint = NSLayoutConstraint(item: definitionLabel,
                                                     attribute: .bottom,
@@ -92,7 +93,7 @@ class WordTableViewController: UITableViewController {
                                                     toItem: headerView,
                                                     attribute: .bottom,
                                                     multiplier: 1,
-                                                    constant: -3)
+                                                    constant: -5)
 
         
         headerView.addConstraints([leadingConstraint, trailingConstraint, topConstraint, bottomConstraint])
@@ -102,7 +103,7 @@ class WordTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        let definition = word.definitions?[section] as! Definition
+        let definition = word?.definitions?[section] as! Definition
         return definition.examples?.count ?? 0
     }
 
@@ -110,7 +111,7 @@ class WordTableViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "exampleCell", for: indexPath)
 
-        let definition = word.definitions?[indexPath.section] as! Definition
+        let definition = word?.definitions?[indexPath.section] as! Definition
         let examplesSet = definition.examples!
         
         var examples = ""
@@ -137,11 +138,24 @@ class WordTableViewController: UITableViewController {
         return cell
     }
     
+    // MARK: - UITableViewDelegate
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     //MARK: - Actions
     
     @IBAction func play() {
 
-        guard let spellingURL = word.spellingURL else { return }
+        guard let spellingURL = word?.spellingURL else {
+            
+            if let wordStr = word?.word  {
+                let speechUtterance = AVSpeechUtterance(string: wordStr)
+                speechSynthesizer.speak(speechUtterance)
+            }
+            return
+        }
         
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         let documentDirectory = paths[0]

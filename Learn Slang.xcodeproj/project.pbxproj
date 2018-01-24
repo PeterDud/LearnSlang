@@ -10,6 +10,7 @@
 		AAA4B09D8750FDD24D0E8BDC /* Pods_Learn_Slang.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE025666FD851529711AB34E /* Pods_Learn_Slang.framework */; };
 		CE1A333220121D0A00FB256B /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1A333120121D0900FB256B /* SearchViewController.swift */; };
 		CE5283701FF6AE2500CCE7A7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52836F1FF6AE2500CCE7A7 /* Extensions.swift */; };
+		CE530F3720188E2A0045013D /* ListToWordSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE530F3620188E2A0045013D /* ListToWordSplitViewController.swift */; };
 		CE5827061FF3A7DE00ED1E6B /* WordListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5827051FF3A7DE00ED1E6B /* WordListViewController.swift */; };
 		CE621CB11FE3AE4F007659DE /* DefinitionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE621CB01FE3AE4F007659DE /* DefinitionTableViewCell.swift */; };
 		CE6AA9A92008FF3E000B3BBE /* DefinitionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6AA9A82008FF3E000B3BBE /* DefinitionModel.swift */; };
@@ -60,6 +61,7 @@
 		2A5D94F1E216418D69759660 /* Pods-Learn Slang.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Learn Slang.release.xcconfig"; path = "Pods/Target Support Files/Pods-Learn Slang/Pods-Learn Slang.release.xcconfig"; sourceTree = "<group>"; };
 		CE1A333120121D0900FB256B /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		CE52836F1FF6AE2500CCE7A7 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		CE530F3620188E2A0045013D /* ListToWordSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListToWordSplitViewController.swift; sourceTree = "<group>"; };
 		CE5827051FF3A7DE00ED1E6B /* WordListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListViewController.swift; sourceTree = "<group>"; };
 		CE621CB01FE3AE4F007659DE /* DefinitionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionTableViewCell.swift; sourceTree = "<group>"; };
 		CE6AA9A82008FF3E000B3BBE /* DefinitionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionModel.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				CE1A333120121D0900FB256B /* SearchViewController.swift */,
+				CE530F3620188E2A0045013D /* ListToWordSplitViewController.swift */,
 				CE5827051FF3A7DE00ED1E6B /* WordListViewController.swift */,
 				CE6CC0E12007BDE100C70692 /* WordTableViewController.swift */,
 			);
@@ -474,6 +477,7 @@
 				CE74CB77200CE5FF00386551 /* Definition+CoreDataClass.swift in Sources */,
 				CE8A03411FE131C1004E53AF /* Learn_Slang.xcdatamodeld in Sources */,
 				CE74CB7A200CE5FF00386551 /* Word+CoreDataProperties.swift in Sources */,
+				CE530F3720188E2A0045013D /* ListToWordSplitViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

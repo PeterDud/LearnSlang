@@ -14,11 +14,13 @@ class WordListViewController: UIViewController {
     @IBOutlet weak var wordSearchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     private let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
-    private var fetchedResultController: NSFetchedResultsController<Word>!
+    private var fetchedResultController: NSFetchedResultsController<Word>?
     
     var attributesBlack = [NSAttributedStringKey.foregroundColor : UIColor.black,
                            NSAttributedStringKey.font : UIFont.init(name: "Hallosans-Light", size: 28.0)!]
-    
+    let attributesGray = [NSAttributedStringKey.foregroundColor : UIColor.lightGray,
+                          NSAttributedStringKey.font : UIFont.init(name: "Hallosans-Light", size: 25.0)!]
+
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -26,14 +28,24 @@ class WordListViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: editButton)
         tableView.sectionIndexColor = UIColor.black
         
-        attributesBlack[NSAttributedStringKey.font] = UIFont.init(name: "Hallosans-Light", size: 25.0)!
-        self.navigationController?.navigationBar.titleTextAttributes = attributesBlack
+        enableCustomFonts()
         
         // Notifications subscriptions
         NotificationCenter.default.addObserver(self, selector: #selector(WordListViewController.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(WordListViewController.keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
 
+    func enableCustomFonts() {
+        
+        let textField = wordSearchBar.value(forKey: "_searchField") as! UITextField
+        textField.font = UIFont(name: "Hallosans-Light", size: 25.0)
+        textField.attributedPlaceholder = NSAttributedString(string: "Enter your word", attributes:attributesGray)
+        
+        attributesBlack[NSAttributedStringKey.font] = UIFont.init(name: "Hallosans-Light", size: 25.0)!
+        self.navigationController?.navigationBar.titleTextAttributes = attributesBlack
+    }
+
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateTableContent()
@@ -83,9 +95,9 @@ class WordListViewController: UIViewController {
         request.sortDescriptors = [sort]
         do {
             fetchedResultController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: "word.firstChar", cacheName: nil)
-            fetchedResultController.delegate = self
+            fetchedResultController?.delegate = self
             
-            try self.fetchedResultController.performFetch()
+            try self.fetchedResultController?.performFetch()
         } catch let error  {
             print("Error: \(error)")
         }
@@ -113,12 +125,12 @@ extension WordListViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
 
-        return fetchedResultController.sections?.count ?? 0
+        return fetchedResultController?.sections?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        let objs = fetchedResultController.sections?[section].objects
+        let objs = fetchedResultController?.sections?[section].objects
         return objs?.count ?? 0
     }
     
@@ -126,9 +138,9 @@ extension WordListViewController: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "wordCell", for: indexPath)
         
-        let word = fetchedResultController.object(at: indexPath)
+        let word = fetchedResultController?.object(at: indexPath)
         cell.textLabel!.font = UIFont(name: "Hallo sans", size: 24)
-        cell.textLabel!.text = word.word
+        cell.textLabel!.text = word?.word
         
         return cell
     }
@@ -136,8 +148,10 @@ extension WordListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            let word = fetchedResultController.object(at: indexPath)
-            context.delete(word)
+            let word = fetchedResultController?.object(at: indexPath)
+            guard let myWord = word else { return }
+            
+            context.delete(myWord)
             do {
                 try context.save()
             } catch let error as NSError {
@@ -148,16 +162,12 @@ extension WordListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
         
-        return fetchedResultController.section(forSectionIndexTitle: title, at: index)
+        return fetchedResultController?.section(forSectionIndexTitle: title, at: index) ?? 0
     }
     
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         
-        if fetchedResultController != nil {
-            return fetchedResultController.sectionIndexTitles
-        } else {
-            return nil
-        }
+        return fetchedResultController?.sectionIndexTitles ?? nil
     }
 }
 
@@ -173,7 +183,7 @@ extension WordListViewController: UITableViewDelegate {
 
     internal func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let sectionTitle = fetchedResultController.sectionIndexTitles[section]
+        let sectionTitle = fetchedResultController?.sectionIndexTitles[section]
         
         let myLabel = UILabel()
         myLabel.frame = CGRect(x: 20, y: 5, width: 320, height: 22) // #Warning: make it flexible
@@ -193,7 +203,9 @@ extension WordListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let word = fetchedResultController.object(at: indexPath)
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let word = fetchedResultController?.object(at: indexPath)
         
         performSegue(withIdentifier: "showWordSegue", sender: word)
     }
@@ -201,13 +213,15 @@ extension WordListViewController: UITableViewDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
             if segue.identifier == "showWordSegue" {
-                if let wordTableViewController = segue.destination as? WordTableViewController {
+                if let navigationController = segue.destination as? UINavigationController,
+                    let wordTableViewController = navigationController.topViewController as? WordTableViewController {
                     if let send = sender as? Word {
                     wordTableViewController.word = send 
                 }
             }
         }
     }
+    
 }
 
 extension WordListViewController: NSFetchedResultsControllerDelegate {

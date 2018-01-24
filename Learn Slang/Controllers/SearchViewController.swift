@@ -30,7 +30,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         createSaveBarButtonItem()
         enableCustomFonts()
                 
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableViewAutomaticDimension 
         tableView.estimatedRowHeight = 140
         
         // Notifications subscriptions
@@ -155,8 +155,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         let cell = tableView.dequeueReusableCell(withIdentifier: "definitionCell", for: indexPath) as! DefinitionTableViewCell
         let definition = wordModel!.definitions[indexPath.row]
         let definitionStr = definition.definition
-        cell.definitionLabel.font = UIFont(name: "Hallo sans", size: 22.0)
         cell.definitionLabel.text = definitionStr
+        cell.definitionLabel.font = UIFont.init(name: "ArialMT", size: 20)
+        cell.definitionLabel.textAlignment = .justified
         
         if indexPath.row % 2 == 0 {
             let color = UIColor.init(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0)
@@ -166,6 +167,12 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         }
         
         return cell
+    }
+    
+    // MARK: - UITableViewDelegate
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // MARK: - Notifactions methods, moving content up/down when keyboard appears/disappears
