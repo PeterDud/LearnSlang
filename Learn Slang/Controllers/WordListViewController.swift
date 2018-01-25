@@ -203,8 +203,6 @@ extension WordListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        tableView.deselectRow(at: indexPath, animated: true)
-        
         let word = fetchedResultController?.object(at: indexPath)
         
         performSegue(withIdentifier: "showWordSegue", sender: word)

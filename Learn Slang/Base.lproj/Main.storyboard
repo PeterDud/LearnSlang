@@ -111,7 +111,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="exampleCell" textLabel="LGI-O2-fq5" rowHeight="49" style="IBUITableViewCellStyleDefault" id="fTG-gU-FPD" customClass="DefinitionWithExampleTVCell" customModule="Learn_Slang" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="exampleCell" textLabel="LGI-O2-fq5" rowHeight="49" style="IBUITableViewCellStyleDefault" id="fTG-gU-FPD" customClass="DefinitionTableViewCell" customModule="Learn_Slang" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="49"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fTG-gU-FPD" id="zdk-D6-2fQ">
@@ -149,7 +149,7 @@
         <!--Word Search-->
         <scene sceneID="tmd-A7-aGT">
             <objects>
-                <viewController id="NqE-sG-xfQ" customClass="SearchViewController" customModule="Learn_Slang" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="NqE-sG-xfQ" customClass="SearchViewController" customModule="Learn_Slang" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="INC-Eu-lqC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -165,7 +165,7 @@
                                 <rect key="frame" x="0.0" y="120" width="375" height="498"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="definitionCell" id="u1O-qf-tx9" customClass="DefinitionTableViewCell" customModule="Learn_Slang" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="definitionCell" id="u1O-qf-tx9" customClass="DefinitionTableViewCell" customModule="Learn_Slang">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="u1O-qf-tx9" id="Atp-E4-8Ws">
