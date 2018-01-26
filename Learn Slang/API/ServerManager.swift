@@ -24,10 +24,10 @@ class ServerManager {
 
                 let responseError = response.result.error!
                 let errorDescription = responseError.localizedDescription
-                completion(.Error("ERROR WHILE DOWNLOADING WORD: \(errorDescription)"))
+                completion(.Error("CONNECTION FAILURE: \(errorDescription)"))
                 return
             }
-            
+
             guard let responseJSON = response.result.value as? [String: Any],
                   let list = responseJSON["list"] as? [[String: Any]],
                   let spellingsURLs = responseJSON["sounds"] as? [String] else {

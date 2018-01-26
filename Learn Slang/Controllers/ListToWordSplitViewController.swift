@@ -15,9 +15,6 @@ class ListToWordSplitViewController: UISplitViewController, UISplitViewControlle
 
         self.delegate = self
         self.preferredDisplayMode = .allVisible
-        
-        print("hellothere")
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {

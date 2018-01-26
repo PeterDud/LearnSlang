@@ -156,7 +156,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         let definition = wordModel!.definitions[indexPath.row]
         let definitionStr = definition.definition
         cell.definitionLabel.text = definitionStr
-        cell.definitionLabel.font = UIFont.init(name: "ArialMT", size: 20)
         cell.definitionLabel.textAlignment = .justified
         
         if indexPath.row % 2 == 0 {

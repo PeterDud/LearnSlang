@@ -21,9 +21,6 @@ class WordTableViewController: UITableViewController {
         title = word?.word
         
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .play, target: self, action: #selector(WordTableViewController.play))
-//        if word?.spellingURL == nil {
-//            navigationItem.rightBarButtonItem?.isEnabled = false
-//        }
         
         tableView.sectionHeaderHeight = UITableViewAutomaticDimension
         tableView.estimatedSectionHeaderHeight = 100
@@ -46,23 +43,27 @@ class WordTableViewController: UITableViewController {
     
     internal override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 
+        // getting string for section title
         guard let definitions = word?.definitions else { return nil }
         
         let sectionTitle = (definitions[section] as! Definition).definition
 
+        // creating and setting up UILabel for displaying the definition string
         let definitionLabel = UILabel()
         definitionLabel.numberOfLines = 0
         definitionLabel.textAlignment = .justified
         
-        definitionLabel.font = UIFont.init(name: "ArialMT", size: 19)
+        definitionLabel.font = UIFont.init(name: "Noteworthy-Bold", size: 20)
         definitionLabel.text = sectionTitle
 
+        // creating UIView (returning value of this method) and adding definition label as its subview
         let headerView = UIView()
         headerView.backgroundColor = UIColor(white: 0.97, alpha: 1)
         headerView.addSubview(definitionLabel)
         
         definitionLabel.translatesAutoresizingMaskIntoConstraints = false
 
+        // setting up and adding constraints
         let leadingConstraint = NSLayoutConstraint(item: definitionLabel,
                                                     attribute: .leading,
                                                     relatedBy: .equal,
@@ -95,7 +96,6 @@ class WordTableViewController: UITableViewController {
                                                     multiplier: 1,
                                                     constant: -5)
 
-        
         headerView.addConstraints([leadingConstraint, trailingConstraint, topConstraint, bottomConstraint])
         
         return headerView
