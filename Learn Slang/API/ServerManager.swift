@@ -28,6 +28,21 @@ class ServerManager {
                 return
             }
 
+            if let statusCode = response.response?.statusCode {
+                switch statusCode {
+                case 200..<300:
+                    break
+                case 400..<500:
+                    completion(.Error("Client error: \(statusCode)"))
+                    return
+                case 500..<600:
+                    completion(.Error("Server error: \(statusCode)"))
+                    return
+                default:
+                    break 
+                }
+            }
+            
             guard let responseJSON = response.result.value as? [String: Any],
                   let list = responseJSON["list"] as? [[String: Any]],
                   let spellingsURLs = responseJSON["sounds"] as? [String] else {
