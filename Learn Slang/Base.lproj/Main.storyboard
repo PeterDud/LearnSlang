@@ -31,7 +31,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nPf-Ug-bZY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-270" y="94"/>
+            <point key="canvasLocation" x="-308" y="191"/>
         </scene>
         <!--showWordSegue-->
         <scene sceneID="bNa-Sm-9Xw">
@@ -125,6 +125,86 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="defCell" textLabel="ara-pt-kXs" rowHeight="49" style="IBUITableViewCellStyleDefault" id="ct3-Yi-Gap" customClass="DefinitionTableViewCell" customModule="Learn_Slang" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="77" width="375" height="49"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ct3-Yi-Gap" id="WyP-xV-8iE">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="48.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Definition" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ara-pt-kXs">
+                                            <rect key="frame" x="16" y="0.0" width="343" height="48.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="21"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="readMoreCell" rowHeight="84" id="4Xb-7y-jb7" customClass="DefinitionTableViewCell" customModule="Learn_Slang">
+                                <rect key="frame" x="0.0" y="126" width="375" height="84"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4Xb-7y-jb7" id="Hdj-tl-x12">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="83.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sizing Label" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u2m-qH-xhJ">
+                                            <rect key="frame" x="16" y="11" width="343" height="33"/>
+                                            <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="21"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QhN-wk-MTR" userLabel="Container View">
+                                            <rect key="frame" x="16" y="11" width="343" height="33"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xzg-Ej-wUX">
+                                                    <rect key="frame" x="0.0" y="0.0" width="343" height="34"/>
+                                                    <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="21"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="Xzg-Ej-wUX" firstAttribute="leading" secondItem="QhN-wk-MTR" secondAttribute="leading" id="4GY-Ub-vJD"/>
+                                                <constraint firstAttribute="trailing" secondItem="Xzg-Ej-wUX" secondAttribute="trailing" id="MEz-iW-OnJ"/>
+                                                <constraint firstItem="Xzg-Ej-wUX" firstAttribute="top" secondItem="QhN-wk-MTR" secondAttribute="top" id="MbR-cu-MO4"/>
+                                            </constraints>
+                                        </view>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="azu-xM-18E">
+                                            <rect key="frame" x="16" y="52" width="343" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="k5O-q1-AD9"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="16"/>
+                                            <state key="normal" title="Read More"/>
+                                            <connections>
+                                                <action selector="readMoreBtnClicked:" destination="4Xb-7y-jb7" eventType="touchUpInside" id="TfY-Du-ekb"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="QhN-wk-MTR" firstAttribute="leading" secondItem="Hdj-tl-x12" secondAttribute="leadingMargin" id="212-ir-rKK"/>
+                                        <constraint firstItem="QhN-wk-MTR" firstAttribute="top" secondItem="Hdj-tl-x12" secondAttribute="topMargin" id="91m-mm-3ak"/>
+                                        <constraint firstItem="azu-xM-18E" firstAttribute="leading" secondItem="Hdj-tl-x12" secondAttribute="leadingMargin" id="CrS-UL-Ykl"/>
+                                        <constraint firstItem="azu-xM-18E" firstAttribute="top" secondItem="u2m-qH-xhJ" secondAttribute="bottom" constant="8" id="Grb-QL-bVO"/>
+                                        <constraint firstItem="azu-xM-18E" firstAttribute="trailing" secondItem="Hdj-tl-x12" secondAttribute="trailingMargin" id="Ohv-pX-hnO"/>
+                                        <constraint firstItem="u2m-qH-xhJ" firstAttribute="top" secondItem="Hdj-tl-x12" secondAttribute="topMargin" id="RiZ-KY-8vS"/>
+                                        <constraint firstItem="QhN-wk-MTR" firstAttribute="trailing" secondItem="Hdj-tl-x12" secondAttribute="trailingMargin" id="cNU-5h-7e2"/>
+                                        <constraint firstItem="azu-xM-18E" firstAttribute="top" secondItem="QhN-wk-MTR" secondAttribute="bottom" constant="8" id="cad-hA-hdd"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="azu-xM-18E" secondAttribute="bottom" id="cqV-Ji-rYc"/>
+                                        <constraint firstItem="u2m-qH-xhJ" firstAttribute="trailing" secondItem="Hdj-tl-x12" secondAttribute="trailingMargin" id="nSD-1B-qaU"/>
+                                        <constraint firstItem="u2m-qH-xhJ" firstAttribute="leading" secondItem="Hdj-tl-x12" secondAttribute="leadingMargin" id="uOf-CT-toJ"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="containerView" destination="QhN-wk-MTR" id="2Kx-P4-z6W"/>
+                                    <outlet property="definitionLabel" destination="Xzg-Ej-wUX" id="nKP-WD-gti"/>
+                                    <outlet property="readMoreBtn" destination="azu-xM-18E" id="yIz-W2-vYZ"/>
+                                    <outlet property="sizingLabel" destination="u2m-qH-xhJ" id="BVG-1J-7n5"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="bOa-GT-fac" id="1xZ-NR-coY"/>
@@ -169,7 +249,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Definition" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HD6-tv-nZE">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Definition" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HD6-tv-nZE">
                                                     <rect key="frame" x="15" y="11" width="345" height="22"/>
                                                     <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="21"/>
                                                     <nil key="textColor"/>
@@ -185,6 +265,69 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="definitionLabel" destination="HD6-tv-nZE" id="0TW-ua-75n"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="readMoreDefCell" rowHeight="84" id="xv4-po-s71" customClass="DefinitionTableViewCell" customModule="Learn_Slang">
+                                        <rect key="frame" x="0.0" y="72" width="375" height="84"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xv4-po-s71" id="lUU-HC-rxh">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="83.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sizing Label" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1EX-sw-qNd">
+                                                    <rect key="frame" x="15" y="11" width="345" height="33"/>
+                                                    <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="21"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3uq-80-ZN5" userLabel="Container View">
+                                                    <rect key="frame" x="15" y="11" width="345" height="33"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Definition" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KyL-a8-AM9">
+                                                            <rect key="frame" x="0.0" y="0.0" width="345" height="34"/>
+                                                            <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="21"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="KyL-a8-AM9" firstAttribute="top" secondItem="3uq-80-ZN5" secondAttribute="top" id="6jw-kx-zgV"/>
+                                                        <constraint firstItem="KyL-a8-AM9" firstAttribute="leading" secondItem="3uq-80-ZN5" secondAttribute="leading" id="TPn-x0-YPy"/>
+                                                        <constraint firstAttribute="trailing" secondItem="KyL-a8-AM9" secondAttribute="trailing" id="c6S-NG-Mf9"/>
+                                                    </constraints>
+                                                </view>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FZ5-E4-QEY">
+                                                    <rect key="frame" x="15" y="52" width="345" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="AWu-jJ-hLa"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="16"/>
+                                                    <state key="normal" title="Read More"/>
+                                                    <connections>
+                                                        <action selector="readMoreBtnClicked:" destination="xv4-po-s71" eventType="touchUpInside" id="5Xd-yE-S41"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="1EX-sw-qNd" firstAttribute="top" secondItem="lUU-HC-rxh" secondAttribute="topMargin" id="06l-rn-Hs4"/>
+                                                <constraint firstItem="FZ5-E4-QEY" firstAttribute="top" secondItem="1EX-sw-qNd" secondAttribute="bottom" constant="8" id="EPT-xN-sCY"/>
+                                                <constraint firstItem="FZ5-E4-QEY" firstAttribute="leading" secondItem="lUU-HC-rxh" secondAttribute="leadingMargin" id="I6w-zV-5Uk"/>
+                                                <constraint firstItem="FZ5-E4-QEY" firstAttribute="top" secondItem="3uq-80-ZN5" secondAttribute="bottom" constant="8" id="LAF-Mg-dxK"/>
+                                                <constraint firstItem="3uq-80-ZN5" firstAttribute="leading" secondItem="lUU-HC-rxh" secondAttribute="leadingMargin" id="Mdi-p3-dqb"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="FZ5-E4-QEY" secondAttribute="bottom" id="N86-BV-NmN"/>
+                                                <constraint firstItem="3uq-80-ZN5" firstAttribute="top" secondItem="lUU-HC-rxh" secondAttribute="topMargin" id="VDY-FH-mHb"/>
+                                                <constraint firstItem="1EX-sw-qNd" firstAttribute="trailing" secondItem="lUU-HC-rxh" secondAttribute="trailingMargin" id="aqj-Z0-Tk8"/>
+                                                <constraint firstItem="1EX-sw-qNd" firstAttribute="leading" secondItem="lUU-HC-rxh" secondAttribute="leadingMargin" id="ghI-e4-RRr"/>
+                                                <constraint firstItem="FZ5-E4-QEY" firstAttribute="trailing" secondItem="lUU-HC-rxh" secondAttribute="trailingMargin" id="jMc-PK-SJ8"/>
+                                                <constraint firstItem="3uq-80-ZN5" firstAttribute="trailing" secondItem="lUU-HC-rxh" secondAttribute="trailingMargin" id="zMr-KA-aVC"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="containerView" destination="3uq-80-ZN5" id="QAO-C0-rZg"/>
+                                            <outlet property="definitionLabel" destination="KyL-a8-AM9" id="DNr-f0-wTw"/>
+                                            <outlet property="readMoreBtn" destination="FZ5-E4-QEY" id="TmM-B9-aJ2"/>
+                                            <outlet property="sizingLabel" destination="1EX-sw-qNd" id="Pcf-SQ-Ps8"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -215,7 +358,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yNB-NP-jGE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1321" y="-205"/>
+            <point key="canvasLocation" x="1320.8" y="-205.54722638680661"/>
         </scene>
         <!--List-->
         <scene sceneID="Q1X-BK-7G4">

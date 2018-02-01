@@ -23,7 +23,7 @@ class ListToWordSplitViewController: UISplitViewController, UISplitViewControlle
     }
     
     // MARK: UISplitViewCotnrollerDelegate
-    
+        
     func splitViewController(
         _ splitViewController: UISplitViewController,
         collapseSecondary secondaryViewController: UIViewController,

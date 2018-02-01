@@ -16,6 +16,7 @@ class WordListViewController: UIViewController {
     private let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
     private var fetchedResultController: NSFetchedResultsController<Word>?
     
+    var selectedIndexPath: IndexPath?
     var attributesBlack = [NSAttributedStringKey.foregroundColor : UIColor.black,
                            NSAttributedStringKey.font : UIFont.init(name: "Hallosans-Light", size: 28.0)!]
     let attributesGray = [NSAttributedStringKey.foregroundColor : UIColor.lightGray,
@@ -50,6 +51,15 @@ class WordListViewController: UIViewController {
         super.viewWillAppear(animated)
         updateTableContent()
         tableView.reloadData()
+        if UIDevice.current.orientation.isLandscape == true {
+            
+            guard let selected = selectedIndexPath else { return }
+            
+            DispatchQueue.main.async {
+                self.tableView.selectRow(at: selected, animated: true, scrollPosition: .top)
+                self.tableView.scrollToRow(at: selected, at: .top, animated: true)
+            }
+        }
     }
     
     func createEditButton (withText text: String) -> UIButton  {
@@ -119,6 +129,21 @@ class WordListViewController: UIViewController {
         tableView.contentInset = UIEdgeInsets.zero
         tableView.scrollIndicatorInsets = UIEdgeInsets.zero
     }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "showWordSegue" {
+            if let navigationController = segue.destination as? UINavigationController,
+                let wordTableViewController = navigationController.topViewController as? WordTableViewController {
+                if let send = sender as? Word {
+                    wordTableViewController.word = send
+                }
+            }
+        }
+    }
+
 }
 
 extension WordListViewController: UITableViewDataSource {
@@ -203,21 +228,9 @@ extension WordListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        selectedIndexPath = indexPath
         let word = fetchedResultController?.object(at: indexPath)
-        
         performSegue(withIdentifier: "showWordSegue", sender: word)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
-            if segue.identifier == "showWordSegue" {
-                if let navigationController = segue.destination as? UINavigationController,
-                    let wordTableViewController = navigationController.topViewController as? WordTableViewController {
-                    if let send = sender as? Word {
-                    wordTableViewController.word = send 
-                }
-            }
-        }
     }
     
 }

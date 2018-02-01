@@ -9,11 +9,14 @@
 import UIKit
 import AVKit
 
-class WordTableViewController: UITableViewController {
+class WordTableViewController: UITableViewController, DefinitionTableViewCellDelegate, DefinitionHeaderViewDelegate {
 
     var word: Word?
     var player: AVAudioPlayer!
     let speechSynthesizer = AVSpeechSynthesizer()
+    
+    var readMoreClicked = false
+    var indexOfReadMoreButton = -1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,11 +30,22 @@ class WordTableViewController: UITableViewController {
 
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
+        
+        let nib = UINib(nibName: "DefinitionHeaderView", bundle: nil)
+        tableView.register(nib, forHeaderFooterViewReuseIdentifier: "DefinitionHeaderView")
+
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
 
+    }
+    
+    // MARK: - DefinitionHeaderViewDelegate
+    
+    func moreTapped(header: DefinitionHeaderView) {
+        tableView.beginUpdates()
+        tableView.endUpdates()
     }
 
     // MARK: - Table view data source
@@ -42,63 +56,39 @@ class WordTableViewController: UITableViewController {
     }
     
     internal override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-
-        // getting string for section title
+        
         guard let definitions = word?.definitions else { return nil }
         
-        let sectionTitle = (definitions[section] as! Definition).definition
-
-        // creating and setting up UILabel for displaying the definition string
-        let definitionLabel = UILabel()
-        definitionLabel.numberOfLines = 0
-        definitionLabel.textAlignment = .justified
+        let definition = definitions[section] as! Definition
+        let sectionTitle = definition.definition!
         
-        definitionLabel.font = UIFont.init(name: "Noteworthy-Bold", size: 20)
-        definitionLabel.text = sectionTitle
-
-        // creating UIView (returning value of this method) and adding definition label as its subview
-        let headerView = UIView()
-        headerView.backgroundColor = UIColor(white: 0.97, alpha: 1)
-        headerView.addSubview(definitionLabel)
-        
-        definitionLabel.translatesAutoresizingMaskIntoConstraints = false
-
-        // setting up and adding constraints
-        let leadingConstraint = NSLayoutConstraint(item: definitionLabel,
-                                                    attribute: .leading,
-                                                    relatedBy: .equal,
-                                                    toItem: headerView,
-                                                    attribute: .leading,
-                                                    multiplier: 1,
-                                                    constant: 13)
-
-        let trailingConstraint = NSLayoutConstraint(item: definitionLabel,
-                                                    attribute: .trailing,
-                                                    relatedBy: .equal,
-                                                    toItem: headerView,
-                                                    attribute: .trailing,
-                                                    multiplier: 1,
-                                                    constant: -13)
-
-        let topConstraint = NSLayoutConstraint(item: definitionLabel,
-                                                    attribute: .top,
-                                                    relatedBy: .equal,
-                                                    toItem: headerView,
-                                                    attribute: .top,
-                                                    multiplier: 1,
-                                                    constant: 5)
-
-        let bottomConstraint = NSLayoutConstraint(item: definitionLabel,
-                                                    attribute: .bottom,
-                                                    relatedBy: .equal,
-                                                    toItem: headerView,
-                                                    attribute: .bottom,
-                                                    multiplier: 1,
-                                                    constant: -5)
-
-        headerView.addConstraints([leadingConstraint, trailingConstraint, topConstraint, bottomConstraint])
-        
-        return headerView
+        if sectionTitle.count > 300 {
+            
+            let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "DefinitionHeaderView") as! DefinitionHeaderView
+            headerView.readMoreBtn.setTitle(headerView.isExpanded ? "Show Less" : "Read More", for: .normal)
+            headerView.view.backgroundColor = UIColor.init(white: 241/255, alpha: 1.0)
+            headerView.containerView.backgroundColor = headerView.view.backgroundColor
+            headerView.linesCount = 6
+            headerView.myInit(definition: sectionTitle)
+            headerView.delegate = self
+            return headerView
+            
+        } else {
+            
+            let defCell = tableView.dequeueReusableCell(withIdentifier: "defCell")!
+            defCell.textLabel?.text = sectionTitle
+            defCell.textLabel?.font = UIFont.init(name: "Noteworthy-Bold", size: 21)
+            defCell.backgroundColor = UIColor.init(white: 241/255, alpha: 1.0)
+            
+            let headerView = UIView.init(frame: defCell.frame)
+            headerView.addSubview(defCell)
+            
+            return defCell
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return UITableViewAutomaticDimension
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -109,19 +99,19 @@ class WordTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "exampleCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "exampleCell", for: indexPath) as! DefinitionTableViewCell
 
         let definition = word?.definitions?[indexPath.section] as! Definition
         let examplesSet = definition.examples!
         
         var examples = ""
-        
+
         if examplesSet.count > 1 && indexPath.row == 0 {
             examples = "Examples: \n"
         } else if examplesSet.count == 1 && (examplesSet[0] as! Example).example != "" {
             examples = "Example: \n"
         }
-        
+
         for example in examplesSet {
             let myExample = example as! Example
             let exampleStr = myExample.example
@@ -132,7 +122,7 @@ class WordTableViewController: UITableViewController {
                 examples += "\n\n"
             }
         }
-        
+
         cell.textLabel?.text = examples
 
         return cell
@@ -142,6 +132,14 @@ class WordTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    // MARK: - DefinitionTableViewCellDelegate
+    
+    func moreTapped(cell: DefinitionTableViewCell) {
+        
+        tableView.beginUpdates()
+        tableView.endUpdates()
     }
     
     //MARK: - Actions

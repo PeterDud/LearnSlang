@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
+class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, DefinitionTableViewCellDelegate {
     
     var wordModel: WordModel?
     @IBOutlet weak var tableView: UITableView!
@@ -21,10 +21,12 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     var definition: Definition!
     var spellingFilePath: String!
     
+    var readMoreClicked = false
+    var indexOfReadMoreButton = -1
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         cancelButton = wordSearchBar.value(forKey: "_cancelButton") as? UIButton
         
         createSaveBarButtonItem()
@@ -150,22 +152,52 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         return wordModel!.definitions.count
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 140
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "definitionCell", for: indexPath) as! DefinitionTableViewCell
         let definition = wordModel!.definitions[indexPath.row]
         let definitionStr = definition.definition
-        cell.definitionLabel.text = definitionStr
-        cell.definitionLabel.textAlignment = .justified
         
-        if indexPath.row % 2 == 0 {
-            let color = UIColor.init(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0)
-            cell.backgroundColor = color
+        // Setting up cell with a lot of text and Read More/Show Less button
+        if definitionStr.count > 400 {
+
+            let readMoreCell = tableView.dequeueReusableCell(withIdentifier: "readMoreDefCell", for: indexPath) as! DefinitionTableViewCell
+            readMoreCell.backgroundColor = whiteOrGray(index: indexPath.row)
+            readMoreCell.containerView.backgroundColor = readMoreCell.backgroundColor
+            readMoreCell.myInit(definition: definitionStr)
+            readMoreCell.delegate = self
+            readMoreCell.readMoreBtn.setTitle(readMoreCell.isExpanded ? "Show Less" : "Read More", for: .normal)
+            
+            return readMoreCell
+            
+        // Setting up ordinary cell
         } else {
-            cell.backgroundColor = UIColor.white
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "definitionCell", for: indexPath) as! DefinitionTableViewCell
+            cell.backgroundColor = whiteOrGray(index: indexPath.row)
+            cell.definitionLabel.text = definitionStr
+            
+            return cell
         }
+    }
+    
+    // MARK: - Helper Methods
         
-        return cell
+    func whiteOrGray(index: Int) -> UIColor {
+        
+        if index % 2 != 0 {
+            let gray = UIColor(white: 248/255, alpha: 1.0)
+            return gray
+        } else {
+            return UIColor.white
+        }
     }
     
     // MARK: - UITableViewDelegate
@@ -188,6 +220,14 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     @objc func keyboardWillHide(notification: NSNotification) {
         tableView.contentInset = UIEdgeInsets.zero
         tableView.scrollIndicatorInsets = UIEdgeInsets.zero
+    }
+    
+    // MARK: - DefinitionTableViewCellDelegate
+    
+    func moreTapped(cell: DefinitionTableViewCell) {
+        
+        tableView.beginUpdates()
+        tableView.endUpdates()
     }
     
     // MARK: - Table View Update Methods
@@ -241,7 +281,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         
         wordSearchBar.resignFirstResponder()
     }
-    
+        
     // MARK: - Alerts
     
     func showAlertWith(title: String, message: String) {
@@ -441,4 +481,11 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         case example(String?)
     }
 }
+
+
+
+
+
+
+
 

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		AAA4B09D8750FDD24D0E8BDC /* Pods_Learn_Slang.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE025666FD851529711AB34E /* Pods_Learn_Slang.framework */; };
 		CE1A333220121D0A00FB256B /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1A333120121D0900FB256B /* SearchViewController.swift */; };
+		CE381A9C202339C3002E7DE8 /* DefinitionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE381A9B202339C3002E7DE8 /* DefinitionHeaderView.swift */; };
+		CE381AA020233D3F002E7DE8 /* DefinitionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE381A9F20233D3F002E7DE8 /* DefinitionHeaderView.xib */; };
 		CE5283701FF6AE2500CCE7A7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52836F1FF6AE2500CCE7A7 /* Extensions.swift */; };
 		CE530F3720188E2A0045013D /* ListToWordSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE530F3620188E2A0045013D /* ListToWordSplitViewController.swift */; };
 		CE5827061FF3A7DE00ED1E6B /* WordListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5827051FF3A7DE00ED1E6B /* WordListViewController.swift */; };
@@ -60,6 +62,8 @@
 		11D9810606B1FA7104A10098 /* Pods-Learn Slang.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Learn Slang.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Learn Slang/Pods-Learn Slang.debug.xcconfig"; sourceTree = "<group>"; };
 		2A5D94F1E216418D69759660 /* Pods-Learn Slang.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Learn Slang.release.xcconfig"; path = "Pods/Target Support Files/Pods-Learn Slang/Pods-Learn Slang.release.xcconfig"; sourceTree = "<group>"; };
 		CE1A333120121D0900FB256B /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		CE381A9B202339C3002E7DE8 /* DefinitionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionHeaderView.swift; sourceTree = "<group>"; };
+		CE381A9F20233D3F002E7DE8 /* DefinitionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DefinitionHeaderView.xib; sourceTree = "<group>"; };
 		CE52836F1FF6AE2500CCE7A7 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CE530F3620188E2A0045013D /* ListToWordSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListToWordSplitViewController.swift; sourceTree = "<group>"; };
 		CE5827051FF3A7DE00ED1E6B /* WordListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListViewController.swift; sourceTree = "<group>"; };
@@ -230,6 +234,8 @@
 			isa = PBXGroup;
 			children = (
 				CE621CB01FE3AE4F007659DE /* DefinitionTableViewCell.swift */,
+				CE381A9B202339C3002E7DE8 /* DefinitionHeaderView.swift */,
+				CE381A9F20233D3F002E7DE8 /* DefinitionHeaderView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -376,6 +382,7 @@
 				CE700E261FF24578001F206F /* Canter Light.otf in Resources */,
 				CE8A03461FE131C1004E53AF /* LaunchScreen.storyboard in Resources */,
 				CE700E411FF255E9001F206F /* Hallo sans black.otf in Resources */,
+				CE381AA020233D3F002E7DE8 /* DefinitionHeaderView.xib in Resources */,
 				CE700E221FF24578001F206F /* Hallo sans.otf in Resources */,
 				CE8A03431FE131C1004E53AF /* Assets.xcassets in Resources */,
 				CE700E3E1FF255E9001F206F /* Hallo sans light.otf in Resources */,
@@ -465,6 +472,7 @@
 				CE74CB7B200CE5FF00386551 /* Example+CoreDataClass.swift in Sources */,
 				CEC2A9511FE93CFB0011609A /* WordModel.swift in Sources */,
 				CE621CB11FE3AE4F007659DE /* DefinitionTableViewCell.swift in Sources */,
+				CE381A9C202339C3002E7DE8 /* DefinitionHeaderView.swift in Sources */,
 				CE74CB7C200CE5FF00386551 /* Example+CoreDataProperties.swift in Sources */,
 				CEC2A96B1FE959A10011609A /* CoreDataStack.swift in Sources */,
 				CE6CC0E22007BDE100C70692 /* WordTableViewController.swift in Sources */,

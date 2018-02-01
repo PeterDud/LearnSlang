@@ -39,7 +39,7 @@ class ServerManager {
                     completion(.Error("Server error: \(statusCode)"))
                     return
                 default:
-                    break 
+                    break
                 }
             }
             
