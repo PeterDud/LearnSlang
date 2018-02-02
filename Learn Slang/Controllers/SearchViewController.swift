@@ -166,7 +166,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         let definitionStr = definition.definition
         
         // Setting up cell with a lot of text and Read More/Show Less button
-        if definitionStr.count > 400 {
+        if definitionStr.count > 450 {
 
             let readMoreCell = tableView.dequeueReusableCell(withIdentifier: "readMoreDefCell", for: indexPath) as! DefinitionTableViewCell
             readMoreCell.backgroundColor = whiteOrGray(index: indexPath.row)

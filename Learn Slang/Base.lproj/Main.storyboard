@@ -115,7 +115,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="48.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Example" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LGI-O2-fq5">
+                                        <label opaque="NO" multipleTouchEnabled="YES" tag="100" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Example" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LGI-O2-fq5">
                                             <rect key="frame" x="16" y="0.0" width="343" height="48.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="21"/>
@@ -141,69 +141,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="readMoreCell" rowHeight="84" id="4Xb-7y-jb7" customClass="DefinitionTableViewCell" customModule="Learn_Slang">
-                                <rect key="frame" x="0.0" y="126" width="375" height="84"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4Xb-7y-jb7" id="Hdj-tl-x12">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="83.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sizing Label" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u2m-qH-xhJ">
-                                            <rect key="frame" x="16" y="11" width="343" height="33"/>
-                                            <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="21"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QhN-wk-MTR" userLabel="Container View">
-                                            <rect key="frame" x="16" y="11" width="343" height="33"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xzg-Ej-wUX">
-                                                    <rect key="frame" x="0.0" y="0.0" width="343" height="34"/>
-                                                    <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="21"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <constraints>
-                                                <constraint firstItem="Xzg-Ej-wUX" firstAttribute="leading" secondItem="QhN-wk-MTR" secondAttribute="leading" id="4GY-Ub-vJD"/>
-                                                <constraint firstAttribute="trailing" secondItem="Xzg-Ej-wUX" secondAttribute="trailing" id="MEz-iW-OnJ"/>
-                                                <constraint firstItem="Xzg-Ej-wUX" firstAttribute="top" secondItem="QhN-wk-MTR" secondAttribute="top" id="MbR-cu-MO4"/>
-                                            </constraints>
-                                        </view>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="azu-xM-18E">
-                                            <rect key="frame" x="16" y="52" width="343" height="21"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="k5O-q1-AD9"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="16"/>
-                                            <state key="normal" title="Read More"/>
-                                            <connections>
-                                                <action selector="readMoreBtnClicked:" destination="4Xb-7y-jb7" eventType="touchUpInside" id="TfY-Du-ekb"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="QhN-wk-MTR" firstAttribute="leading" secondItem="Hdj-tl-x12" secondAttribute="leadingMargin" id="212-ir-rKK"/>
-                                        <constraint firstItem="QhN-wk-MTR" firstAttribute="top" secondItem="Hdj-tl-x12" secondAttribute="topMargin" id="91m-mm-3ak"/>
-                                        <constraint firstItem="azu-xM-18E" firstAttribute="leading" secondItem="Hdj-tl-x12" secondAttribute="leadingMargin" id="CrS-UL-Ykl"/>
-                                        <constraint firstItem="azu-xM-18E" firstAttribute="top" secondItem="u2m-qH-xhJ" secondAttribute="bottom" constant="8" id="Grb-QL-bVO"/>
-                                        <constraint firstItem="azu-xM-18E" firstAttribute="trailing" secondItem="Hdj-tl-x12" secondAttribute="trailingMargin" id="Ohv-pX-hnO"/>
-                                        <constraint firstItem="u2m-qH-xhJ" firstAttribute="top" secondItem="Hdj-tl-x12" secondAttribute="topMargin" id="RiZ-KY-8vS"/>
-                                        <constraint firstItem="QhN-wk-MTR" firstAttribute="trailing" secondItem="Hdj-tl-x12" secondAttribute="trailingMargin" id="cNU-5h-7e2"/>
-                                        <constraint firstItem="azu-xM-18E" firstAttribute="top" secondItem="QhN-wk-MTR" secondAttribute="bottom" constant="8" id="cad-hA-hdd"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="azu-xM-18E" secondAttribute="bottom" id="cqV-Ji-rYc"/>
-                                        <constraint firstItem="u2m-qH-xhJ" firstAttribute="trailing" secondItem="Hdj-tl-x12" secondAttribute="trailingMargin" id="nSD-1B-qaU"/>
-                                        <constraint firstItem="u2m-qH-xhJ" firstAttribute="leading" secondItem="Hdj-tl-x12" secondAttribute="leadingMargin" id="uOf-CT-toJ"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="containerView" destination="QhN-wk-MTR" id="2Kx-P4-z6W"/>
-                                    <outlet property="definitionLabel" destination="Xzg-Ej-wUX" id="nKP-WD-gti"/>
-                                    <outlet property="readMoreBtn" destination="azu-xM-18E" id="yIz-W2-vYZ"/>
-                                    <outlet property="sizingLabel" destination="u2m-qH-xhJ" id="BVG-1J-7n5"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
