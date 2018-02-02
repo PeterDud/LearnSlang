@@ -169,7 +169,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         
         let numberOfVisibleLines = numberOfLinesInLabel(with: definitionStr, width: Int(tableView.frame.size.width - 32))
 
-        if numberOfVisibleLines >= 10 {
+        if definitionStr.count > 500 {
 
             let readMoreCell = tableView.dequeueReusableCell(withIdentifier: "readMoreDefCell", for: indexPath) as! DefinitionTableViewCell
             readMoreCell.backgroundColor = whiteOrGray(index: indexPath.row)
@@ -485,10 +485,14 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     }
 }
 
-
-
-
-
-
-
-
+func numberOfLinesInLabel(with text: String, width: Int) -> Int {
+    
+    let frame = CGRect(x: 0, y: 0, width: width, height: 10000)
+    let label = UILabel.init(frame: frame)
+    label.numberOfLines = 0
+    label.font = UIFont.init(name: "Noteworthy-Bold", size: 21)
+    label.textAlignment = .justified
+    label.text = text
+    
+    return label.numberOfVisibleLines
+}

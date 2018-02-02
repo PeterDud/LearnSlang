@@ -13,6 +13,8 @@
 		CE381AA020233D3F002E7DE8 /* DefinitionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE381A9F20233D3F002E7DE8 /* DefinitionHeaderView.xib */; };
 		CE5283701FF6AE2500CCE7A7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52836F1FF6AE2500CCE7A7 /* Extensions.swift */; };
 		CE530F3720188E2A0045013D /* ListToWordSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE530F3620188E2A0045013D /* ListToWordSplitViewController.swift */; };
+		CE5520B62024ADF1006A4B6F /* BasicDefinitionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5520B52024ADF1006A4B6F /* BasicDefinitionHeaderView.swift */; };
+		CE5520B82024AE0A006A4B6F /* BasicDefinitionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5520B72024AE0A006A4B6F /* BasicDefinitionHeaderView.xib */; };
 		CE5827061FF3A7DE00ED1E6B /* WordListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5827051FF3A7DE00ED1E6B /* WordListViewController.swift */; };
 		CE621CB11FE3AE4F007659DE /* DefinitionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE621CB01FE3AE4F007659DE /* DefinitionTableViewCell.swift */; };
 		CE6AA9A92008FF3E000B3BBE /* DefinitionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6AA9A82008FF3E000B3BBE /* DefinitionModel.swift */; };
@@ -66,6 +68,8 @@
 		CE381A9F20233D3F002E7DE8 /* DefinitionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DefinitionHeaderView.xib; sourceTree = "<group>"; };
 		CE52836F1FF6AE2500CCE7A7 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CE530F3620188E2A0045013D /* ListToWordSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListToWordSplitViewController.swift; sourceTree = "<group>"; };
+		CE5520B52024ADF1006A4B6F /* BasicDefinitionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicDefinitionHeaderView.swift; sourceTree = "<group>"; };
+		CE5520B72024AE0A006A4B6F /* BasicDefinitionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BasicDefinitionHeaderView.xib; sourceTree = "<group>"; };
 		CE5827051FF3A7DE00ED1E6B /* WordListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListViewController.swift; sourceTree = "<group>"; };
 		CE621CB01FE3AE4F007659DE /* DefinitionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionTableViewCell.swift; sourceTree = "<group>"; };
 		CE6AA9A82008FF3E000B3BBE /* DefinitionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionModel.swift; sourceTree = "<group>"; };
@@ -235,7 +239,9 @@
 			children = (
 				CE621CB01FE3AE4F007659DE /* DefinitionTableViewCell.swift */,
 				CE381A9B202339C3002E7DE8 /* DefinitionHeaderView.swift */,
+				CE5520B52024ADF1006A4B6F /* BasicDefinitionHeaderView.swift */,
 				CE381A9F20233D3F002E7DE8 /* DefinitionHeaderView.xib */,
+				CE5520B72024AE0A006A4B6F /* BasicDefinitionHeaderView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -380,6 +386,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE700E261FF24578001F206F /* Canter Light.otf in Resources */,
+				CE5520B82024AE0A006A4B6F /* BasicDefinitionHeaderView.xib in Resources */,
 				CE8A03461FE131C1004E53AF /* LaunchScreen.storyboard in Resources */,
 				CE700E411FF255E9001F206F /* Hallo sans black.otf in Resources */,
 				CE381AA020233D3F002E7DE8 /* DefinitionHeaderView.xib in Resources */,
@@ -479,6 +486,7 @@
 				CE1A333220121D0A00FB256B /* SearchViewController.swift in Sources */,
 				CE8A036E1FE13ABF004E53AF /* ServerManager.swift in Sources */,
 				CE74CB78200CE5FF00386551 /* Definition+CoreDataProperties.swift in Sources */,
+				CE5520B62024ADF1006A4B6F /* BasicDefinitionHeaderView.swift in Sources */,
 				CE8A03391FE131C1004E53AF /* AppDelegate.swift in Sources */,
 				CE74CB79200CE5FF00386551 /* Word+CoreDataClass.swift in Sources */,
 				CE5283701FF6AE2500CCE7A7 /* Extensions.swift in Sources */,

@@ -31,9 +31,11 @@ class WordTableViewController: UITableViewController, DefinitionTableViewCellDel
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
         
-        let nib = UINib(nibName: "DefinitionHeaderView", bundle: nil)
-        tableView.register(nib, forHeaderFooterViewReuseIdentifier: "DefinitionHeaderView")
+        let nib1 = UINib(nibName: "DefinitionHeaderView", bundle: nil)
+        tableView.register(nib1, forHeaderFooterViewReuseIdentifier: "DefinitionHeaderView")
 
+        let nib2 = UINib(nibName: "BasicDefinitionHeaderView", bundle: nil)
+        tableView.register(nib2, forHeaderFooterViewReuseIdentifier: "BasicDefinitionHeaderView")
     }
 
     override func didReceiveMemoryWarning() {
@@ -64,10 +66,8 @@ class WordTableViewController: UITableViewController, DefinitionTableViewCellDel
         
         let definition = definitions[section] as! Definition
         let sectionTitle = definition.definition!
-
-        let numberOfVisibleLines = numberOfLinesInLabel(with: sectionTitle, width: Int(tableView.frame.size.width - 32))
         
-        if numberOfVisibleLines >= 8   {
+        if sectionTitle.count > 350   {
             
             let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "DefinitionHeaderView") as! DefinitionHeaderView
             headerView.readMoreBtn.setTitle(headerView.isExpanded ? "Show Less" : "Read More", for: .normal)
@@ -81,12 +81,11 @@ class WordTableViewController: UITableViewController, DefinitionTableViewCellDel
             
         } else {
             
-            let defCell = tableView.dequeueReusableCell(withIdentifier: "defCell")!
-            defCell.textLabel?.text = sectionTitle
-            defCell.textLabel?.font = UIFont.init(name: "Noteworthy-Bold", size: 21)
-            defCell.backgroundColor = UIColor.init(white: 241/255, alpha: 1.0)
+            let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "BasicDefinitionHeaderView") as! BasicDefinitionHeaderView
+            headerView.definitionLabel.text = sectionTitle
+            headerView.definitionLabel.backgroundColor = UIColor.init(white: 241/255, alpha: 1.0)
             
-            return defCell
+            return headerView
         }
     }
     
@@ -180,15 +179,4 @@ class WordTableViewController: UITableViewController, DefinitionTableViewCellDel
 
 }
 
-func numberOfLinesInLabel(with text: String, width: Int) -> Int {
-    
-    let frame = CGRect(x: 0, y: 0, width: width, height: 10000)
-    let label = UILabel.init(frame: frame)
-    label.numberOfLines = 0
-    label.font = UIFont.init(name: "Noteworthy-Bold", size: 21)
-    label.textAlignment = .justified
-    label.text = text
-    
-    return label.numberOfVisibleLines
-}
 
