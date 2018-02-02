@@ -30,7 +30,7 @@
                                 <constraint firstAttribute="height" constant="21" id="Fas-QQ-V7d"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="16"/>
-                            <state key="normal" title="Button"/>
+                            <state key="normal" title="Read More"/>
                             <connections>
                                 <action selector="readMoreBtnClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="fRD-rF-WtC"/>
                             </connections>

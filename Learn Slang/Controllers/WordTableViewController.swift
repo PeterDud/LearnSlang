@@ -67,16 +67,17 @@ class WordTableViewController: UITableViewController, DefinitionTableViewCellDel
         let definition = definitions[section] as! Definition
         let sectionTitle = definition.definition!
         
-        if sectionTitle.count > 350   {
+        let numberOfVisibleLines = numberOfLinesInLabel(with: sectionTitle, width: Int(tableView.frame.size.width - 32))
+
+        if numberOfVisibleLines > 8 {
             
             let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "DefinitionHeaderView") as! DefinitionHeaderView
-            headerView.readMoreBtn.setTitle(headerView.isExpanded ? "Show Less" : "Read More", for: .normal)
             headerView.view.backgroundColor = UIColor.init(white: 241/255, alpha: 1.0)
             headerView.containerView.backgroundColor = headerView.view.backgroundColor
             headerView.linesCount = 8
             headerView.myInit(definition: sectionTitle)
             headerView.delegate = self
-            
+
             return headerView
             
         } else {

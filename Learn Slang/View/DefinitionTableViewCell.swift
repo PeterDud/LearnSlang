@@ -33,6 +33,10 @@ class DefinitionTableViewCell: UITableViewCell {
     
     func myInit(definition: String) {
 
+        isExpanded = false
+        
+        readMoreBtn.setTitle("Read More", for: .normal)
+
         definitionLabel.text = definition
         definitionLabel.numberOfLines = 0
 
