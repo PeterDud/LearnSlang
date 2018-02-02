@@ -85,6 +85,7 @@ class WordTableViewController: UITableViewController, DefinitionTableViewCellDel
             let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "BasicDefinitionHeaderView") as! BasicDefinitionHeaderView
             headerView.definitionLabel.text = sectionTitle
             headerView.definitionLabel.backgroundColor = UIColor.init(white: 241/255, alpha: 1.0)
+            headerView.view.backgroundColor = headerView.definitionLabel.backgroundColor
             
             return headerView
         }

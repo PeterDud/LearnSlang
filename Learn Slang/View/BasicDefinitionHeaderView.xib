@@ -50,6 +50,7 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="definitionLabel" destination="lef-c5-ct5" id="T4O-8t-irJ"/>
+                <outlet property="view" destination="ip7-PD-Ue0" id="xAt-bx-3L2"/>
             </connections>
             <point key="canvasLocation" x="26.5" y="51.5"/>
         </view>

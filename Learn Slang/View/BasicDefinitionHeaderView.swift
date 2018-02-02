@@ -11,5 +11,5 @@ import UIKit
 class BasicDefinitionHeaderView: UITableViewHeaderFooterView {
 
     @IBOutlet weak var definitionLabel: UILabel!
-    
+    @IBOutlet weak var view: UIView!
 }
