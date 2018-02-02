@@ -41,6 +41,9 @@ class WordTableViewController: UITableViewController, DefinitionTableViewCellDel
 
     }
     
+    // MARK: - Helper Methods
+    
+    
     // MARK: - DefinitionHeaderViewDelegate
     
     func moreTapped(header: DefinitionHeaderView) {
@@ -61,14 +64,16 @@ class WordTableViewController: UITableViewController, DefinitionTableViewCellDel
         
         let definition = definitions[section] as! Definition
         let sectionTitle = definition.definition!
+
+        let numberOfVisibleLines = numberOfLinesInLabel(with: sectionTitle, width: Int(tableView.frame.size.width - 32))
         
-        if sectionTitle.count > 300   {
+        if numberOfVisibleLines >= 8   {
             
             let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "DefinitionHeaderView") as! DefinitionHeaderView
             headerView.readMoreBtn.setTitle(headerView.isExpanded ? "Show Less" : "Read More", for: .normal)
             headerView.view.backgroundColor = UIColor.init(white: 241/255, alpha: 1.0)
             headerView.containerView.backgroundColor = headerView.view.backgroundColor
-            headerView.linesCount = 7
+            headerView.linesCount = 8
             headerView.myInit(definition: sectionTitle)
             headerView.delegate = self
             
@@ -174,3 +179,16 @@ class WordTableViewController: UITableViewController, DefinitionTableViewCellDel
     }
 
 }
+
+func numberOfLinesInLabel(with text: String, width: Int) -> Int {
+    
+    let frame = CGRect(x: 0, y: 0, width: width, height: 10000)
+    let label = UILabel.init(frame: frame)
+    label.numberOfLines = 0
+    label.font = UIFont.init(name: "Noteworthy-Bold", size: 21)
+    label.textAlignment = .justified
+    label.text = text
+    
+    return label.numberOfVisibleLines
+}
+

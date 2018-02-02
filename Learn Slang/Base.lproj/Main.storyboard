@@ -187,15 +187,15 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Definition" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HD6-tv-nZE">
-                                                    <rect key="frame" x="15" y="11" width="345" height="22"/>
+                                                    <rect key="frame" x="16" y="11" width="343" height="22"/>
                                                     <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="21"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="HD6-tv-nZE" firstAttribute="trailing" secondItem="Atp-E4-8Ws" secondAttribute="trailingMargin" id="A91-By-vbI"/>
-                                                <constraint firstItem="HD6-tv-nZE" firstAttribute="leading" secondItem="Atp-E4-8Ws" secondAttribute="leadingMargin" id="I6s-oc-NdL"/>
+                                                <constraint firstItem="HD6-tv-nZE" firstAttribute="trailing" secondItem="Atp-E4-8Ws" secondAttribute="trailingMargin" constant="-1" id="A91-By-vbI"/>
+                                                <constraint firstItem="HD6-tv-nZE" firstAttribute="leading" secondItem="Atp-E4-8Ws" secondAttribute="leadingMargin" constant="1" id="I6s-oc-NdL"/>
                                                 <constraint firstItem="HD6-tv-nZE" firstAttribute="bottom" secondItem="Atp-E4-8Ws" secondAttribute="bottomMargin" id="ZaS-3v-99M"/>
                                                 <constraint firstItem="HD6-tv-nZE" firstAttribute="top" secondItem="Atp-E4-8Ws" secondAttribute="topMargin" id="gUr-YC-LYC"/>
                                             </constraints>
@@ -218,7 +218,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3uq-80-ZN5" userLabel="Container View">
-                                                    <rect key="frame" x="15" y="11" width="345" height="33"/>
+                                                    <rect key="frame" x="16" y="11" width="343" height="33"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Definition" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KyL-a8-AM9">
                                                             <rect key="frame" x="0.0" y="0.0" width="345" height="34"/>
@@ -231,7 +231,7 @@
                                                     <constraints>
                                                         <constraint firstItem="KyL-a8-AM9" firstAttribute="top" secondItem="3uq-80-ZN5" secondAttribute="top" id="6jw-kx-zgV"/>
                                                         <constraint firstItem="KyL-a8-AM9" firstAttribute="leading" secondItem="3uq-80-ZN5" secondAttribute="leading" id="TPn-x0-YPy"/>
-                                                        <constraint firstAttribute="trailing" secondItem="KyL-a8-AM9" secondAttribute="trailing" id="c6S-NG-Mf9"/>
+                                                        <constraint firstAttribute="trailing" secondItem="KyL-a8-AM9" secondAttribute="trailing" constant="-2" id="c6S-NG-Mf9"/>
                                                     </constraints>
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FZ5-E4-QEY">
@@ -251,13 +251,13 @@
                                                 <constraint firstItem="FZ5-E4-QEY" firstAttribute="top" secondItem="1EX-sw-qNd" secondAttribute="bottom" constant="8" id="EPT-xN-sCY"/>
                                                 <constraint firstItem="FZ5-E4-QEY" firstAttribute="leading" secondItem="lUU-HC-rxh" secondAttribute="leadingMargin" id="I6w-zV-5Uk"/>
                                                 <constraint firstItem="FZ5-E4-QEY" firstAttribute="top" secondItem="3uq-80-ZN5" secondAttribute="bottom" constant="8" id="LAF-Mg-dxK"/>
-                                                <constraint firstItem="3uq-80-ZN5" firstAttribute="leading" secondItem="lUU-HC-rxh" secondAttribute="leadingMargin" id="Mdi-p3-dqb"/>
+                                                <constraint firstItem="3uq-80-ZN5" firstAttribute="leading" secondItem="lUU-HC-rxh" secondAttribute="leadingMargin" constant="1" id="Mdi-p3-dqb"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="FZ5-E4-QEY" secondAttribute="bottom" id="N86-BV-NmN"/>
                                                 <constraint firstItem="3uq-80-ZN5" firstAttribute="top" secondItem="lUU-HC-rxh" secondAttribute="topMargin" id="VDY-FH-mHb"/>
                                                 <constraint firstItem="1EX-sw-qNd" firstAttribute="trailing" secondItem="lUU-HC-rxh" secondAttribute="trailingMargin" id="aqj-Z0-Tk8"/>
                                                 <constraint firstItem="1EX-sw-qNd" firstAttribute="leading" secondItem="lUU-HC-rxh" secondAttribute="leadingMargin" id="ghI-e4-RRr"/>
                                                 <constraint firstItem="FZ5-E4-QEY" firstAttribute="trailing" secondItem="lUU-HC-rxh" secondAttribute="trailingMargin" id="jMc-PK-SJ8"/>
-                                                <constraint firstItem="3uq-80-ZN5" firstAttribute="trailing" secondItem="lUU-HC-rxh" secondAttribute="trailingMargin" id="zMr-KA-aVC"/>
+                                                <constraint firstItem="3uq-80-ZN5" firstAttribute="trailing" secondItem="lUU-HC-rxh" secondAttribute="trailingMargin" constant="-1" id="zMr-KA-aVC"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
