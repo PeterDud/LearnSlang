@@ -21,7 +21,8 @@ class DefinitionTableViewCell: UITableViewCell {
     @IBOutlet weak var containerView: UIView! // Container view holds definitionLabel with numberOfLines 0 and clip to bounds enabled
     var delegate: DefinitionTableViewCellDelegate?
     var isExpanded = false
-    var linesCount = 10
+    var linesCount = 8
+    var index = -1
     
     @IBAction func readMoreBtnClicked(_ sender: UIButton) {
         
@@ -32,12 +33,17 @@ class DefinitionTableViewCell: UITableViewCell {
     }
     
     func myInit(definition: String) {
-
+        
         definitionLabel.text = definition
         definitionLabel.numberOfLines = 0
-
+        
         sizingLabel.text = definition
+//        isExpanded = false
+//        readMoreBtn.setTitle("Read More", for: .normal)
+//        sizingLabel.numberOfLines = linesCount
+        readMoreBtn.setTitle(isExpanded ? "Show Less" : "Read More", for: .normal)
         sizingLabel.numberOfLines = isExpanded ? 0 : linesCount
+
     }
 
 }

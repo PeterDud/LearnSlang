@@ -21,8 +21,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     var definition: Definition!
     var spellingFilePath: String!
     
-    var readMoreClicked = false
-    var indexOfReadMoreButton = -1
+    var expandedCellIndexes = Set<Int>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -169,15 +168,21 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         
         let numberOfVisibleLines = numberOfLinesInLabel(with: definitionStr, width: Int(tableView.frame.size.width - 32))
 
-        if numberOfVisibleLines > 10 {
+        if numberOfVisibleLines > 8 {
 
             let readMoreCell = tableView.dequeueReusableCell(withIdentifier: "readMoreDefCell", for: indexPath) as! DefinitionTableViewCell
             readMoreCell.backgroundColor = whiteOrGray(index: indexPath.row)
             readMoreCell.containerView.backgroundColor = readMoreCell.backgroundColor
-            readMoreCell.myInit(definition: definitionStr)
             readMoreCell.delegate = self
-            readMoreCell.readMoreBtn.setTitle(readMoreCell.isExpanded ? "Show Less" : "Read More", for: .normal)
+            readMoreCell.index = indexPath.row
             
+            if expandedCellIndexes.contains(indexPath.row) {
+                readMoreCell.isExpanded = true
+            } else {
+                readMoreCell.isExpanded = false 
+            }
+            readMoreCell.myInit(definition: definitionStr)
+
             return readMoreCell
             
         // Setting up ordinary cell
@@ -228,6 +233,14 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     // MARK: - DefinitionTableViewCellDelegate
     
     func moreTapped(cell: DefinitionTableViewCell) {
+        
+        let tappedCellIndex = cell.index // we need to keep track of tapped cells
+        
+        if expandedCellIndexes.contains(tappedCellIndex) {
+            expandedCellIndexes.remove(tappedCellIndex)
+        } else {
+            expandedCellIndexes.insert(tappedCellIndex)
+        }
         
         tableView.beginUpdates()
         tableView.endUpdates()

@@ -72,13 +72,11 @@ class WordTableViewController: UITableViewController, DefinitionTableViewCellDel
         if numberOfVisibleLines > 8 {
             
             let readMoreHeaderView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "DefinitionHeaderView") as! DefinitionHeaderView
+            readMoreHeaderView.linesCount = 8
             readMoreHeaderView.myInit(definition: sectionTitle)
             readMoreHeaderView.delegate = self
-//            readMoreHeaderView.isExpanded = false
-//            readMoreHeaderView.readMoreBtn.setTitle("Read More", for: .normal)
             readMoreHeaderView.view.backgroundColor = UIColor.init(white: 241/255, alpha: 1.0)
             readMoreHeaderView.containerView.backgroundColor = readMoreHeaderView.view.backgroundColor
-            readMoreHeaderView.linesCount = 8
 
             return readMoreHeaderView
             
