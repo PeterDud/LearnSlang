@@ -9,14 +9,13 @@
 import UIKit
 import AVKit
 
-class WordTableViewController: UITableViewController, DefinitionTableViewCellDelegate, DefinitionHeaderViewDelegate {
+class WordTableViewController: UITableViewController, DefinitionHeaderViewDelegate {
 
     var word: Word?
     var player: AVAudioPlayer!
     let speechSynthesizer = AVSpeechSynthesizer()
     
-    var readMoreClicked = false
-    var indexOfReadMoreButton = -1
+    var expandedCellIndexes = Set<Int>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +48,15 @@ class WordTableViewController: UITableViewController, DefinitionTableViewCellDel
     // MARK: - DefinitionHeaderViewDelegate
     
     func moreTapped(header: DefinitionHeaderView) {
+        
+        let tappedCellIndex = header.index                        // we need to keep track of tapped cells
+        
+        if expandedCellIndexes.contains(tappedCellIndex) {
+            expandedCellIndexes.remove(tappedCellIndex)
+        } else {
+            expandedCellIndexes.insert(tappedCellIndex)
+        }
+        
         tableView.beginUpdates()
         tableView.endUpdates()
     }
@@ -72,12 +80,19 @@ class WordTableViewController: UITableViewController, DefinitionTableViewCellDel
         if numberOfVisibleLines > 8 {
             
             let readMoreHeaderView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "DefinitionHeaderView") as! DefinitionHeaderView
-            readMoreHeaderView.linesCount = 8
             readMoreHeaderView.myInit(definition: sectionTitle)
             readMoreHeaderView.delegate = self
             readMoreHeaderView.view.backgroundColor = UIColor.init(white: 241/255, alpha: 1.0)
             readMoreHeaderView.containerView.backgroundColor = readMoreHeaderView.view.backgroundColor
+            readMoreHeaderView.index = section
 
+            if expandedCellIndexes.contains(section) {
+                readMoreHeaderView.isExpanded = true
+            } else {
+                readMoreHeaderView.isExpanded = false
+            }
+            readMoreHeaderView.myInit(definition: sectionTitle)
+            
             return readMoreHeaderView
             
         } else {
@@ -136,14 +151,6 @@ class WordTableViewController: UITableViewController, DefinitionTableViewCellDel
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-    }
-
-    // MARK: - DefinitionTableViewCellDelegate
-    
-    func moreTapped(cell: DefinitionTableViewCell) {
-        
-        tableView.beginUpdates()
-        tableView.endUpdates()
     }
     
     //MARK: - Actions

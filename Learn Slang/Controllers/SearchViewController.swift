@@ -101,6 +101,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
+        expandedCellIndexes = []
+        
         ServerManager.shared.downloadWord(word: searchBar.text!) { (result) in
             switch result {
             case .Success(let word):
@@ -234,7 +236,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     
     func moreTapped(cell: DefinitionTableViewCell) {
         
-        let tappedCellIndex = cell.index // we need to keep track of tapped cells
+        let tappedCellIndex = cell.index                        // we need to keep track of tapped cells
         
         if expandedCellIndexes.contains(tappedCellIndex) {
             expandedCellIndexes.remove(tappedCellIndex)

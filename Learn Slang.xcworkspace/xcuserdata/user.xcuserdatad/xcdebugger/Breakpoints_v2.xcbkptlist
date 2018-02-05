@@ -31,11 +31,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Learn Slang/Controllers/WordTableViewController.swift"
-            timestampString = "539533251.951568"
+            timestampString = "539535409.104496"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
             landmarkName = "tableView(_:viewForHeaderInSection:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -47,27 +47,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Learn Slang/Controllers/WordTableViewController.swift"
-            timestampString = "539533251.951697"
+            timestampString = "539535409.105002"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Learn Slang/Controllers/WordTableViewController.swift"
-            timestampString = "539533251.951911"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -79,11 +63,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Learn Slang/View/DefinitionHeaderView.swift"
-            timestampString = "539533251.952073"
+            timestampString = "539535409.105316"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
             landmarkName = "myInit(definition:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -95,11 +79,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Learn Slang/Controllers/WordTableViewController.swift"
-            timestampString = "539533251.952221"
+            timestampString = "539535409.105438"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
             landmarkName = "tableView(_:viewForHeaderInSection:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -111,11 +95,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Learn Slang/View/DefinitionHeaderView.swift"
-            timestampString = "539533251.952309"
+            timestampString = "539535409.1057169"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
             landmarkName = "readMoreBtnClicked(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -127,11 +111,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Learn Slang/Controllers/SearchViewController.swift"
-            timestampString = "539533281.063423"
+            timestampString = "539535409.105909"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
