@@ -71,23 +71,25 @@ class WordTableViewController: UITableViewController, DefinitionTableViewCellDel
 
         if numberOfVisibleLines > 8 {
             
-            let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "DefinitionHeaderView") as! DefinitionHeaderView
-            headerView.view.backgroundColor = UIColor.init(white: 241/255, alpha: 1.0)
-            headerView.containerView.backgroundColor = headerView.view.backgroundColor
-            headerView.linesCount = 8
-            headerView.myInit(definition: sectionTitle)
-            headerView.delegate = self
+            let readMoreHeaderView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "DefinitionHeaderView") as! DefinitionHeaderView
+            readMoreHeaderView.myInit(definition: sectionTitle)
+            readMoreHeaderView.delegate = self
+//            readMoreHeaderView.isExpanded = false
+//            readMoreHeaderView.readMoreBtn.setTitle("Read More", for: .normal)
+            readMoreHeaderView.view.backgroundColor = UIColor.init(white: 241/255, alpha: 1.0)
+            readMoreHeaderView.containerView.backgroundColor = readMoreHeaderView.view.backgroundColor
+            readMoreHeaderView.linesCount = 8
 
-            return headerView
+            return readMoreHeaderView
             
         } else {
             
-            let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "BasicDefinitionHeaderView") as! BasicDefinitionHeaderView
-            headerView.definitionLabel.text = sectionTitle
-            headerView.definitionLabel.backgroundColor = UIColor.init(white: 241/255, alpha: 1.0)
-            headerView.view.backgroundColor = headerView.definitionLabel.backgroundColor
+            let basicHeaderView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "BasicDefinitionHeaderView") as! BasicDefinitionHeaderView
+            basicHeaderView.definitionLabel.text = sectionTitle
+            basicHeaderView.definitionLabel.backgroundColor = UIColor.init(white: 241/255, alpha: 1.0)
+            basicHeaderView.view.backgroundColor = basicHeaderView.definitionLabel.backgroundColor
             
-            return headerView
+            return basicHeaderView
         }
     }
     
