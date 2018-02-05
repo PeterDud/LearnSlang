@@ -1,35 +1,36 @@
 //
-//  DefinitionTableViewCell.swift
+//  DefinitionHeaderView.swift
 //  Learn Slang
 //
-//  Created by user on 15/12/2017.
-//  Copyright © 2017 user. All rights reserved.
+//  Created by user on 01/02/2018.
+//  Copyright © 2018 user. All rights reserved.
 //
 
 import UIKit
 
-protocol DefinitionTableViewCellDelegate {
+protocol DefinitionHeaderViewDelegate {
     
-    func moreTapped(cell: DefinitionTableViewCell)
+    func moreTapped(header: DefinitionHeaderView)
 }
 
-class DefinitionTableViewCell: UITableViewCell {
+class DefinitionHeaderView: UITableViewHeaderFooterView {
 
+    @IBOutlet weak var view: UIView!
     @IBOutlet weak var definitionLabel: UILabel!
     @IBOutlet weak var sizingLabel: UILabel!  // this is invisible label (alpha = 0), we need it to make cell expand smoothly after pressing readMoreBtn.
     @IBOutlet weak var readMoreBtn: UIButton!
     @IBOutlet weak var containerView: UIView! // Container view holds definitionLabel with numberOfLines 0 and clip to bounds enabled
-    var delegate: DefinitionTableViewCellDelegate?
-    var isExpanded = false
+    var delegate: DefinitionHeaderViewDelegate?
+    var isExpanded = false 
     var linesCount = 8
     var index = -1
-    
+
     @IBAction func readMoreBtnClicked(_ sender: UIButton) {
         
         isExpanded = !isExpanded
         sizingLabel.numberOfLines = isExpanded ? 0 : linesCount
         readMoreBtn.setTitle(isExpanded ? "Show Less" : "Read More", for: .normal)
-        delegate?.moreTapped(cell: self)
+        delegate?.moreTapped(header: self)
     }
     
     func myInit(definition: String) {
@@ -44,3 +45,14 @@ class DefinitionTableViewCell: UITableViewCell {
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
