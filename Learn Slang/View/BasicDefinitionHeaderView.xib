@@ -40,7 +40,6 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="ip7-PD-Ue0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Qco-7t-sAL"/>
                 <constraint firstItem="ip7-PD-Ue0" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="Tqd-xO-Lhx"/>

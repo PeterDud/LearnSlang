@@ -76,7 +76,6 @@
                     <viewLayoutGuide key="safeArea" id="TmW-8I-CnB"/>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="93c-6o-Cxs" secondAttribute="bottom" priority="999" identifier="viewB" id="3vP-m1-DGC"/>
                 <constraint firstItem="93c-6o-Cxs" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" priority="999" identifier="viewT" id="EO5-Pn-lPA"/>

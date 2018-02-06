@@ -46,7 +46,7 @@ class WordTableViewController: UITableViewController, DefinitionHeaderViewDelega
     
     func moreTapped(header: DefinitionHeaderView) {
         
-        let tappedCellIndex = header.index                        // we need to keep track of tapped cells
+        let tappedCellIndex = header.index                        // we need to keep track of tapped cells to make expanded and unexpanded cells consistent
         
         if expandedCellIndexes.contains(tappedCellIndex) {
             expandedCellIndexes.remove(tappedCellIndex)
