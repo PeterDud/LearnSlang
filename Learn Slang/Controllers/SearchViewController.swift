@@ -168,9 +168,12 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         
         // Setting up cell with a lot of text and Read More/Show Less button
         
-        let numberOfVisibleLines = numberOfLinesInLabel(with: definitionStr, width: Int(tableView.frame.size.width - 32))
-
-        if numberOfVisibleLines > 8 {
+        let numberOfVisibleLines = numberOfLinesInLabel(with: definitionStr,
+                                                        width: Int(tableView.frame.size.width - 32),
+                                                        font: UIFont(name: "Noteworthy-Light", size: 21)!)
+        let linesLimit = 8
+        
+        if numberOfVisibleLines > linesLimit {
 
             let readMoreCell = tableView.dequeueReusableCell(withIdentifier: "readMoreDefCell", for: indexPath) as! DefinitionTableViewCell
             readMoreCell.backgroundColor = whiteOrGray(index: indexPath.row)
@@ -500,14 +503,24 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     }
 }
 
-func numberOfLinesInLabel(with text: String, width: Int) -> Int {
+
+func numberOfLinesInLabel(with text: String, width: Int, font: UIFont) -> Int {
     
     let frame = CGRect(x: 0, y: 0, width: width, height: 10000)
     let label = UILabel.init(frame: frame)
     label.numberOfLines = 0
-    label.font = UIFont.init(name: "Noteworthy-Bold", size: 21)
+    label.font = font
     label.textAlignment = .justified
     label.text = text
     
     return label.numberOfVisibleLines
 }
+
+
+
+
+
+
+
+
+

@@ -42,9 +42,6 @@ class WordTableViewController: UITableViewController, DefinitionHeaderViewDelega
 
     }
     
-    // MARK: - Helper Methods
-    
-    
     // MARK: - DefinitionHeaderViewDelegate
     
     func moreTapped(header: DefinitionHeaderView) {
@@ -75,9 +72,12 @@ class WordTableViewController: UITableViewController, DefinitionHeaderViewDelega
         let definition = definitions[section] as! Definition
         let sectionTitle = definition.definition!
         
-        let numberOfVisibleLines = numberOfLinesInLabel(with: sectionTitle, width: Int(tableView.frame.size.width - 32))
-
-        if numberOfVisibleLines > 8 {
+        let numberOfVisibleLines = numberOfLinesInLabel(with: sectionTitle,
+                                                        width: Int(tableView.frame.size.width - 16),
+                                                        font: UIFont.init(name: "Noteworthy-Bold", size: 21)!)
+        let linesLimit = 8
+        
+        if numberOfVisibleLines > linesLimit {
             
             let readMoreHeaderView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "DefinitionHeaderView") as! DefinitionHeaderView
             readMoreHeaderView.myInit(definition: sectionTitle)
